@@ -1,0 +1,14 @@
+# mdBook build output
+/book/
+
+# mise local tool installs
+.mise/
+
+# uv / Python virtual environment
+.venv/
+__pycache__/
+
+# LibreOffice / OS cruft
+.~lock.*#
+*.tmp
+.DS_Store

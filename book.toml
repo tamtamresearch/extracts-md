@@ -1,0 +1,26 @@
+[book]
+title = "ITS Standard Extracts"
+authors = ["ISO/TC 204"]
+language = "en"
+src = "output"
+
+[build]
+build-dir = "book"
+
+# Strips YAML front-matter and injects a title header on each page.
+# Uses the uv-managed environment so an interpreter is always available.
+[preprocessor.frontmatter]
+command = "uv run python frontmatter_preprocessor.py"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+smart-punctuation = true
+no-section-label = true
+
+[output.html.search]
+enable = true
+
+[output.html.fold]
+enable = true
+level = 1

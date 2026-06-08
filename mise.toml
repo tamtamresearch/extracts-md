@@ -1,0 +1,47 @@
+# mise configuration for the ITS Standard Extracts mdBook.
+#
+# First-time setup:
+#   mise install         # install pinned tools (uv, mdbook)
+#   mise run setup        # uv installs Python (.python-version) + deps (pyproject)
+#
+# Day to day:
+#   mise run convert      # docx -> output/<doc>/index.md  (+ figures)
+#   mise run gen          # regenerate SUMMARY.md + landing page
+#   mise run build        # build the static site into book/
+#   mise run serve        # local preview with live reload
+#   mise run all          # convert + gen + build
+
+[tools]
+uv = "latest"
+mdbook = "0.4"
+
+[settings]
+# Let mise pick up the uv-managed Python toolchain.
+python.uv_venv_auto = true
+
+[tasks.setup]
+description = "Install Python (via uv) and project dependencies"
+run = "uv sync"
+
+[tasks.convert]
+description = "Convert input/*.docx to output/<doc>/index.md with figures + HTML tables"
+run = "uv run python convert_docx.py input output"
+
+[tasks.gen]
+description = "Regenerate output/SUMMARY.md and output/index.md from front-matter"
+run = "uv run python gen_nav.py output"
+
+[tasks.build]
+description = "Build the mdBook static site into book/"
+depends = ["gen"]
+run = "mdbook build"
+
+[tasks.serve]
+description = "Serve the book locally with live reload"
+depends = ["gen"]
+run = "mdbook serve --open"
+
+[tasks.all]
+description = "Full pipeline: convert -> gen -> build"
+depends = ["convert", "gen"]
+run = "mdbook build"
