@@ -27,6 +27,9 @@ def read_meta(path):
     return {
         "standard": field(fm, "standard"),
         "name": field(fm, "name"),
+        "name_1": field(fm, "name_1"),
+        "name_2": field(fm, "name_2"),
+        "name_3": field(fm, "name_3"),
         "published": field(fm, "published"),
         "edition": field(fm, "edition"),
         "pages": field(fm, "pages"),
@@ -64,15 +67,30 @@ def main():
         "the source standard and retains the original chapter numbering. "
         "An extract does **not** replace the standard itself.",
         "",
-        "| Standard | Title | Published | Ed. | Pages |",
-        "| --- | --- | --- | --- | --- |",
     ]
+    
     for folder, m in docs:
-        title = m["name"].split(" – ")[1] if " – " in m["name"] else m["name"]
-        p.append(
-            f"| [{m['standard'] or folder}]({folder}/index.md) "
-            f"| {title} | {m['published']} | {m['edition']} | {m['pages']} |"
-        )
+        # Build standard identifier with year
+        std_line = f"**[{m['standard'] or folder}:{m['published']}]({folder}/index.md)**"
+        
+        p.append(std_line)
+        
+        # Build name parts: combine earlier parts, show last part separately
+        name_parts = [m['name_1'], m['name_2'], m['name_3']]
+        name_parts = [part for part in name_parts if part]  # filter empty
+        
+        if len(name_parts) == 1:
+            # Only one part - show as single line
+            p.append(name_parts[0])
+        elif len(name_parts) > 1:
+            # Multiple parts - combine all but last with "–", add hard break before last part
+            combined = " – ".join(name_parts[:-1])
+            # Two spaces at end = hard line break in Markdown
+            p.append(combined + "  ")
+            p.append(name_parts[-1])
+        
+        p.append("")  # blank line between entries
+    
     with open(os.path.join(OUT, "index.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(p) + "\n")
 
