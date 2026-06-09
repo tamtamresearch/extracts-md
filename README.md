@@ -19,6 +19,9 @@ website can be generated.
 
 - **`.docx` → Markdown.** Parses each extract, emits one `index.md` per standard
   with structured front-matter and the body starting at *Introduction*.
+- **Inline formatting.** Preserves **bold**, *italic*, and `code` formatting from
+  Word documents. Monospace fonts (Courier New, etc.) are converted to inline code.
+  Smart space handling ensures clean Markdown output.
 - **Figures.** Extracts embedded images; converts vector EMF/WMF to PNG (via
   LibreOffice) and trims page whitespace.
 - **Tables.** Renders Word tables as HTML `<table>` with `colspan`/`rowspan`, so
@@ -117,11 +120,33 @@ The workflow ensures that only tested, validated content is deployed to the `gh-
 | `mise run serve`       | serve locally with live reload                            |
 | `mise run all`         | `convert` + `gen` + `build`                               |
 | `mise run preflight`   | validate environment (LibreOffice, dependencies)          |
-| `mise run test`        | run full test suite (26 tests)                            |
+| `mise run test`        | run full test suite (35 tests)                            |
 | `mise run test-integration` | run core end-to-end tests (implementation-agnostic) |
 | `mise run test-unit`   | run function-level tests (implementation-specific)        |
 
 Adding a new extract is just: drop the `.docx` in `input/` and run `mise run all`.
+
+## Features
+
+### Inline Formatting Support
+
+The converter preserves Word inline formatting in Markdown:
+
+- **Bold text** → `**bold text**`
+- *Italic text* → `*italic text*`
+- `Code/verbatim` → `` `code` ``
+- ***Bold+italic*** → `***text***`
+
+**Smart handling:**
+- Monospace fonts (Courier New, Consolas, Monaco) are converted to inline code
+- Code formatting takes precedence: monospace text with bold/italic is rendered as plain code
+- Consecutive runs with identical formatting are merged (prevents `**word** **by** **word**`)
+- Leading/trailing spaces are moved outside formatting markers (prevents `**text **`)
+
+**Example from ISO 14823-1:**
+
+Before (Word): `{joint-iso-itut(2) its(28) gdd(5)}` in Courier New font  
+After (Markdown): `` `{joint-iso-itut(2) its(28) gdd(5)}` ``
 
 ## How conversion works
 
@@ -155,6 +180,12 @@ line (`edition`/`pages` are omitted when absent).
 - Word `Heading 1` is demoted to `##`, so each page has a single H1 — injected
   from `name` by the preprocessor at build time (the front-matter never appears
   on the rendered page).
+- **Inline formatting preserved:**
+  - Bold text → `**text**`
+  - Italic text → `*text*`
+  - Monospace/code → `` `text` ``
+  - Code formatting takes precedence (monospace text ignores bold/italic)
+  - Consecutive runs with identical formatting are merged for clean output
 - Tables → HTML; figures → `![…](fig-N.png)` with their captions.
 
 ## Customisation
@@ -167,7 +198,7 @@ line (`edition`/`pages` are omitted when absent).
 
 ## Testing
 
-The project includes a comprehensive pytest-based test suite with 26 tests:
+The project includes a comprehensive pytest-based test suite with 35 tests:
 
 ```sh
 mise run preflight        # validate environment (LibreOffice, dependencies)
@@ -179,8 +210,8 @@ mise run test-unit        # function-level tests (implementation-specific)
 ### Test Coverage
 
 - **Pre-flight tests** (5): Environment validation, dependency checks
-- **Integration tests** (5): Real extract conversion, navigation generation, preprocessor
-- **Unit tests** (16): Function-level tests for `clean()`, `yaml_q()`, `field()`, `sort_key()`, etc.
+- **Integration tests** (6): Real extract conversion, navigation generation, preprocessor, inline formatting
+- **Unit tests** (24): Function-level tests for `clean()`, `yaml_q()`, formatting conversion, etc.
 
 The integration tests use a real extract (`ISO_TS_22741-10.docx`) and validate:
 - Front-matter structure and all required fields
