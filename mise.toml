@@ -45,3 +45,20 @@ run = "mdbook serve --open"
 description = "Full pipeline: convert -> gen -> build"
 depends = ["convert", "gen"]
 run = "mdbook build"
+
+[tasks.preflight]
+description = "Validate environment (LibreOffice, dependencies)"
+run = "uv run pytest tests/test_preflight.py -v"
+
+[tasks.test]
+description = "Run pytest test suite (integration + unit)"
+depends = ["preflight"]
+run = "uv run pytest tests/ -v"
+
+[tasks.test-integration]
+description = "Run only integration tests (implementation-agnostic)"
+run = "uv run pytest tests/test_integration.py -v"
+
+[tasks.test-unit]
+description = "Run only unit tests (implementation-specific)"
+run = "uv run pytest tests/unit/ -v"

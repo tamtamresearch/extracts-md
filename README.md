@@ -37,11 +37,17 @@ extracts-md/
 │       ├── index.md             # the extract, with YAML front-matter
 │       └── fig-N.png            # extracted figures
 ├── book/                        # built static site (git-ignored)
+├── tests/                       # pytest test suite
+│   ├── test_preflight.py        # environment validation
+│   ├── test_integration.py      # end-to-end tests
+│   ├── unit/                    # function-level tests
+│   └── fixtures/                # test data (real .docx + expected output)
 ├── convert_docx.py              # docx → output/<doc>/index.md (+ figures, HTML tables)
 ├── gen_nav.py                   # regenerate SUMMARY.md + landing index.md
 ├── frontmatter_preprocessor.py  # mdBook preprocessor: strip front-matter, add H1
 ├── book.toml                    # mdBook configuration (src = output/)
-├── pyproject.toml               # Python dependencies (python-docx, Pillow)
+├── pytest.ini                   # pytest configuration
+├── pyproject.toml               # Python dependencies (python-docx, Pillow, pytest)
 ├── .python-version              # Python version, provisioned by uv
 └── mise.toml                    # tool + task definitions
 ```
@@ -75,14 +81,18 @@ mise run serve    # local preview with live reload
 
 ### Tasks
 
-| Task              | Description                                               |
-|-------------------|-----------------------------------------------------------|
-| `mise run setup`  | `uv sync` — install Python and dependencies               |
-| `mise run convert`| `input/*.docx` → `output/<doc>/index.md` (+ figures)      |
-| `mise run gen`    | regenerate `SUMMARY.md` and the landing page              |
-| `mise run build`  | build the static site into `book/`                        |
-| `mise run serve`  | serve locally with live reload                            |
-| `mise run all`    | `convert` + `gen` + `build`                               |
+| Task                   | Description                                               |
+|------------------------|-----------------------------------------------------------|
+| `mise run setup`       | `uv sync` — install Python and dependencies               |
+| `mise run convert`     | `input/*.docx` → `output/<doc>/index.md` (+ figures)      |
+| `mise run gen`         | regenerate `SUMMARY.md` and the landing page              |
+| `mise run build`       | build the static site into `book/`                        |
+| `mise run serve`       | serve locally with live reload                            |
+| `mise run all`         | `convert` + `gen` + `build`                               |
+| `mise run preflight`   | validate environment (LibreOffice, dependencies)          |
+| `mise run test`        | run full test suite (26 tests)                            |
+| `mise run test-integration` | run core end-to-end tests (implementation-agnostic) |
+| `mise run test-unit`   | run function-level tests (implementation-specific)        |
 
 Adding a new extract is just: drop the `.docx` in `input/` and run `mise run all`.
 
@@ -128,6 +138,36 @@ line (`edition`/`pages` are omitted when absent).
 - **mdBook theme / search / folding.** Configure in `book.toml`.
 - **Tool versions.** Pin in `mise.toml` (`uv`, `mdbook`) and `.python-version`.
 
+## Testing
+
+The project includes a comprehensive pytest-based test suite with 26 tests:
+
+```sh
+mise run preflight        # validate environment (LibreOffice, dependencies)
+mise run test             # full test suite (~2s)
+mise run test-integration # core end-to-end tests (implementation-agnostic)
+mise run test-unit        # function-level tests (implementation-specific)
+```
+
+### Test Coverage
+
+- **Pre-flight tests** (5): Environment validation, dependency checks
+- **Integration tests** (5): Real extract conversion, navigation generation, preprocessor
+- **Unit tests** (16): Function-level tests for `clean()`, `yaml_q()`, `field()`, `sort_key()`, etc.
+
+The integration tests use a real extract (`ISO_TS_22741-10.docx`) and validate:
+- Front-matter structure and all required fields
+- Figure extraction (2 PNG files)
+- Table rendering as HTML with `colspan`/`rowspan`
+- Heading demotion (H1 → H2)
+- Navigation file generation (`SUMMARY.md`, `index.md`)
+
+Tests requiring LibreOffice are marked and can be skipped with:
+
+```sh
+uv run pytest tests/ -m "not requires_libreoffice"
+```
+
 ## Troubleshooting
 
 - **`FileNotFoundError: 'libreoffice'` / `'soffice'`** — install LibreOffice
@@ -135,6 +175,7 @@ line (`edition`/`pages` are omitted when absent).
   containing EMF/WMF figures need it.
 - **`uv` resolves a newer Python than pinned** — run `uv python pin 3.12 && uv sync`
   to lock the exact interpreter.
+- **Tests failing** — run `mise run preflight` first to validate your environment.
 
 ## License
 
