@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO/TS 22726-1 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--dynamic-data-and-map-database-specification-for-connected-and-automated-driving-system-applications--part-1-architecture-and-logical-data-model-for-harmonization-of-static-map-data"><a class="header" href="#intelligent-transport-systems--dynamic-data-and-map-database-specification-for-connected-and-automated-driving-system-applications--part-1-architecture-and-logical-data-model-for-harmonization-of-static-map-data">Intelligent transport systems – Dynamic data and map database specification for connected and automated driving system applications – Part 1: Architecture and logical data model for harmonization of static map data</a></h1>
+<p><strong>ISO/TS 22726-1</strong> · Published 2025 (Edition 2) · 269 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>The ISO/TS 22726 series was created in response to the need to unify the way <strong>static map data for automated driving (ADS)</strong> are represented and stored. Modern vehicles with a high degree of automation require extremely precise, consistent, and rapidly accessible map data that link detailed descriptions of infrastructure with dynamic traffic information. Existing standards — such as ISO 14296 or GDF 5.1 - cover navigation or data exchange between providers, but they are not optimized for <strong>runtime access in onboard systems</strong> nor for representing detailed elements such as lanes, their topology, precise geometries, or relationships to traffic events.</p>
+<p>ISO/TS 22726-1 therefore defines the logical data model and database structure for storing and directly querying detailed static map entities. ISO/TS 22726-2 builds on this model and specifies physical data structures and implementation rules so that the model can be deployed in databases used by vehicles, backends and map service providers. Together, they form the foundational framework for the next generation of high-precision maps for automated driving.</p>
+<p>This Extract describes Part 1 of the standard (hereinafter “the described document”).</p>
+<p><em>Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.</em></p>
+<h2 id="use"><a class="header" href="#use">Use</a></h2>
+<p>This standard is intended for map providers, vehicle manufacturers, ADS function suppliers and C-ITS service operators. It enables a unified method for storing and updating detailed map layers, reducing maintenance costs, and ensuring interoperability across suppliers. Vehicle manufacturers use it when integrating map libraries, where fast and deterministic access to data and clear relationships between static and dynamic information are essential.</p>
+<p>This standard is applied in the creation of HD maps, updating map layers, validating fleet sensor data, trajectory planning or integrating traffic events into map bases. The result is a unified environment that supports safe and reliable automated driving across the mobility ecosystem.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>The described document specifies the architecture and logical data model of static map data (MHAD) for ADS. It defines the main packages, their elements, common data classes, rules for the position and geometry of elements, modelling of traffic regulations and conformance requirements (see Annex A).</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The described document lists one normative reference <strong>ISO/IEC 19501</strong> UML version 1.4.2</p>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and Definitions</a></h2>
+<p>The clause contains 11 terms and definitions, the most important of which are:</p>
+<p><strong>feature</strong> – database representation of a real-world object</p>
+<p><strong>belt</strong> – configuration concept for defining an area bounded by side lines and terminal lines, characterized by directions, and represented by one or more linear axes when skeletonized</p>
+<p>The following terms are also used in the standard and in the extract:</p>
+<p><strong>package</strong> – logical unit of the model that groups related data elements into a single whole and defines their shared namespace</p>
+<p><strong>subpackage</strong> – package hierarchically placed inside another package, used for finer structuring of its content</p>
+<h2 id="4-abbreviations"><a class="header" href="#4-abbreviations">4 Abbreviations</a></h2>
+<p>This clause lists 33 abbreviations, the most important of which are:</p>
+<p><strong>ADS</strong> automated driving system</p>
+<p><strong>MHAD</strong> map for highly automated driving</p>
+<p><strong>RBE</strong> RoadBeltElement</p>
+<p><strong>LBE</strong> LaneBeltElement</p>
+<p><strong>RSE</strong> RoadStructuresAndEquipment</p>
+<p>Other terms and abbreviations from the ITS domain can be found in the <em>ITS Terminology</em> dictionary (<a href="http://www.itsterminology.org">www.itsterminology.org</a>), the <em>StandardLand</em> website (<a href="http://www.standardland.cz">www.standardland.cz</a>) or the <em>OBP platform</em> (<a href="http://www.iso.org/obp">www.iso.org/obp</a>).</p>
+<h2 id="5-document-structure-and-conformance"><a class="header" href="#5-document-structure-and-conformance">5 Document structure and conformance</a></h2>
+<p>This clause, 2 pages in length, refers to the main parts of the document and sets the requirements for conformance of implementations with this standard and for conformance of UML diagrams with ISO/IEC 19501.</p>
+<h2 id="6-architecture"><a class="header" href="#6-architecture">6 Architecture</a></h2>
+<p>This clause, 1.5 pages long and containing one diagram, presents the conceptual architecture of an ITS station for ADS with various application modules (e.g. localization module, driving control module). It defines MHAD as the primary static source, with dynamic data complementing the current state of the environment and capable of updating MHAD.</p>
+<h2 id="7-logical-data-model-of-map-data"><a class="header" href="#7-logical-data-model-of-map-data">7 Logical data model of map data</a></h2>
+<p>This clause, 2 pages long, shows a general data model derived from ISO 14296 and the extension of the Transportation package with MHAD. It identifies the main packages (AddressLocation, Cartographic, Service&amp;POI, Transportation, DynamicInformation) of the overall map data model and shows, in a diagram, the relationships between them and MHAD as part of the Transportation package.</p>
+<p>The diagram shows the structure of the Transportation package with MHAD components including RoadBeltNetwork, LaneBeltNetwork and RoadStructureAndEquipment, their relationships to RoadNetwork and TransferZoneNetwork and other networks, and specifies in which standards these network components are defined.</p>
+<h2 id="8-mhad-package"><a class="header" href="#8-mhad-package">8 MHAD package</a></h2>
+<p>This overview clause, four pages long, defines the key concepts and configuration of the MHAD package. It identifies the subpackages of the MHAD package: RoadStructureAndEquipment, RoadBeltNetwork, LaneBeltNetwork and the shared package MHADCommonProperty, and shows their interdependencies in a class diagram.</p>
+<p>It describes the belt concept for roads, intersections and lanes as an area element defined by direction, width and side and terminal boundaries (lines), and shows two examples.</p>
+<p>It describes the relationships between road features and road structure, and equipment features and shows, in a diagram, how road structure and equipment elements (bridge, guardrail) are assigned to road features (road belt) using anchor positions and projection points/lines. It defines, in a table, the composition of the MHAD class and its relationship with the subpackages.</p>
+<p><img src="fig-1.png" alt="Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) (Fig. 7 of the source standard)" /></p>
+<p><strong>Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) (Fig. 7 of the source standard)</strong></p>
+<h2 id="9-mhadcommonproperty-package"><a class="header" href="#9-mhadcommonproperty-package">9 MHADCommonProperty package</a></h2>
+<p>This clause, 75 pages in length, describes the <strong>MHADCommonProperty</strong> package, which defines the common data classes and relationships used within the MHAD data model. The package is divided into three main subpackages <strong>GeneralCommonProperty, CommonPhysicalCharacteristics and TrafficRegulation</strong>, described in separate subclauses. Each subpackage contains a class diagram and detailed descriptions of each class.</p>
+<p>The detailed class descriptions (in tabular form) include:</p>
+<ul>
+<li>
+<p>the class definition, whether it is abstract, its parent type and stereotype,</p>
+</li>
+<li>
+<p>class attributes with their definitions, value types, multiplicities, and stereotypes,</p>
+</li>
+<li>
+<p>relationships with other classes, including definition, relationship type, multiplicity, and stereotype.</p>
+</li>
+</ul>
+<p>The stereotype of an attribute may be a primitive type (a Boolean value), another complex class, or a class containing only an enumeration of values. An example of a tabular class definition for the class VerticalGradient from the CommonPhysicalCharacteristics package is shown in the following table.</p>
+<p><strong>Table 1 – Definition of the class VerticalGradient (Tab. 32 of the source standard)</strong></p>
+<table>
+  <tr>
+    <th colspan="3">Class: VerticalGradient</th>
+  </tr>
+  <tr>
+    <td colspan="3">Definition: Segment of a vertical alignment that element has a single longitudinal gradient ratio.</td>
+  </tr>
+  <tr>
+    <td colspan="3">Subtype of: VerticalAlignmentElement</td>
+  </tr>
+  <tr>
+    <td colspan="3">Stereotypes: «DataType»</td>
+  </tr>
+  <tr>
+    <td colspan="3">Attribute: gradientRatioValue</td>
+  </tr>
+  <tr>
+    <td rowspan="4"></td>
+    <td>Definition:</td>
+    <td>Longitudinal slope ratio as a percentage where the value is positive for ascending cases and negative for descending cases.<br>Example: value = +5.000%</td>
+  </tr>
+  <tr>
+    <td>Value type:</td>
+    <td>Decimal</td>
+  </tr>
+  <tr>
+    <td>Multiplicity:</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Stereotypes:</td>
+    <td>«PrimitiveType»</td>
+  </tr>
+  <tr>
+    <td colspan="3">NOTE This class inherits the attributes a sequentialNumber, a startPoint, and an endPoint from the attributes of the vertical alignment element superclass.</td>
+  </tr>
+</table>
+<p>The TrafficRegulation package is the most extensive one; in addition, it defines the methodology for modelling traffic regulations, including the ability to describe time‑based and vehicle‑based conditions (defined as the TimeCondition and VehicleCondition subpackages), as well as the main objects for defining permanent and temporary regulations.</p>
+<p>TrafficRegulation is linked to belt features and manoeuvre trajectories at the lane or road level to enforce traffic regulations (turn prohibitions, time‑limited restrictions, conditional permissions, etc.).</p>
+<h2 id="10-roadbeltnetwork-package"><a class="header" href="#10-roadbeltnetwork-package">10 RoadBeltNetwork package</a></h2>
+<p>This clause, spanning 61 pages, describes the model of the <strong>road belt network</strong>. RoadBeltNetwork consists of the following subpackages: <strong>RoadBeltNetworkFeature</strong>, <strong>RoadBeltFeatureProperty</strong>, and <strong>RoadBeltSegmentProperty</strong>. It defines the class diagram of this package and the detailed rules for modelling the RoadBeltNetwork, that is, how the classes describing intersections, manoeuvre trajectories at the road level, and the elements and segments of the road belt are constructed and interconnected, including examples.</p>
+<p>The individual classes contained in the package are described in a manner similar to Clause 9.</p>
+<p><img src="fig-2.png" alt="Figure 2 – Diagram of RoadBeltElement and IntersectionBelt (Fig. 16 of the source standard)" /></p>
+<p><strong>Figure 2 – Diagram of RoadBeltElement and IntersectionBelt (Fig. 16 of the source standard)</strong></p>
+<h2 id="11-lanebeltnetwork-package"><a class="header" href="#11-lanebeltnetwork-package">11 LaneBeltNetwork package</a></h2>
+<p>This clause, spanning 35 pages, describes the model of <strong>lane belt networks</strong>. LaneBeltNetwork models the lane-level structure with an analogous structure to the road-level model, but with higher granularity. It consists of the following subpackages: <strong>LaneBeltNetworkFeature</strong>, <strong>LaneBeltFeatureProperty</strong>, and <strong>LaneBeltSegmentProperty</strong>. It defines the class diagram of this package and the detailed rules for modelling the LaneBeltNetwork, that is, how the classes describing the elements and connections of the lane belt are constructed and interconnected, and how manoeuvre trajectories at the lane level are modelled.</p>
+<p><img src="fig-3.png" alt="Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B) (Fig. 23 of the source standard)" /></p>
+<p><strong>Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B) (Fig. 23 of the source standard)</strong></p>
+<h2 id="12-roadstructureandequipment-package"><a class="header" href="#12-roadstructureandequipment-package">12 RoadStructureAndEquipment package</a></h2>
+<p>This clause, spanning 99 pages, describes the model of road structures and road equipment, including horizontal road markings.</p>
+<p>RoadStructureAndEquipment consists of the following subpackages: RoadEquipment, RoadMarking, RoadStructure, and RSECommonProperty.</p>
+<p>It defines the list of elements (see the example in the following table) and indicates to which preceding network concept they belong.</p>
+<p><strong>Table 2 – Excerpt from Tab. 172 of the source standard: Overview of RSE categories</strong></p>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Example element</th>
+    <th>Note</th>
+  </tr>
+  <tr>
+    <td>Road Structure</td>
+    <td>central reserve (CentralReserve); tunnel (Tunnel); road bridge (VehicleBridge)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Road Equipment</td>
+    <td>vertical traffic sign (RoadSign); traffic pole (TrafficPole); guardrail (Guardrail)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Road Marking</td>
+    <td>stop line (StopLine); pedestrian crossing (PedestrianCrossing); longitudinal marking (LaneEdgeMarking)</td>
+    <td></td>
+  </tr>
+</table>
+<p>At the level of each subpackage, the clause contains a class diagram and a detailed description of the individual classes. The classes contained in the package are described in a manner like Clause 9.</p>
+<h2 id="13-relationship-between-mhad-and-dynamic-information"><a class="header" href="#13-relationship-between-mhad-and-dynamic-information">13 Relationship between MHAD and dynamic information</a></h2>
+<p>This clause, in two sentences, notes that dynamic information defined in TS 22726-2 may refine MHAD through the <strong>RoadNetworkElement</strong> interface and refers to the diagram in Clause 9.2.</p>
+<h2 id="annex-a-normative--abstract-test-suite"><a class="header" href="#annex-a-normative--abstract-test-suite">Annex A (normative) – Abstract test suite</a></h2>
+<p>This annex, one page in length, lists the test items for verifying data structures in bullet form and refers to Clause 7.</p>
+<h2 id="annex-b-informative--basic-data-types-and-stereotypes"><a class="header" href="#annex-b-informative--basic-data-types-and-stereotypes">Annex B (informative) – Basic data types and stereotypes</a></h2>
+<p>This annex, 1.5 pages long, provides a table containing the definitions and source standards of primitive data types (number, string, etc.) and stereotypes (weight, speed, time, linear and point data, etc.) taken from other standards.</p>
+<h2 id="annex-c-informative--resolution-and-accuracy-of-mhad"><a class="header" href="#annex-c-informative--resolution-and-accuracy-of-mhad">Annex C (informative) – Resolution and accuracy of MHAD</a></h2>
+<p>This annex, one page long, provides recommended resolution and metrics for positional data (GNSS/RTK), tolerances, and methodologies for accuracy validation.</p>
+<h2 id="annex-d-informative--comparison-of-road-network-models"><a class="header" href="#annex-d-informative--comparison-of-road-network-models">Annex D (informative) – Comparison of road network models</a></h2>
+<p>This annex, five pages long, compares the MHAD belt model with traditional linear models (ISO/TS 20452, ISO 14296, GDF/ISO 20524-2) and includes recommendations for transformations and interoperability.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_TS_19091/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_TS_22741-10/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_TS_19091/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_TS_22741-10/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

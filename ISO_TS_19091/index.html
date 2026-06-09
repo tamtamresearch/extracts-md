@@ -1,0 +1,475 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO/TS 19091 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--cooperative-its--using-v2i-and-i2v-communications-for-applications-related-to-signalized-intersections"><a class="header" href="#intelligent-transport-systems--cooperative-its--using-v2i-and-i2v-communications-for-applications-related-to-signalized-intersections">Intelligent transport systems – Cooperative ITS – Using V2I and I2V communications for applications related to signalized intersections</a></h1>
+<p><strong>ISO/TS 19091</strong> · Published 2019 (Edition 2) · 233 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>ISO/TS 19091 (hereinafter referred to as “this document”) describes the use cases for several applications in the domain of signalized intersections, the goal of which is to improve safety, mobility, and environmental sustainability. For each use case, the information needs are defined that must be fulfilled through communication between vehicles and the infrastructure. In this way, the requirements for individual applications are defined, and these are subsequently mapped to data frames and data elements through which the individual requirements are fulfilled within the defined message set.</p>
+<p><em>Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.</em></p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>The aim of this specification is to define how the defined C-ITS message structures of types SPaT, MAP, SSM, and SRM can be used for C-ITS use cases related to signalized intersections. This document is therefore suitable for:</p>
+<ul>
+<li>
+<p>C-ITS service providers as a catalogue of C-ITS use cases applicable at signalized intersections.</p>
+</li>
+<li>
+<p>Equipment manufacturers and telematics system suppliers as a technical specification defining the specific use of data frames and data elements to fulfil the requirements of individual use cases.</p>
+</li>
+</ul>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>This document defines the messages, data structures, and data elements to support exchanges between the roadside equipment and vehicles, specifically for SPaT, MAP, SSM, and SRM message types. The document consists of common clauses that are labelled informative and are generally applicable to all implementations and regions. These clauses also frequently contain references to other standards defining the content of other message types beyond those listed above.</p>
+<p>Furthermore, the document contains 7 annexes, the content of which includes both the functional description of individual use cases in the domain of signalized intersections, the mapping of use case requirements to the content of individual data structures and data elements of the above message types, and also the individual regional profiles utilizing the so-called extension principle of data messages.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document.</p>
+<ul>
+<li>
+<p>ISO 22951, Data dictionary and message sets for preemption and prioritization signal systems for emergency and public transport vehicles (PRESTO)</p>
+</li>
+<li>
+<p>ISO 26684, Intelligent transport systems (ITS) – Cooperative intersection signal information and violation warning systems (CIWS) – Performance requirements and test procedures</p>
+</li>
+<li>
+<p>SAE J2735™: 2016, Dedicated Short Range Communications (DSRC) Message Set Dictionary</p>
+</li>
+<li>
+<p>EN 302 637-2 V1.3.2, Intelligent Transport Systems (ITS); Vehicular Communications; Basic Set of Applications; Part 2: Specification of Cooperative Awareness Basic Service</p>
+</li>
+<li>
+<p>ARIB STD-T109, 700 MHz Band Intelligent Transport Systems</p>
+</li>
+<li>
+<p>ITS FORUM RC-010, 700 MHz Band Intelligent Transport Systems – Extended Functions Guideline, published on March 15, 2012</p>
+</li>
+<li>
+<p>ETSI/TS 102 894-2 V1.2.2, Intelligent Transport Systems (ITS); Users and applications requirements; Part 2: Applications and facilities layer; common data dictionary</p>
+</li>
+</ul>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and Definitions</a></h2>
+<p>The technical specification defines 52 terms. The most important include:</p>
+<p><strong>MAP data message (MAP)</strong> – data elements and frames comprising a message, the contents of which describe the geometry of a roadway intersection</p>
+<p><strong>signal phase and timing (SPaT)</strong> – a message sent from the infrastructure to C-ITS devices describing the current state of the traffic signal controller (at one or more intersections), its phases, and the relationship to possible intersection manoeuvres</p>
+<p><strong>signal request message (SRM)</strong> – a message sent from C-ITS devices to the infrastructure, by which a vehicle requests preferential treatment from the traffic signal controller for passage through the intersection</p>
+<p><strong>signal status message (SSM)</strong> – a message sent from the infrastructure to C-ITS devices, containing the details of the traffic signal controller’s response to a request for preferential treatment at the intersection</p>
+<p><strong>roadside equipment (RSE)</strong> – equipment located at the infrastructure side that creates and transmits messages to vehicles and receives messages from vehicles for the purpose of supporting V2I and I2V applications</p>
+<h2 id="4-abbreviated-terms"><a class="header" href="#4-abbreviated-terms">4 Abbreviated Terms</a></h2>
+<p>The technical specification contains 51 abbreviations. The most important include:</p>
+<p><strong>CV</strong> Connected Vehicle</p>
+<p><strong>OBE</strong> On-Board Equipment</p>
+<p><strong>RSE</strong> Roadside Equipment</p>
+<p><strong>SPaT</strong> Signal Phase and Timing</p>
+<p><strong>SRM</strong> Signal Request Message (J2735™)</p>
+<p><strong>SSM</strong> Signal Status Message (J2735™)</p>
+<p><strong>TSC</strong> Traffic Signal Controller</p>
+<p>Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (<a href="http://www.itsterminology.org">www.itsterminology.org</a>), the StandardLand website (<a href="http://www.standardland.cz">www.standardland.cz</a>) or the OBP plataform (<a href="http://www.iso.org/obp">www.iso.org/obp</a>).</p>
+<h2 id="5-general-description-informative"><a class="header" href="#5-general-description-informative">5 General Description (informative)</a></h2>
+<p>This clause, spanning 14 pages and 5 subclauses, provides introductory explanatory information primarily relating to Annex A – the list of use cases. It describes how the use cases are divided into three areas: safety, mobility/sustainability, and priority/pre-emption for specific types of transport within the transport system. It also describes that in Annex A, the use cases are described by a set of 16 descriptive characteristics, ranging from basic identification information, through data flow sequence descriptions, to potential risks/issues.</p>
+<p>The “Functional model” subclause describes the three basic components within V2I/I2V communications at signalized intersections, i.e. vehicle equipment, infrastructure, and traffic management, their roles and the relationships between them. Emphasis is placed primarily on communication between vehicles and the infrastructure; however, other interactions with traffic management applications etc. are described at least at a general level. A detailed analysis of these interactions is, however, outside the scope of this document.</p>
+<p>Within the functional model, the general system architecture is also described, including the technical components with which the individual elements described above are equipped – see Figure 1 below. The functions of individual elements in this figure are described in the standard to the extent of approximately one page.</p>
+<p><img src="fig-1.png" alt="Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the source standard)" /></p>
+<p><strong>Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the source standard)</strong></p>
+<p>Furthermore, the Functional model addresses message interactions, i.e. an explanation of the broadcast principle within DSRC communications and the implications and requirements this has for message transmission (frequent repetition of the same message “over the air” instead of interactive information exchange used in TCP/IP).</p>
+<p>In the last part of the “Functional model” subclause, entitled “Common operational assumptions”, 11 primarily technical assumptions are listed and explained, which the authors of the standard considered valid during the design and description of the individual use cases. As an example, the first assumption states:</p>
+<p>“It is assumed that all OBE equipped vehicles are broadcasting the basic safety message (BSM) or cooperative awareness message (CAM) continuously at some repetition rate that may change depending on the presence of active vehicles. Generally, a rate of 10 messages per second is assumed; however, the exact latency needed for the use cases has yet to be determined. It is likely that a rate of less than 10 Hz will be sufficient for these applications.”</p>
+<p>In subclauses 5.3 to 5.5, the groups of use cases into which the authors of the standard have divided them are further described in general terms, namely:</p>
+<ul>
+<li>
+<p>Safety use cases</p>
+</li>
+<li>
+<p>Mobility/sustainability use cases</p>
+</li>
+<li>
+<p>Priority/pre-emption use cases</p>
+</li>
+</ul>
+<p>In this division, the individual use cases are also described in detail in Annex A. For each of the above groups, this subclause describes the intent (what problem the given group of use cases targets), specific assumptions beyond those stated in the preceding subclause, and architecture implications as also described in the preceding subclause.</p>
+<h2 id="6-function-description-informative"><a class="header" href="#6-function-description-informative">6 Function Description (informative)</a></h2>
+<p>This clause, spanning 18 pages, describes the functional requirements divided by individual components (e.g. devices) or messages and their parts that are involved in the process of information exchange between the infrastructure (RSE) and the vehicle (OBE) within the defined use cases. The individual requirements are described in the extent of one to two short paragraphs and are subsequently mapped to use cases in Annex B.</p>
+<p>The requirements are divided into the following subclauses:</p>
+<ul>
+<li>
+<p>Public safety vehicle</p>
+</li>
+<li>
+<p>Signal pre-emption</p>
+</li>
+<li>
+<p>Public transport and commercial vehicle</p>
+</li>
+<li>
+<p>Signal priority requirements</p>
+</li>
+<li>
+<p>Broadcast area’s geometrics</p>
+</li>
+<li>
+<p>Broadcast GNSS augmentation details</p>
+</li>
+<li>
+<p>Signalized intersection requirements</p>
+</li>
+<li>
+<p>Broadcast cross traffic sensor information</p>
+</li>
+<li>
+<p>Broadcast vulnerable road user sensor information</p>
+</li>
+<li>
+<p>Broadcast dilemma zone violation warning</p>
+</li>
+<li>
+<p>Broadcast signal preferential treatment status</p>
+</li>
+<li>
+<p>Message identifier</p>
+</li>
+<li>
+<p>System performance requirements</p>
+</li>
+<li>
+<p>Transmission rates — Signal preferential treatment</p>
+</li>
+<li>
+<p>Transmission rate requirements — Broadcast roadway geometrics information</p>
+</li>
+<li>
+<p>Transmission rate requirements — GNSS augmentations detail broadcasts</p>
+</li>
+<li>
+<p>Transmission rate requirements — Broadcast signal phase and timing information</p>
+</li>
+<li>
+<p>Transmission rate requirements — Broadcast cross traffic sensor information</p>
+</li>
+<li>
+<p>Transmission rate requirements — Broadcast vulnerable road user sensor information</p>
+</li>
+</ul>
+<h2 id="7-messages"><a class="header" href="#7-messages">7 Messages</a></h2>
+<p>In this very brief clause, the following is literally stated:</p>
+<p>“This document specifies the data dictionary to be used internationally for the deployment of the following messages:</p>
+<ul>
+<li>
+<p><em>map data (MAP);</em></p>
+</li>
+<li>
+<p><em>signal phase and timing (SPaT);</em></p>
+</li>
+<li>
+<p><em>signal request message (SRM);</em></p>
+</li>
+<li>
+<p><em>signal status message (SSM).</em></p>
+</li>
+</ul>
+<p>The structure of these messages is defined by selection of an annex and the message requirements therein. The annexes with message structure requirements are as follows:</p>
+<ul>
+<li>
+<p><em>Annex E Profile A for J2735™;</em></p>
+</li>
+<li>
+<p><em>Annex F Profile B for J2735™;</em></p>
+</li>
+<li>
+<p><em>Annex G Profile C for J2735™.“</em></p>
+</li>
+</ul>
+<h2 id="8-conformance"><a class="header" href="#8-conformance">8 Conformance</a></h2>
+<p>This brief clause defines in 3 points the conditions under which a specific implementation of C-ITS systems may be considered conformant with this document.</p>
+<h2 id="annex-a-informative-use-cases"><a class="header" href="#annex-a-informative-use-cases">Annex A (informative) Use Cases</a></h2>
+<p>This annex is the key content of this document, as it contains detailed descriptions of individual use cases. On the introductory page of this annex, a list is provided in a clear tabular form, from which it can be seen that the annex contains descriptions of a total of 25 use cases, divided according to the groups defined in Clause 5 of this document.</p>
+<p>What follows is the detailed description of each use case, which also takes the form of a table with the following parts/rows:</p>
+<ul>
+<li>
+<p>Use case name</p>
+</li>
+<li>
+<p>Category – according to the classification in Clause 5</p>
+</li>
+<li>
+<p>Infrastructure role – describes the role of the infrastructure in the given use case</p>
+</li>
+<li>
+<p>Short description – typically one sentence</p>
+</li>
+<li>
+<p>Goal – what is the objective of the given use case</p>
+</li>
+<li>
+<p>Constraints – recorded technical, organizational, or other constraints</p>
+</li>
+<li>
+<p>Geographic scope – whether it concerns a single intersection or an entire area</p>
+</li>
+<li>
+<p>Actors – e.g. public transport vehicle, roadside equipment, etc.</p>
+</li>
+<li>
+<p>Illustration – a clear graphical diagram including all actors and data flows</p>
+</li>
+<li>
+<p>Preconditions – must be met before the given use case can begin</p>
+</li>
+<li>
+<p>Main flow – a sequence of steps on the part of individual actors within the given use case</p>
+</li>
+<li>
+<p>Alternative flow – a sequence of steps in an alternative scenario. Some use cases have multiple alternative scenarios</p>
+</li>
+<li>
+<p>Post-conditions – description of steps that need to be taken to end the given use case and return to normal state/operation</p>
+</li>
+<li>
+<p>Information requirements – enumerates the specific data elements and data frames of C-ITS message types SPaT, MAP, SRM, SSM, and BSM/CAM needed to realize the given use case</p>
+</li>
+<li>
+<p>Issues – describes known issues with the realization of the given use case. Thematically similar to “constraints” above</p>
+</li>
+</ul>
+<h2 id="annex-b-informative-use-case-to-requirements-traceability"><a class="header" href="#annex-b-informative-use-case-to-requirements-traceability">Annex B (informative) Use Case to Requirements Traceability</a></h2>
+<p>The content of this annex is a tabular mapping of functional requirements defined in Clause 6 of this document to the use cases described in detail in Annex A. The annex contains 3 main tables/matrices corresponding to the use case groups per Clause 5, where the rows list functional requirements from Clause 6 and the columns list use cases from Annex A. Within each matrix, it is indicated whether the respective functional requirement is mandatory (M), optional (O), conditional (C), not applicable (N/A), mandatory only in some regions (REG), or prohibited (X) for the given use case.</p>
+<h2 id="annex-c-informative-requirements-traceability-matrix"><a class="header" href="#annex-c-informative-requirements-traceability-matrix">Annex C (informative) Requirements Traceability Matrix</a></h2>
+<p>This annex defines the relationship between functional requirements defined in Clause 6 of this document and specific data frames and data elements in various types of C-ITS messages. In tabular form, for each defined functional requirement, the specific content of the C-ITS message is defined by which the given requirement can be fulfilled.</p>
+<h2 id="annex-d-normative-extension-procedures"><a class="header" href="#annex-d-normative-extension-procedures">Annex D (normative) Extension Procedures</a></h2>
+<p>This annex briefly explains in half a page that the SAE J2735™ data dictionary is designed with a mechanism for extending messages for local (i.e. regional) needs, and that this mechanism is described in more detail in the SAE J2735™ standard itself.</p>
+<h2 id="annexes-e--f--g-normative-profile-a-profile-b-profile-c-for-j2735"><a class="header" href="#annexes-e--f--g-normative-profile-a-profile-b-profile-c-for-j2735">Annexes E + F + G (normative) Profile A, Profile B, Profile C for J2735™</a></h2>
+<p>These annexes define the individual profiles for different regions. The profiles essentially define which use cases (see Annex A), requirements (Clause 6), and their mappings to data frames and data elements (Annex C) are applicable in the given regions. If any extensions to individual C-ITS message types (see Annex D) are used in the given region, these extensions are specified here. This document contains 3 profiles corresponding to 3 annexes:</p>
+<ul>
+<li>
+<p>Profile A (used primarily in the USA, note by the extract author)</p>
+</li>
+<li>
+<p>Profile B (used primarily in Japan, note by the extract author)</p>
+</li>
+<li>
+<p>Profile C (used primarily in Europe, note by the extract author) – uses data elements from ETSI/TS 102 894-2</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_26683-2/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_TS_22726-1/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_26683-2/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_TS_22726-1/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

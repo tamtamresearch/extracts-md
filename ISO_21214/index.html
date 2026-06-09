@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO 21214 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--calm--infrared-based-communication-systems"><a class="header" href="#intelligent-transport-systems--calm--infrared-based-communication-systems">Intelligent Transport Systems – CALM – Infrared-Based Communication Systems</a></h1>
+<p><strong>ISO 21214</strong> · Published 2015 (Edition 2) · 144 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>The ISO 21214 international standard (hereinafter referred to as the described document) introduces a set of functional requirements for the communication interface of an ITS station.</p>
+<p>The concept of ITS communications (formerly CALM) is a set of requirements aimed at unifying communication systems within ITS. It introduces the concept of an ITS station, which represents the basic building block of this communication architecture. For more information, see the Extract from ISO 21217.</p>
+<p>A key feature of the ITS station is its ability to use various communication protocols with different access technologies. The described document specifies the method of data exchange, via an infrared interface operating at wavelengths from 850 nm to 1010 nm, and expands the interface specification with compatibility with the ITS station according to ISO 21217. For the purposes of the standard, this interface is referred to as IR. This is the second edition of the standard.</p>
+<p><em>Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.</em></p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>The document establishes principles for implementing the IR interface into an ITS station within CALM.</p>
+<p>For public administration authorities, it provides basic technical information to form an idea of the possibilities of using the IR interface in the ITS environment.</p>
+<p>For manufacturers of telematics devices and their operators, it defines the requirements for communication between ITS stations in the ITS interface environment.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>The described document specifies requirements for the implementation of the IR communication interface into the access layer of the ITS-S station. The document further specifies requirements for the Communication Adaptation Layer (CAL) and the Management Adaptation Entity (MAE) layer of the ITS station.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The related standards are primarily those of the ITS communication group (CALM). The clause does not specify these standards in detail.</p>
+<p>In addition to the ITS communication (CALM) standards, it references the following two standards:</p>
+<p><em>ISO/IEC 8802-11:1999, Information technology — Telecommunications and information exchange between systems — Local and metropolitan area networks — Specific requirements — Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications</em></p>
+<p><em>IEC 60825-1, Safety of laser products – Part 1: Equipment classification, requirements and user’s guide</em></p>
+<h2 id="2-conformance"><a class="header" href="#2-conformance">2 Conformance</a></h2>
+<p>This clause contains a short paragraph with a single-line declaration stating that the standard conforms to the requirements of related international standards.</p>
+<h2 id="4-terms-and-definitions"><a class="header" href="#4-terms-and-definitions">4 Terms and Definitions</a></h2>
+<p>The standard introduces 36 new terms. Other terms and abbreviations are provided in ISO 21217 and other CALM standards. In a separate paragraph, the standard introduces terms for the optical characteristics of the interface. Examples of terms and definitions:</p>
+<p><strong>communication zone</strong> – spatial zone in which two CALM-IR units are able to communicate with acceptable performance</p>
+<p><strong>registration phase</strong> – phase where a master identifies devices newly entering his communication zone</p>
+<p><strong>wake-up window; WuW</strong> – special case of a broadcast window and is used to “wake-up” sleeping units entering the communication zone of an active master</p>
+<h2 id="5-symbols-and-abbreviated-terms"><a class="header" href="#5-symbols-and-abbreviated-terms">5 Symbols and abbreviated terms</a></h2>
+<p>The standard contains 82 abbreviations. Example abbreviations:</p>
+<p><strong>CIR</strong> circular QAM <em>(a type of quadrature amplitude modulationcircular QAM)</em></p>
+<p><strong>HHH</strong> Hirt, Hassner, Heise (inventors of the HHH(1,13) code) <em>(packet coding and modulation developed specifically for IR communication)</em></p>
+<p>**IR ** infrared <em>(infrared-based communication interface)</em></p>
+<p><strong>McW</strong> multicast window</p>
+<p><strong>TDMA</strong> time division multiple access</p>
+<p><em><strong>θH</strong></em> horizontal opening angle</p>
+<p><em><strong>θV</strong></em> vertical opening angle</p>
+<p><em>NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (</em><a href="http://www.itsterminology.org/">www.itsterminology.org</a><em>), the StandardLand website (</em><a href="http://www.standardland.cz/">www.standardland.cz</a><em>) or the OBP platform (</em><a href="http://www.iso.org/obp">www.iso.org/obp</a><em>).</em></p>
+<h2 id="6-requirements-transmitter-and-receiver-parameters"><a class="header" href="#6-requirements-transmitter-and-receiver-parameters">6 Requirements: Transmitter and Receiver Parameters</a></h2>
+<p>This clause, spanning 3 pages, defines the requirements for the IR receiver and IR transmitter in the form of parameter tables.</p>
+<p>Article <strong>6.1 Transmitter wavelengths and bandwidth and</strong> Article <strong>6.2 – Radiated power</strong>, both on a single page, define the technical requirements for the transmitter (wavelength, bandwidth, radiated power). For example parameters, see Table 1. The clause also defines 11 transmitter classes (based on radiated power).</p>
+<p><strong>Table 1– IR transmitter parameter specification (Tab. 1 of the source standard)</strong></p>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Specification<br>Channel 870 Channel 970<br>(main channel) (alternative channel)</th>
+  </tr>
+  <tr>
+    <td>TX1 Nominal transmitter wavelength</td>
+    <td>870 nm 970 nm</td>
+  </tr>
+  <tr>
+    <td>TX2 Transmitter pass band</td>
+    <td>820 nm to 910 nm 920 nm to 1 010 nm</td>
+  </tr>
+  <tr>
+    <td>TX3 Coherence length</td>
+    <td>&lt; 1 mm</td>
+  </tr>
+  <tr>
+    <td>TX4 Total radiated power</td>
+    <td>Dependent on transmitter class (see 6.2)</td>
+  </tr>
+  <tr>
+    <td>TX5 Minimum receiver in-band (RX2) radiated power</td>
+    <td>80 % of TX4</td>
+  </tr>
+  <tr>
+    <td>TX6a Radiated power below pass band</td>
+    <td>not specified &lt; 10 % of TX4</td>
+  </tr>
+  <tr>
+    <td>TX6b Radiated power above pass band</td>
+    <td>&lt; 10 % of TX4 not specified</td>
+  </tr>
+</table>
+<p>Article <strong>6.3 Receiver wavelengths and bandwidths</strong> and Article <strong>6.4 – Receiver class</strong> span two pages and define, in the form of two tables, the technical requirements for the receiver (wavelength, bandwidth).</p>
+<p>Clause 6 also defines 16 receiver classes (based on receiver sensitivity).</p>
+<h2 id="7-modulation-and-coding"><a class="header" href="#7-modulation-and-coding">7 Modulation and Coding</a></h2>
+<p>This clause, spanning 3 pages, defines the basic set of requirements for modulation and coding in the IR environment. It provides the basic structure of a data packet at the OSI model physical layer, including pulse durations in μs. It also defines interface communication profiles (see Table 2 (Table 9 of the standard) – Communication profiles).</p>
+<p><strong>Table 2 – Excerpt of Table 9 of the source standard: Communication profiles</strong></p>
+<p><img src="fig-1.png" alt="Table 2 – Excerpt of Table 9 of the source standard: Communication profiles" /></p>
+<h2 id="8-directivity-and-communication-zones"><a class="header" href="#8-directivity-and-communication-zones">8 Directivity and Communication Zones</a></h2>
+<p>This clause, spanning 3 pages, defines the geometrical and spatial requirements for the interaction of IR-based communication interfaces. It first graphically displays the geometric space of IR communication, and then shows the geometric intersection of two IR communication interfaces (see Figure 1). The next part of the clause defines communication zone shortcuts, which are essentially various geometric configurations of IR communication in space, with specific parameter values assigned according to the spatial arrangement shown in Figure 1.</p>
+<p><img src="fig-2.png" alt="" /></p>
+<p><strong>Figure 1 – Horizontal opening and vertical opening angles in IR communication (Fig. 5 of the source standard)</strong></p>
+<h2 id="9-frames-and-windows"><a class="header" href="#9-frames-and-windows">9 Frames and Windows</a></h2>
+<p>This clause, spanning 20 pages, describes the general structure of communication frames in IR communication. It also defines the communication diagram for simultaneous communication of multiple IR units. Data frames are separated by a special frame structure, also described in this clause. Frames are divided into communication windows, which are also defined in this clause (management window, private window, multicast window, broadcast window, compatibility window, spare window, wake-up window).</p>
+<h2 id="10-mac-commands"><a class="header" href="#10-mac-commands">10 MAC Commands</a></h2>
+<p>This clause, spanning 35 pages, describes the commands at the data link layer of the OSI model, which are used to signal interface activity between MAC communication participants. The respective subclauses describe this signalling, based on the requirements of different control units of the ITS station (specifically the IR-CAL communication adaptation layer, the IR-MAE management adaptation entity, and the IR-ME management entity). The clause also details individual MAC commands, in text and in parameter tables.</p>
+<h2 id="11-registration-procedure"><a class="header" href="#11-registration-procedure">11 Registration Procedure</a></h2>
+<p>This clause, spanning 4 pages, describes, in text, tables, and diagrams, the registration procedure used to register the IR interface into communication.</p>
+<h2 id="12-window-management"><a class="header" href="#12-window-management">12 Window Management</a></h2>
+<p>This clause, spanning 2 pages, describes, in text, the mechanism for managing communication windows within IR communication. This especially includes allocating sufficient communication time for individual IR interfaces in communication, managing communication windows for time-critical applications, controlling the required IR interface response time, and more.</p>
+<h2 id="13-ir-management-entity"><a class="header" href="#13-ir-management-entity">13 IR Management Entity</a></h2>
+<p>This clause, spanning 4 pages, describes, in text and tables, the basic features of the IR interface management entity (IR-ME), which is responsible for managing the IR MAC layer and the IR physical layer of the OSI model. This unit also ensures connectivity with the higher layers of the ITS station.</p>
+<h2 id="14-adaptation"><a class="header" href="#14-adaptation">14 Adaptation</a></h2>
+<p>This clause, spanning 6 pages, describes in text, diagrams, and tables, how to integrate the IR interface into the structure of the ITS station. The adaptation structure of the IR interface into the ITS station is shown in Figure 2.</p>
+<p><strong>Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)</strong></p>
+<p><img src="fig-3.png" alt="Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)" /></p>
+<h2 id="15-adoption-of-other-standards-and-internationally-accepted-practices"><a class="header" href="#15-adoption-of-other-standards-and-internationally-accepted-practices">15 Adoption of Other Standards and Internationally Accepted Practices</a></h2>
+<p>This one-paragraph clause, with a reference to ISO 21217, describes how to apply the described document using local (regional) conditions and standards.</p>
+<h2 id="16-marking-and-labelling"><a class="header" href="#16-marking-and-labelling">16 Marking and Labelling</a></h2>
+<p>This one-paragraph clause defines the requirements for labelling devices that contain IR interfaces compatible with the described document.</p>
+<h2 id="17-declaration-of-patents-and-intellectual-property"><a class="header" href="#17-declaration-of-patents-and-intellectual-property">17 Declaration of Patents and Intellectual Property</a></h2>
+<p>This clause, spanning 3 pages, refers to patent ownership associated with the implementation of IR interfaces compatible with the described document.</p>
+<h2 id="annex-a-normative---coding-and-error-correction-of-profiles-0-and-1-and-of-commands"><a class="header" href="#annex-a-normative---coding-and-error-correction-of-profiles-0-and-1-and-of-commands">Annex A (Normative) - Coding and Error Correction of Profiles 0 and 1 and of Commands</a></h2>
+<p>This 2-page annex contains textual and tabular definitions of error correction algorithms for the given communication profiles.</p>
+<h2 id="annex-b-normative---coding-and-modulation-of-profile-2-to-profile-6"><a class="header" href="#annex-b-normative---coding-and-modulation-of-profile-2-to-profile-6">Annex B (Normative) - Coding and Modulation of Profile 2 to Profile 6</a></h2>
+<p>This 7-page annex contains textual and tabular definitions of error correction algorithms for the given communication profiles.</p>
+<h2 id="annex-c-informative---link-power-budget"><a class="header" href="#annex-c-informative---link-power-budget">Annex C (Informative) - Link Power Budget</a></h2>
+<p>This 6-page annex contains texts, diagrams, and tables, describing the implementation of the IR interface where the power consumption in the “in-vehicle unit and roadside equipment” system is shifted to the roadside equipment. This model simplifies the implementation of the IR interface in vehicles.</p>
+<h2 id="annex-d-informative---link-directivity-considerations"><a class="header" href="#annex-d-informative---link-directivity-considerations">Annex D (Informative) - Link Directivity Considerations</a></h2>
+<p>This 2-page annex provides texts and diagrams, with examples of antenna placement for the IR interface on vehicles.</p>
+<h2 id="annex-e-informative---compatibility-of-calm-and-non-calm-infrared-systems"><a class="header" href="#annex-e-informative---compatibility-of-calm-and-non-calm-infrared-systems">Annex E (Informative) - Compatibility of CALM and Non-CALM Infrared Systems</a></h2>
+<p>This 2-page annex describes in text the basic mechanisms to ensure compatibility of the IR interface according to the described document with IR devices that do not meet the ISO 21214 requirements.</p>
+<h2 id="annex-f-normative---specification-of-mr-ir-communication-protocol-for-compatibility-with-iso-21214"><a class="header" href="#annex-f-normative---specification-of-mr-ir-communication-protocol-for-compatibility-with-iso-21214">Annex F (Normative) - Specification of MR-IR Communication Protocol for Compatibility with ISO 21214</a></h2>
+<p>This 25-page annex describes in text, tables, and diagrams, the requirements for adapting the data layer of the existing MR-IR interface to achieve compatibility with the requirements of the described document.</p>
+<h2 id="annex-g-informative---summary-of-changes-between-this-version-of-iso-21214-and-the-previously-published-version"><a class="header" href="#annex-g-informative---summary-of-changes-between-this-version-of-iso-21214-and-the-previously-published-version">Annex G (Informative) - Summary of changes between this version of ISO 21214 and the previously published version</a></h2>
+<p>This 2-page annex contains a list of changes, compared to the original edition of the standard.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_17748-3/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_23792-1/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_17748-3/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_23792-1/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

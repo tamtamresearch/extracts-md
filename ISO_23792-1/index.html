@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO 23792-1 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--motorway-chauffeur-systems-mcs--part-1-framework-and-general-requirements"><a class="header" href="#intelligent-transport-systems--motorway-chauffeur-systems-mcs--part-1-framework-and-general-requirements">Intelligent transport systems – Motorway chauffeur systems (MCS) – Part 1: Framework and general requirements</a></h1>
+<p><strong>ISO 23792-1</strong> · Published 2026 · 38 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>This document specifies a framework and general requirements for Level 3 automated driving systems intended for motorway operation. The standard defines the concept of a Motorway Chauffeur System (MCS) as a specific implementation of an automated driving system (ADS) that performs the entire dynamic driving task (DDT) within the current lane of travel in the presence of a fallback-ready user (FRU). The document establishes a systematic framework including system characteristics, operational design domain (ODD), state models and state transitions, functional requirements, minimum DDT performance requirements, and test scenarios.</p>
+<p><em>Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.</em></p>
+<h2 id="use"><a class="header" href="#use">Use</a></h2>
+<p>This document is primarily intended for vehicle manufacturers, developers of automated driving systems, automotive industry developers, testing organizations, and regulatory authorities. It provides a reference framework for the design, specification, verification, and assessment of MCS systems and may serve as a basis for further standardization activities or regulatory requirements related to motorway automated driving.</p>
+<p>The specification can also be used for the development of internal manufacturer requirements and for creating test scenarios and validation procedures.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>This document specifies the framework, characteristics, functionalities, and minimum performance requirements for a motorway chauffeur system (MCS) performing Level 3 automated driving on motorways.</p>
+<p>The standard specifies the basic functionalities required for in-lane operation, defines requirements related to the generation of request to intervene (RTI), specifies requirements for continuation of operation after issuing an RTI, defines minimum DDT performance requirements, and specifies test procedures. Advanced functionalities such as lane changing are addressed in other parts of the series.</p>
+<p>This document is limited to MCS operation on limited access motorways and does not cover other forms of system engagement or means related to setting a destination and selecting a route.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The standard normatively references ISO 15622:2018 related to performance requirements and test procedures for adaptive cruise control systems and ISO/SAE PAS 22736 defining terminology for driving automation systems for on-road motor vehicles.</p>
+<p>Most additional related standards, technical specifications, and research documents are listed in the bibliography of the standard, which provides a broader context for safety, validation, and system-level frameworks of automated driving systems.</p>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and definitions</a></h2>
+<p>The document explicitly defines 6 terms and definitions (selection):</p>
+<p><strong>motorway –</strong> road specially designed and built for motorized traffic that does not serve properties bordering on it</p>
+<p><strong>route –</strong> planned sequence of waypoints to reach a destination</p>
+<p><strong>trajectory –</strong> sequence of locations that define the intended motion vector of the subject vehicle</p>
+<p><strong>vehicle motion control (VMC) –</strong> activities necessary to adjust vehicle movement continuously in real time, which include “lateral vehicle motion control” and “longitudinal vehicle motion control”</p>
+<h2 id="4-symbols-and-abbreviated-terms"><a class="header" href="#4-symbols-and-abbreviated-terms">4 Symbols and abbreviated terms</a></h2>
+<p>The document defines 14 abbreviated terms (selection):</p>
+<p>MCS Motorway chauffeur system</p>
+<p>FRU fallback-ready user</p>
+<p>DDT dynamic driving task</p>
+<p>RTI request to intervene</p>
+<p>MRM minimal risk manoeuvre</p>
+<p>MRC minimal risk condition</p>
+<p>OEDR object and event detection and response</p>
+<p>TTC time to collision</p>
+<p>Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (<a href="http://www.itsterminology.org">www.itsterminology.org</a>), the StandardLand website (<a href="http://www.standardland.cz">www.standardland.cz</a>) or the OBP plataform (<a href="http://www.iso.org/obp">www.iso.org/obp</a>).</p>
+<h2 id="5-characteristics-of-mcs"><a class="header" href="#5-characteristics-of-mcs">5 Characteristics of MCS</a></h2>
+<p>Clause 5 defines the conceptual framework of the system and its operational scope. It forms the basis for detailed operational requirements in Clause 6 and minimum functional requirements in Clause 7.</p>
+<h3 id="51-general"><a class="header" href="#51-general">5.1 General</a></h3>
+<p>This subclause defines the fundamental nature of MCS as a Level 3 implementation requiring the presence of a fallback-ready user. MCS can be implemented in various forms; however, all implementations shall comply with the prescribed operational design domain.</p>
+<h3 id="52-operational-design-domain"><a class="header" href="#52-operational-design-domain">5.2 Operational design domain</a></h3>
+<p>This subclause is further divided into five parts and systematically describes the ODD. Subclause <strong>5.2.1 General</strong> specifies the requirement to define a pre-defined ODD for the system (Figure 2). Subclause <strong>5.2.2 Roadway physical characteristics</strong> describes the physical structure of the motorway, lane configurations, profiles, curvatures, and related characteristics. Subclause <strong>5.2.3 Traffic in the surrounding environment</strong> addresses characteristics of surrounding traffic and other vehicles.</p>
+<p>Subclause 5**.2.4 Abnormalities in roadway operational condition** includes extraordinary situations such as road works or incidents. Subclause <strong>5.2.5 Ambient environmental conditions</strong> describes weather and lighting conditions.</p>
+<p><img src="fig-1.png" alt="Figure 1 — Example of geographic boundary (geofence) of an ODD (Fig. 2 in the source document)" /></p>
+<p><strong>Figure 1 — Example of geographic boundary (geofence) of an ODD (Fig. 2 in the source document)</strong></p>
+<h3 id="53-system-functionalities"><a class="header" href="#53-system-functionalities">5.3 System functionalities</a></h3>
+<p>This subclause is divided into 5.3.1 General, 5.3.2 Basic functionalities to realize in-lane operation, and 5.3.3 Lane changing functionalities. Subclause 5.3.2 establishes linkage to Clause 6 and specifies implementation of the basic functionalities including performing the DDT, issuing RTIs, and capability to safely stop the vehicle. Subclause 5.3.3 distinguishes discretionary and mandatory lane changes and references other parts of the series.</p>
+<h3 id="54-system-limitations"><a class="header" href="#54-system-limitations">5.4 System limitations</a></h3>
+<p>Situations that may lead to performance-impairing or incapacitating effects, and their possible consequences, should be documented (referenced to the further chapters 6.4.2.5-6).</p>
+<h3 id="55-providing-information-to-the-user"><a class="header" href="#55-providing-information-to-the-user">5.5 Providing information to the user</a></h3>
+<p>The standard requires that, prior to first use, the user shall be informed about system functionalities, limitations, engagement conditions, and situations that may lead to a request to intervene. This clause establishes an important connection between technical requirements and human factors (referenced back to 5.2-5.4).</p>
+<h2 id="6-operational-requirements"><a class="header" href="#6-operational-requirements">6 Operational requirements</a></h2>
+<p>Clause 6 represents the core of the standard and is systematically divided into Clauses 6.1 to 6.4, while Clauses 6.2 and 6.3 contain additional extensive subdivision.</p>
+<h3 id="61-operating-conditions"><a class="header" href="#61-operating-conditions">6.1 Operating conditions</a></h3>
+<p>Subclause 6.1 is divided into 6.1.1 General, 6.1.2 Engagement conditions, 6.1.3 Disengagement triggering conditions, and 6.1.4 Direct disengagement conditions.</p>
+<p>Subclause 6.1.2 specifies the conditions under which the system may transition into the normal state. Subclause 6.1.3 defines situations in which an RTI shall be generated, for example when leaving the ODD or when system performance deteriorates. Subclause 6.1.4 describes direct user interventions, such as steering override, leading to immediate disengagement.</p>
+<h3 id="62-state-transition"><a class="header" href="#62-state-transition">6.2 State transition</a></h3>
+<p>Subclause 6.2 State transition includes subdivisions 6.2.1 to 6.2.5. Subclause 6.2.1 General introduces the state model. Subclauses 6.2.2 Off state, 6.2.3 Standby state, 6.2.4 Normal state, and 6.2.5 Requesting fallback state define individual system states and their meaning.</p>
+<h3 id="63-system-functions"><a class="header" href="#63-system-functions">6.3 System functions</a></h3>
+<p>Subclause <strong>6.3 is the most extensive part and contains 14 subclauses.</strong></p>
+<p>Subclause 6.3.1 General includes an overview of system functions in tabular form.</p>
+<p>Subclause 6.3.2 Object and event detection and response describes OEDR requirements. Subclause 6.3.3 Vehicle motion control defines requirements for longitudinal and lateral vehicle control. Subclause 6.3.4 Generation of request to intervene specifies requirements for multimodal signalling. Subclause 6.3.5 Status indication addresses continuous communication of system state to the user.</p>
+<p>Further subclauses, namely 6.3.6 User control interface, 6.3.7 FRU input detection, 6.3.8 MCS monitoring the FRU, 6.3.9 Subject vehicle condition monitor, 6.3.10 MCS condition monitor, 6.3.11 Localization, 6.3.12 External warning generation, 6.3.13 Functions required for route following functionalities, and 6.3.14 Related functions further elaborate individual areas of the functional system architecture.</p>
+<p>For example, detailed requirements related to route following functionalities are specified in 6.3.13.1 and 6.3.13.2, addressing path selection and related manoeuvres, while 6.3.14.1 and 6.3.14.2 address minimal risk manoeuvres and wireless communication.</p>
+<h3 id="64-requirements-for-continuing-operation-after-detecting-disengagement-triggering-conditions"><a class="header" href="#64-requirements-for-continuing-operation-after-detecting-disengagement-triggering-conditions">6.4 Requirements for continuing operation after detecting disengagement-triggering conditions</a></h3>
+<p>Subclause 6.4 is divided into 6.4.1 General, 6.4.2 Classification of adverse situations, and 6.4.3 Responses to adverse situations.</p>
+<p>Subclause 6.4.2 introduces five severity levels of situations, ranging from situations with potential future effect to situations with incapacitating effect. Subclause 6.4.3 specifies corresponding system responses, including continued operation, issuing an RTI, or transition to a minimal risk manoeuvre.</p>
+<h2 id="7-minimum-performance-requirements-of-the-ddt"><a class="header" href="#7-minimum-performance-requirements-of-the-ddt">7 Minimum performance requirements of the DDT</a></h2>
+<p>Clause 7 represents the normative core defining functional performance parameters of the system. While Clause 6 defines operational logic and functional architecture, Clause 7 specifies concrete minimum behavioural requirements for performing the dynamic driving task (DDT) during normal and degraded operation.</p>
+<p><strong>7.1 General</strong></p>
+<p>This subclause defines the scope of Clause 7 and emphasizes that the requirements apply to system behaviour within the prescribed operational design domain.</p>
+<p><strong>7.2 Operating speed range</strong></p>
+<p>This subclause specifies that the minimum operating speed range of the system shall include 0 km/h, meaning capability for complete stopping and subsequent restarting.</p>
+<p><strong>7.3 Normal operation</strong></p>
+<p>This subclause is further divided into 7.3.1 Sustained longitudinal vehicle motion control, 7.3.2 Sustained lateral vehicle motion control, and 7.3.3 Crash avoidance. This part contains the most specific technical limits.</p>
+<p>Subclause 7.3.1 specifies that the system shall be capable of maintaining a safe distance from the forward vehicle and responding to its deceleration.</p>
+<p>Subclause 7.3.2 specifies requirements for sustained lateral vehicle motion control, including maintaining the subject vehicle within the current lane of travel under defined roadway geometric conditions. It considers roadway profile and effects at higher speeds.</p>
+<p>Subclause 7.3.3 specifies minimum requirements for system response in situations involving sudden changes in traffic conditions. The standard provides specific reference scenarios, such as aggressive cut-in from the adjacent lane with a time to collision (TTC) greater than 2,5 s, and response to an obstacle at least the size of a passenger vehicle’s free-standing tyre. This part establishes a direct link to the test scenarios in Clause 8.</p>
+<p><strong>7.4 Performance-impaired operation</strong></p>
+<p>This subclause builds upon the classification of adverse situations defined in 6.4.2 and specifies minimum requirements and recommendations for performance-impaired operation.</p>
+<p><strong>7.5 MCS reaction to unresponsive FRU</strong></p>
+<p>This subclause specifies the required system response when the fallback-ready user does not adequately respond to a request to intervene and no performance-impairing or incapacitating situation is present. This part creates a direct linkage to the functional requirements related to minimal risk manoeuvres specified in 6.3.14.1 and to the test scenarios defined in Clause 8.</p>
+<h2 id="8-test-procedures"><a class="header" href="#8-test-procedures">8 Test procedures</a></h2>
+<p>Clause 8 specifies test procedures intended to verify compliance with the operational and performance requirements defined in Clauses 6 and 7. The clause is systematically divided into general testing requirements and individual scenario-based test procedures.</p>
+<h3 id="81-general"><a class="header" href="#81-general">8.1 General</a></h3>
+<p>Subclause 8.1 is divided into 8.1.1 Purpose, 8.1.2 Driving environment, 8.1.3 System settings and test driver roles, 8.1.4 Common test pass criteria, 8.1.5 Confirmation of the HMI design, 8.1.6 Success rate and number of trials, 8.1.7 List of test scenarios, and 8.1.8 Test sites.</p>
+<p><strong>Clause 8 describes the following scenarios:</strong></p>
+<p><strong>8.2 Scenario 1: MCS reaction to unresponsive FRU</strong></p>
+<p>This scenario verifies system behaviour when the fallback-ready user does not respond to an RTI.</p>
+<p><strong>8.3 Scenario 2: Direct disengagement by steering input</strong></p>
+<p>This scenario verifies direct disengagement initiated by user steering input.</p>
+<p><strong>8.4 Scenario 3: Continued operation after brake intervention</strong></p>
+<p>This scenario evaluates the capability of the MCS to continue operation following a brake intervention by the user under specified conditions.</p>
+<p><strong>8.5 Scenario 4: Forward vehicle braking hard</strong></p>
+<p>This scenario evaluates the response of the MCS to significant deceleration of the forward vehicle.</p>
+<p><strong>8.6 Scenario 5: Aggressive cut-in from the adjacent lane</strong></p>
+<p>This scenario (performed under two different speed and distance conditions) evaluates system response to a vehicle aggressively entering the lane in front of the subject vehicle from an adjacent lane.</p>
+<p><strong>8.7 Scenario 6: Obstacle in lane</strong></p>
+<p>This scenario evaluates system behaviour when an obstacle is present within the current lane of travel.</p>
+<p><strong>8.8 Scenario 8: Approaching geographical ODD boundary</strong></p>
+<p>This scenario verifies system behaviour when the subject vehicle approaches the geographical boundary of the prescribed ODD.</p>
+<p><strong>8.9 Scenario 9: Engagement restricted outside ODD</strong></p>
+<p>This scenario verifies that the MCS does not engage outside its prescribed operational design domain.</p>
+<h2 id="bibliography"><a class="header" href="#bibliography">Bibliography</a></h2>
+<p>The bibliography contains references to additional standards, technical specifications, and research documents related to automated driving systems, operational design domains, safety assessment, validation methodologies, human-machine interaction, and advanced driving functionalities.</p>
+<p>Document does not provide any <strong>Annexes</strong>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_21214/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_26683-2/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_21214/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_26683-2/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

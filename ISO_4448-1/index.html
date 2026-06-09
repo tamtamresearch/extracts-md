@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO/TR 4448-1 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--public-area-mobile-robots-pmr--part-1-overview-of-the-paradigm"><a class="header" href="#intelligent-transport-systems--public-area-mobile-robots-pmr--part-1-overview-of-the-paradigm">Intelligent Transport Systems – Public-area mobile robots (PMR) – Part 1: Overview of the paradigm</a></h1>
+<p><strong>ISO/TR 4448-1</strong> · Published 2024 · 24 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>In 2023, there are several hundred companies around the world – mostly start-ups – engaged in the development of small, remote-controlled and sometimes partially automated devices for operation on city sidewalks and cycle paths. Thousands of small retailers and dozens of delivery companies use these systems for last-mile delivery. Already, many more cities have a small number of such PMRs than robotic taxis in pilot operation. This means that cities are likely to face PMR regulation requirements much sooner than the regulation of robotic cars and trucks is expected.</p>
+<p><em>Note: This Extract presents selected clauses of the described document and retains the original clause numbering.</em></p>
+<h2 id="use"><a class="header" href="#use">Use</a></h2>
+<p>The described document serves as a first introduction to the issue of mobile robots in public space and is intended for all those who deal with the issue, i.e. both at the level of the Ministry of Transport of the Czech Republic and local governments or operators of such systems or robot manufacturers. The document does not set any requirements, it only outlines areas that should be standardized.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The document described refers to only one ISO/TS 14812, which is the normative ITS dictionary.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>This document provides an overview of the ground-based automated mobility systems deployment paradigm. The paradigm covers such curbsides and pathways as are suitable for co-temporal, collaborative use by various types and combinations of automated and non-automated, wheeled, or ambulatory, motorized and non-motorized, mobility-related vehicles and devices as well as for various levels of automated or remote operation of such vehicles. This includes vehicles and devices that move people as well as goods within proximate distances of human bystanders.</p>
+<p><em>Note: Aerial (flying) drones are not part of the scope.</em></p>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and definitions</a></h2>
+<p>This part of the technical standard defines 14 terms, the most important of which are the following:</p>
+<p><strong>delivery robot</strong> <em>–</em> a robotic vehicle used to deliver goods, food, and other items, often for “last mile” applications</p>
+<p>Note 1 to the entry: Although the word “drone” is correctly used to describe a robot on wheels, this document uses the term “robot” and the specific abbreviation PMR</p>
+<p><strong>pathway</strong> – infrastructure designed to permit the movement of various combinations of active transportation users and public-area mobile robots (PMRs) within the same space, including outdoor footways, cycleways, crosswalks, road shoulders, trails and indoor passageways, corridors or hallways</p>
+<p><em>(Note: It usually forms a network of pathways.)</em></p>
+<p><strong>public-area mobile robot (PMR); (ground) automated mobile systems in public space (PMR)</strong> – wheeled or legged (ambulatory) ground-based device that is designed to travel along public, shared, active transportation pathways without the use of visible human assistance or physical guides</p>
+<p>Note 1 to entry: Physical guides include rails and curbs. Note 2 to entry: While the term public-area mobile robot (PMR) excludes devices with visible human assistance, a PMR can be teleoperated by a human. Note 3 to entry: While the term “PMR” excludes devices with visible human assistance, PMRs can carry humans as passengers, e.g. an automated wheelchair. Note 4 to entry: While the term “PMR” excludes devices with visible human assistance, PMRs can be electronically tethered to follow a human.</p>
+<p><strong>robotaxi</strong> – vehicle with an automated driving system (ADS) that is configured to perform the entire dynamic driving task (DDT) throughout its operational design domain (ODD) for the purpose of a for-hire passenger service</p>
+<p>Note 1 to entry: This is a form of ADS-DV (Automated Driving System – Dedicated Vehicle) defined in SAE J3016 202104. EXAMPLE Remotely monitored automated taxi.</p>
+<h2 id="4-abbreviations"><a class="header" href="#4-abbreviations">4 Abbreviations</a></h2>
+<p>This clause lists 12 abbreviations from the field of mobile robots in public space, the most important of which are the following:</p>
+<p><strong>ADS</strong> automated driving system</p>
+<p><strong>DDT</strong> dynamic driving task</p>
+<p><strong>IoT</strong> internet of things</p>
+<p><strong>PMR</strong> public-area mobile robot, ground-based automated mobile system in public space</p>
+<p><strong>PUDO</strong> pickup and drop off</p>
+<p><strong>VRU</strong> vulnerable road user</p>
+<p>Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (<a href="http://www.itsterminology.org/">www.itsterminology.org</a>), the StandardLand website (<a href="http://www.standardland.cz/">www.standardland.cz</a>) or the OBP platform (<a href="http://www.iso.org/obp">www.iso.org/obp</a>).</p>
+<h2 id="5-purpose-and-justification"><a class="header" href="#5-purpose-and-justification">5 Purpose and justification</a></h2>
+<p>Clause 5 is 1.5 pages long and explains the general reasons for standardization, reasons related to traffic safety, planning, commercial use, operational and also legal requirements and insurance.</p>
+<h2 id="6-parts-outline"><a class="header" href="#6-parts-outline">6 Parts outline</a></h2>
+<p>Clause 6 is 4 pages long and elaborates on the necessary steps that the standardization of this new area of transport requires. The first step is the nomenclature and definition of data, including the subsequent handling of data, the second step is the standard options for the robot’s behavior and the related topic of security, then the level of readiness of the city for the deployment of such a service is also described, as well as the need for personal assistance. For example, for the definition of behavior, the document also lists 4 main cases: boarding/exiting/loading/unloading from a mobile robot by the curb, the robot’s access to zones where people are moving, the behavior of the robot in these zones, and the robot’s communication methods when interacting with a human. As part of the city’s readiness for the deployment of such a service, the quality of the given network of paths for the movement of robots, the movement of robots in extreme weather, the resolution of accident situations and the supervision of proper maintenance of robots, e.g. in the resolution or updating of map data, is described on half a page.</p>
+<h2 id="7-context"><a class="header" href="#7-context">7 Context</a></h2>
+<p>Clause 7 is 10 pages long and describes the reasons why standardization is necessary. Subclause 7.1 discusses the comparison of robotic vehicles and delivery robots in terms of quantity and timing of deployment, with standardisation of these means being more urgent.</p>
+<p><img src="fig-1.png" alt="Figure 1 — Example of PMR forms for the distribution of small packages (Source. Urban robotics foundation)" /></p>
+<p><strong>Figure 1 — Example of PMR forms for the distribution of small packages</strong> <em>(Source. Urban robotics foundation)</em></p>
+<p>Subclause <strong>7.2</strong> describes the need to create a safe space in the public space of the city, where such systems could move, the majority of which is devoted to safety aspects and also to lower operating costs than those associated with robo-vehicles.</p>
+<p>Subclause <strong>7.3</strong> deals with challenges such as common obstacles on the infrastructure/pavement, such as garbage cans, parked vehicles, stored building materials or evicted furniture, fallen tree branches or bushes growing into the road, places where the pavement ends or poor quality of the pavement surface. At the same time, it also lists 12 issues that need to be solved by regulation:</p>
+<ul>
+<li>
+<p>pedestrian and cyclist safety and rights-of-way;</p>
+</li>
+<li>
+<p>requirements for infrastructure dimensions (related to accessibility regulations);</p>
+</li>
+<li>
+<p>PMR speeds, dimensions, weights (maximums and minimums);</p>
+</li>
+<li>
+<p>equipment such as brakes, lights, speakers, mics, reflectors, signage (decals);</p>
+</li>
+<li>
+<p>device identification and its visibility for enforcement;</p>
+</li>
+<li>
+<p>areas and hours of operation, especially avoiding certain zones such as schools;</p>
+</li>
+<li>
+<p>PMR behaviour regarding accessibility (e.g. distance-keeping, blocking ramps or entrance ways);</p>
+</li>
+<li>
+<p>audible signals emanating from a PMR such as their loudness and meaning;</p>
+</li>
+<li>
+<p>requirements to alert other users of PMR presence (sounds, lights, flags);</p>
+</li>
+<li>
+<p>requirements to recognize and respond to sounds such as emergency vehicle sirens;</p>
+</li>
+<li>
+<p>enforcement and penalties;</p>
+</li>
+<li>
+<p>liability and insurance.</p>
+</li>
+</ul>
+<h2 id="8-operating-principles-for-pmrs"><a class="header" href="#8-operating-principles-for-pmrs">8 Operating principles for PMRs</a></h2>
+<p>Operating and deployment standards for operations in shared human-social environments should establish general rules for PMRs across various types of pathways used by active transportation users of all abilities.This clause contains two subclauses. <strong>8.1 Contrasting types of infrastructure</strong> (contrasting pathway, curb, cycleways and footway). <strong>8.2 Behavioural factors</strong> contains <em>Table 1: Factors that can influence the acceptance and workability of PMRs</em>, where many important factors for the behavioural aspects for PMRs are listed and described.</p>
+<h2 id="9-governance-principles-for-pmrs"><a class="header" href="#9-governance-principles-for-pmrs">9 Governance principles for PMRs</a></h2>
+<p>Clause 9 contains two subclauses. In <strong>9.1. General</strong> explains on 1 page general governance principles for PMRs. It also states that the ISO 4888 series is designed to maintain neutrality by providing the essential data and procedures needed and its structure enables legislators to tailor the standards to local governance needs while ensuring that relevant rules can be clearly communicated to roboticists, operators of automated systems, and end users. Second subclause describes <strong>9.2 Similarities between PMRs and wheeled, human-assistive devices.</strong></p>
+<h2 id="10-environmental-and-social-considerations"><a class="header" href="#10-environmental-and-social-considerations">10 Environmental and social considerations</a></h2>
+<p>Clause 10 on 1.5 pages describes <strong>10.1 Environmental (climate and weather) resilience certification</strong> and <strong>10.2 Social considerations.</strong></p>
+<h2 id="11-use-cases"><a class="header" href="#11-use-cases">11 Use cases</a></h2>
+<p>This Clause contains <em>Table 2 – Selection of use cases for PMRs</em>, which includes a description of 12 current scenarios of use cases.</p>
+<h2 id="the-bibliography"><a class="header" href="#the-bibliography">The Bibliography</a></h2>
+<p>Provides 4 references to the parking data model, the taxonomy of autonomous transport and two articles on robotaxis and the transformation of public space with the advent of mobile robots.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../EN_ISO_17573-1/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_14823-1/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../EN_ISO_17573-1/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_14823-1/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

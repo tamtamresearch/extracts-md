@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO 26683-2 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--freight-land-conveyance-content-identification-and-communication--part-2-application-interface-profiles"><a class="header" href="#intelligent-transport-systems--freight-land-conveyance-content-identification-and-communication--part-2-application-interface-profiles">Intelligent Transport Systems – Freight land conveyance content identification and communication – Part 2: Application interface profiles</a></h1>
+<p><strong>ISO 26683-2</strong> · Published 2013 · 38 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>The ISO 26683 (FLC‑CIC) set of standards uses advanced information and communication technology for freight transport, focusing on the presentation of data when providing end‑to‑end services related to cargo and their means of transport. It does not provide a system design, nor does it specify the technologies to be used.</p>
+<p>The aim is to enable the effective handling of vehicle and trailer/semi‑trailer identification in connection with en‑route cargo information within the vehicle’s on‑board system. This supports real‑time vehicle tracking and tracing, as well as cargo monitoring. It enables shipment auditing and provides visibility into cargo status.</p>
+<p><a href="https://www.iso.org/standard/61000.html">ISO 26683-1</a> provides the context and architecture for the collection and transmission of aggregated data on cargo and transport units to carriers’ commercial operating systems or to public‑sector systems (e.g. customs, transport statistics, international trade). It also lists the reference standards relevant to all parts of this standard family.</p>
+<p><a href="https://www.iso.org/standard/57600.html">ISO 26683-2</a> (further on also referred to as “the document described”) contains descriptions of various application interface profiles for communication during the identification of cargo or the contents of freight vehicles, linked to other services such as handling in multimodal transport.</p>
+<p><em>Note: The Extract presents selected chapters of the described document and retains the original chapter numbering.</em></p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>This set of standards provides examples for designing interoperable systems related to transport means and cargo. It covers the provision of information for tracking, managing, and tracing goods in multimodal transport and handling — from the individual item level, regardless of the number or type of packaging or transport units, to the description of the connection with the transport vehicle/unit and the infrastructure (e.g., a dispatch centre).</p>
+<p>The document described specifies interface profiles for various types of communication that enable interoperability in multimodal freight transport. The document allows readers to understand scenarios for possible freight‑unit configurations and the related communication using the defined profiles. In addition to the technical description, each profile includes a set of standards that must be considered for interoperability, presented in a clear and detailed way for potential users.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>The document described focuses on application interface profiles for data aggregation and transfer in the context of ISO 26683-1. It enables the provision of interoperable data for the visibility of goods during transport and for services in land freight transport, through the specification of application interface profiles. The interfaces relate to various types of communication between the cargo item, semi-trailer or trailer, vehicle, and infrastructure. It also includes representations of the physical configurations of different combinations of semi-trailers or trailers with a road tractor.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>Related standards (59) are listed in Clause 2, References to Standards, and in the Bibliography (9) at the end of the standard. The most relevant standards are the other parts of the FLC‑CIC set. For the primary list of referenced standards see ISO 26683-1.</p>
+<p><a href="https://unece.org/trade/uncefact/umm">Standards for specific communication methods</a> used in particular profiles are listed in Clause 6, directly within the individual application interface profiles.</p>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and Definitions</a></h2>
+<p>This clause defines 33 terms; the Extract lists only selection of the most important ones:</p>
+<p><strong>application interface –</strong> communication point where one part of a system communicates with another in order to service an application</p>
+<p><strong>application interface profile</strong> – series and sequence of behaviour and protocols including, where appropriate, the identification of chosen classes, conforming subsets, options and parameters of those base standards necessary to accomplish a defined function at an interface in a particular way such that it can be used interoperably between two parties</p>
+<p><strong>interrogator</strong> <strong>–</strong> a device performing reading functions, additionally capable of sending data to the on-board equipment (OBE) via wireless transmission</p>
+<p><strong>reader –</strong> a device that communicates with the OBE to read or write information</p>
+<h2 id="4-abbreviations"><a class="header" href="#4-abbreviations">4 Abbreviations</a></h2>
+<p>The standard contains 35 abbreviations; relevant for understanding this Extract are:</p>
+<p><strong>DSRC –</strong> dedicated short range communication</p>
+<p><strong>FLC-CIC –</strong> freight land conveyance content identification and communication</p>
+<p><strong>IMS –</strong> IP multimedia subsystem (a standard for an architectural framework)</p>
+<p><strong>OBE/</strong><a href="https://www.standardland.cz/en/its-on-board-unit-on-board-unit/d1675?s=obu&amp;sources=20">OBU</a> <strong>–</strong> on-board equipment/on-board unit</p>
+<p><strong>OCR –</strong> optical character recognition (ie. a symbol for a product description)</p>
+<p><strong>PDE –</strong> portable data collection equipment</p>
+<p><strong>PHS –</strong> personal handy-phone system</p>
+<p><strong>RFID –</strong> radio-frequency identification</p>
+<p><strong>UBL –</strong> universal business language <em>(standard by</em> <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=ubl">OASIS</a><em>, for business, including a library for transport)</em></p>
+<p><strong>UMTS –</strong> universal mobile telecommunication system <em>(for 3G networks)</em></p>
+<p><strong>WPA –</strong> WiFi protected access secured <em>(WiFi access, using encryption)</em></p>
+<p>NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (<a href="http://www.itsterminology.org/">www.itsterminology.org</a><em>)</em>, the StandardLand website (<a href="http://www.standardland.cz/">www.standardland.cz</a>) or the OBP platform (<a href="http://www.iso.org/obp">www.iso.org/obp</a><em>).</em></p>
+<h2 id="5-context"><a class="header" href="#5-context">5 Context</a></h2>
+<p>Clause 5 is about half a page long. It refers back to the context information provided in ISO 26683-1. The document described focuses on interface profiles for data transmission. All profiles are optional/voluntary, and when applied in accordance with the document described, they provide a basis for interoperability.</p>
+<p>A brief overview of data transmission is provided in the following subclauses: 5.2 Transfer of data from tags to interrogators (Profile Level 3); 5.3 Transfer of data from trailers to OBE (Profile Level 2); 5.4 Transfer of data from OBE to infrastructure (Profile Level 1).</p>
+<h2 id="6-freight-land-conveyance-content-and-communication--application-interface-profiles"><a class="header" href="#6-freight-land-conveyance-content-and-communication--application-interface-profiles">6 Freight land conveyance content and communication – Application interface profiles</a></h2>
+<p>Clause 6, comprising 32 pages, forms the core of the document. It provides a detailed description of the communication levels and the corresponding individual application interface profiles associated with each level.</p>
+<h3 id="61-general"><a class="header" href="#61-general">6.1 General</a></h3>
+<p>The document does not define a single specific application interface profile. Instead, it “provides interoperability where a communication medium has been selected and is in compliance with one or more of the standards referenced in Annex A of ISO 26683-1.” The profiles conform to the profile format defined in <a href="https://www.iso.org/standard/30726.html">ISO/IEC TR 10000-1</a>.</p>
+<h3 id="62-taxonomy-of-freight-land-conveyance-content-and-communication-application-interface-profiles"><a class="header" href="#62-taxonomy-of-freight-land-conveyance-content-and-communication-application-interface-profiles">6.2 Taxonomy of freight land conveyance content and communication application interface profiles</a></h3>
+<p>Profiles for three basic levels of communication are specified. There is also a fourth layer for profiles, independent on scenarios, to be used accordingly to the needs of its instance and demand of the user.</p>
+<p>Level 1 (L1): from the vehicle’s OBE to the roadside infrastructure</p>
+<p>Level 2 (L2): a) from the trailer(s) to the OBE or b) from items directly to the OBE</p>
+<p>Level 3 (L3): from the item (incl. item sensors) to the interrogator/OBE of the trailer</p>
+<p>Level D1: for data presentation only; data formatting in UBL, accordingly to potential requirements</p>
+<p>The <strong>following clauses</strong> deal with application profiles, related standards, requirements, and compliance. The method of data collection and auditing for identifying the cargo list is not defined in the profiles and is of an individual decision of the participant. The clauses below describe the 11 profiles for all of the above mentioned levels, L1 through L3 and D1.</p>
+<h3 id="63-flc-cic-profile-nol1-1-iso-15628-dsrc-optional"><a class="header" href="#63-flc-cic-profile-nol1-1-iso-15628-dsrc-optional">6.3 FLC-CIC Profile No.L1-1: ISO 15628 DSRC (optional)</a></h3>
+<p>The scenario for the profile is as follows: data from the cargo is collected using DSRC on-board communication; the device uses the DSRC application layer in accordance with <a href="https://www.iso.org/search.html?PROD_isoorg_en%5Bquery%5D=15628">ISO 15628</a>.</p>
+<h3 id="64-flc-cic-profile-nol1-2-iso-21215-calm-m5hz-dsrc-optional"><a class="header" href="#64-flc-cic-profile-nol1-2-iso-21215-calm-m5hz-dsrc-optional">6.4 FLC-CIC Profile No.L1-2: ISO 21215 CALM M5Hz DSRC (optional)</a></h3>
+<p>The scenario focuses on collecting data from cargo via on-board DSRC equipment, and using 5 GHz communications stations (CALM) in accordance with <a href="https://www.iso.org/standard/70074.html">ISO 21215</a>.</p>
+<h3 id="65-flc-cic-profile-nol1-3-iso-10374-optional"><a class="header" href="#65-flc-cic-profile-nol1-3-iso-10374-optional">6.5 FLC-CIC Profile No.L1-3: ISO 10374 (optional)</a></h3>
+<p>This scenario describes the possibility of collecting cargo data via on-board equipment, communicating in accordance with <a href="https://www.iso.org/search.html?PROD_isoorg_en%5Bquery%5D=10374">ISO 10374</a> (for automatic container identification). Communication can run in any point of the route where are:</p>
+<p>interrogators in accordance with <a href="https://www.iso.org/search.html?PROD_isoorg_en%5Bquery%5D=10374">ISO 10374</a></p>
+<p>an on-board transponder in accordance with <a href="https://www.iso.org/search.html?PROD_isoorg_en%5Bquery%5D=10374">ISO 10374</a></p>
+<h3 id="66-flc-cic-profile-nol1-4-gsmumtslteimspdcphs-optional"><a class="header" href="#66-flc-cic-profile-nol1-4-gsmumtslteimspdcphs-optional">6.6 FLC-CIC Profile No.L1-4: GSM/UMTS/LTE/IMS/PDC/PHS (optional)</a></h3>
+<p>This profile uses the wireless communication among devices designed by <a href="https://www.3gpp.org/">3GPP</a> for 3G mobile systems in GSM networks and for radio technologies.</p>
+<h3 id="67-flc-cic-profile-nol1-5-iso-iec-18000-optional"><a class="header" href="#67-flc-cic-profile-nol1-5-iso-iec-18000-optional">6.7 FLC-CIC Profile No.L1-5: ISO IEC 18000 (optional)</a></h3>
+<p>Scenario of the profile enables the collection, archiving, and transmission of data from cargo via on-board equipment, communicating in accordance with <a href="https://www.iso.org/standard/88535.html">ISO 18000-6</a> Type B or Type C, where:</p>
+<p>installed interrogators are in accordance with <a href="https://www.iso.org/standard/88535.html">ISO 18000-6</a>, Type B or C</p>
+<p>the on-board transponder complies with <a href="https://www.iso.org/standard/88535.html">ISO 18000-6</a>, of the same type as the interrogator (Type B or C)</p>
+<h3 id="68-flc-cic-profile-nol2-1-item-data-agglomeration-direct-to-vehicle-obe-using-rfid-optional"><a class="header" href="#68-flc-cic-profile-nol2-1-item-data-agglomeration-direct-to-vehicle-obe-using-rfid-optional">6.8 FLC-CIC Profile No.L2-1: Item data agglomeration direct to vehicle OBE using RFID (optional)</a></h3>
+<p>Profile L2-1 describes usage of an RFID tag attached to a cargo item, and transmitting data directly to the OBE interrogator. It is recommended to use a system that complies with the RFID standards listed in the Annex A of <a href="https://www.iso.org/search.html?PROD_isoorg_en%5Bquery%5D=26683-1">ISO 26683-1</a>.</p>
+<h3 id="69-flc-cic-profile-nol2-2-data-agglomeration-from-multiple-trailers-optional"><a class="header" href="#69-flc-cic-profile-nol2-2-data-agglomeration-from-multiple-trailers-optional">6.9 FLC-CIC Profile No.L2-2: Data agglomeration from multiple trailers (optional)</a></h3>
+<p>The profile is similar to L2-1, but for multiple containers or trailers. First, data is collected from items/sensors/seals into the interrogator or OBE of a trailer or a semi-trailer. Then, as the second step, the data is transferred to the vehicle OBE. Figure 1 below provides a schematic description of the physical architecture, but other solutions are also possible.</p>
+<p><img src="fig-1.png" alt="Figure 1 – Communication diagram – a tractor unit with semi-trailer and trailer and two loaded containers with items monitored by sensors (Fig. 7 of the source standard)" /></p>
+<p><em>Figure 1 – Communication diagram – a tractor unit with semi-trailer and trailer and two loaded containers with items monitored by sensors (Fig. 7 of the source standard)</em></p>
+<h3 id="610-flc-cic-profile-nol3-1-item-data-agglomeration-to-trailer-interrogator-using-rfid-optional"><a class="header" href="#610-flc-cic-profile-nol3-1-item-data-agglomeration-to-trailer-interrogator-using-rfid-optional">6.10 FLC-CIC Profile No.L3-1: Item data agglomeration to trailer interrogator using RFID (optional)</a></h3>
+<p>In this scenario, items have an attached RFID tag, from which data is transmitted to the interrogator of a semi-trailer or a trailer.</p>
+<h3 id="611-flc-cic-profile-nol3-2-item-data-agglomeration-to-vehicle-obe-using-short-range-rfid-andor-bar-code-or-ocr-optional"><a class="header" href="#611-flc-cic-profile-nol3-2-item-data-agglomeration-to-vehicle-obe-using-short-range-rfid-andor-bar-code-or-ocr-optional">6.11 FLC-CIC <strong>Profile</strong> No.L3-2: Item data agglomeration to vehicle OBE using short range RFID and/or bar-code or OCR (optional)</a></h3>
+<p>In this scenario, the cargo contents are identified and audited only after loading: by an RFID interrogator or a barcode reader or by scanning an OCR marking. These devices do not have the range and capability to reliably collect data from items during loading.</p>
+<h3 id="612-flc-cic-profile-nol3-3-item-data-agglomeration-to-vehicle-obe-using-short-range-rfid-andor-bar-code-where-the-tractortruck-does-not-have-fixed-obe-optional"><a class="header" href="#612-flc-cic-profile-nol3-3-item-data-agglomeration-to-vehicle-obe-using-short-range-rfid-andor-bar-code-where-the-tractortruck-does-not-have-fixed-obe-optional">6.12 FLC-CIC Profile No.L3-3: Item data agglomeration to vehicle OBE using short range RFID and/or bar-code where the tractor/truck does not have fixed OBE (optional)</a></h3>
+<p>Profile L3-3 is aimed for express or postal delivery systems, for supplying supermarkets or other warehouses, etc. Vehicles do not usually have the fixed OBEs, but use the driver’s mobile device, which communicates with the dispatch centre either by physical or wireless connection.</p>
+<h3 id="613-flc-cic-profile-nod1-1-its-consignment-in-ubl-representation-optional"><a class="header" href="#613-flc-cic-profile-nod1-1-its-consignment-in-ubl-representation-optional">6.13 FLC-CIC Profile No.D1-1: ITS consignment in UBL representation (optional)</a></h3>
+<p>This is a supporting profile for all profiles described above. This one is intended for all ways of communication (levels L1 to L3). Profile D1-1 focuses on the method for converting cargo data into the UBL format specified in the <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=ubl">OASIS</a> standard: UBL-CommonLibrary-2.</p>
+<h2 id="clauses-7-10"><a class="header" href="#clauses-7-10">Clauses 7-10</a></h2>
+<p>Chapters 7–10 cover the following four topics and each contain only one general statement:</p>
+<h2 id="clause-7--security-provisions"><a class="header" href="#clause-7--security-provisions">Clause 7 – Security provisions</a></h2>
+<h2 id="clause-8--test-and-conformance-requirements"><a class="header" href="#clause-8--test-and-conformance-requirements">Clause 8 – Test and conformance requirements</a></h2>
+<h2 id="clause-9--marking-labelling-and-packaging"><a class="header" href="#clause-9--marking-labelling-and-packaging">Clause 9 – Marking, labelling and packaging</a></h2>
+<h2 id="clause-10--declaration-of-patents-and-intellectual-property"><a class="header" href="#clause-10--declaration-of-patents-and-intellectual-property">Clause 10 – Declaration of patents and intellectual property</a></h2>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_23792-1/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_TS_19091/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_23792-1/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_TS_19091/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO 17748-3 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--energy-based-green-its-services-for-smart-city-mobility-applications-via-nomadic-and-mobile-devices--part-3-data-exchange-requirements-for-electric-vehicle-ev-based-demand-response-charging-services"><a class="header" href="#intelligent-transport-systems--energy-based-green-its-services-for-smart-city-mobility-applications-via-nomadic-and-mobile-devices--part-3-data-exchange-requirements-for-electric-vehicle-ev-based-demand-response-charging-services">Intelligent Transport Systems – Energy-based green ITS services for smart city mobility applications via nomadic and mobile devices – Part 3: Data exchange requirements for electric vehicle (EV)-based demand response charging services</a></h1>
+<p><strong>ISO 17748-3</strong> · Published 2026 · 33 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>This standard defines data exchange requirements to support Electric Vehicle (EV)-based Demand Response (DR) services utilizing nomadic devices, considering two types of EV-based DR services. One is to reduce demand of electric vehicles charging when there is a shortage on the grid side. The other is to increase demand of electric vehicles charging when the surplus on the grid side is forecasted day ahead.</p>
+<p><em>Note: The extract lists selected chapters of the described document and adopts the original chapter numbering.</em></p>
+<h2 id="use"><a class="header" href="#use">Use</a></h2>
+<p>The described document serves primarily for energy demand managers, i.e. energy distributors, decentralized energy system managers, electric vehicle fleet managers and governance bodies who want to manage local electricity offer and demand events by managing the operation and charging of electric vehicles.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>This standard specifies the data exchange requirements between related systems within smart city for EV based DR services utilizing nomadic devices as follows:</p>
+<ul>
+<li>
+<p>EV-based DR service for demand reduction, called “demand response” during the shortage of reserve on electric grid or in response to fine dust warning issued according to air quality forecast</p>
+</li>
+<li>
+<p>EV-based DR for demand increase, called “reverse demand response”, instead of curtailment during excess electricity generation by renewable energy sources such as the sun and wind</p>
+</li>
+</ul>
+<p>This standard defines the requirements of main actors such as EV, nomadic device, smart city cloud, charging station and service provider to support EV-based DR services. This standard also defines data set and data processing procedure requirements for EV-based DR services.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The document described refers to ISO Guide 84 on climate change, standards related to charging of vehicles and energy markets (IEC 61851-1, IEC 62325, IEC 62746, IEC 62746-10-1), Application integration at electric utilities and electricity metering (IEC 61968, IEC 61968-9, IEC 61968-100, IEC 62055-31, Home Electronic System (HES) application model (ISO/IEC 15067-3-3), Vehicle to grid communication interface (ISO 15118-2, ISO 15118-20, DIN SPEC 70121:2014-12 and Open Charge Alliance protocols.</p>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and definitions</a></h2>
+<p>This part of the technical standard defines 13 terms and 23 abbreviations, the key of which are the following:</p>
+<p><strong>customer baseline load (CBL)</strong> the pattern of electric demand as usual, is needed to measure performance of DR program</p>
+<p><strong>DR meter</strong> the meter installed by the service provider to measure load amount of the customer.</p>
+<p><strong>electric vehicle supply equipment (EVSE)</strong> equipment or a combination of equipment, providing dedicated functions to supply electric energy from a fixed electrical installation or supply network to an EV for the purpose of power transfer.</p>
+<p><strong>EV based DR</strong> <strong>service</strong> DR activity by which the cost of charging electric vehicles is modified to cause consumers to shift consumption patterns</p>
+<p><strong>reverse DR resource</strong> DR resources for the purpose of large-scale transaction of power load increase, and electricity users of all types of contracts as participating customers without restrictions on the types of electricity use contracts concluded by electricity users in the Jeju area with sales companies or district electric operators</p>
+<p><strong>standard DR resource</strong> DR resource that refers to national DR and includes electricity users with a contracted power of 200 kW or less, residential electricity users, and individual households belonging to collective buildings among electricity use contracts concluded with sales companies or district electric business operators as customers participating in DR</p>
+<p><strong>virtual end node (VEN)</strong> client and can be an EMS, a thermostat or other end device that accepts the OpenADR signal from a server (VTN)</p>
+<p><strong>virtual top node (VTN)</strong> server that transmits OpenADR signals to end devices or other intermediate servers</p>
+<p><strong>CSMS</strong> charging station management system</p>
+<p><strong>CSO</strong> charging station operator</p>
+<p><strong>DR</strong> demand response</p>
+<p><strong>EMS</strong> energy management system</p>
+<p><strong>EV</strong> electric vehicle</p>
+<p>Other terms and abbreviations from the ITS domain can be found in the <em>ITS Terminology</em> dictionary (<a href="http://www.itsterminology.org">www.itsterminology.org</a>), the <em>StandardLand</em> website (<a href="http://www.standardland.cz">www.standardland.cz</a>) or the <em>OBP platform</em> (<a href="http://www.iso.org/obp">www.iso.org/obp</a>).</p>
+<h2 id="4-supported-ev-based-dr-services"><a class="header" href="#4-supported-ev-based-dr-services">4 Supported EV-based DR services</a></h2>
+<p>Chapter 4 is 8 pages long and describes supported EV based DR services by 5 figures and 3 tables. A common DR service is described in 4.1, illustrated at the figure 1, the reverse DR service is described in 4.2. The procedures for EV based DR services are described in 4.3 using a figure and a table to describe the steps of the processes for the following services:</p>
+<ul>
+<li>
+<p><strong>a standard DR service procedure</strong> (from Contract &amp; Registration via DR implementation &amp; metering to Calculation &amp; Settlement)</p>
+</li>
+<li>
+<p><strong>a Fine dust DR service procedure</strong> (from Contract &amp; Registration via DR Bidding to DR implementation &amp; metering and Calculation &amp; Settlement)</p>
+</li>
+<li>
+<p><strong>a Reverse DR service procedure</strong> (from Contract &amp; Registration via DR Bidding to DR implementation &amp; metering and Calculation &amp; Settlement)</p>
+</li>
+</ul>
+<p><img src="fig-1.png" alt="Figure 1 (Figure 1 of the source document) – EV-based standard DR service" /></p>
+<p><strong>Figure 1 (Figure 1 of the source document) – EV-based standard DR service</strong></p>
+<h2 id="5-requirements-for-main-actors"><a class="header" href="#5-requirements-for-main-actors">5 Requirements for main actors</a></h2>
+<p>Chapter 5 is 5 pages long and describes the requirements for the main actors, as illustrated at the figure 2. These are requirements for EV requirements (5.2), EVSE requirements (5.3), Nomadic device requirements (5.4), Service provider requirements (5.5), Smart city cloud requirements (5.6) and Metering device requirements (5.7)</p>
+<p><img src="fig-2.png" alt="Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service" /></p>
+<p><strong>Figure 2 (Figure 6 of the source document) ­– Requirement of each actor for EV-based DR service</strong></p>
+<h2 id="6-requirements-for-communication"><a class="header" href="#6-requirements-for-communication">6 Requirements for communication</a></h2>
+<p>Chapter 6 is 2,5 pages long and describes the requirements for wired as well as wireless communication, including the figure illustrating the communication architecture. It references IEC 62746-10-1 that provides a standardized and secure DR interface that allows electricity providers to communicate DR signals directly to existing customers using a common language and existing communications such as the Internet.</p>
+<h2 id="7-data-set-and-data-processing-for-ev-based-dr"><a class="header" href="#7-data-set-and-data-processing-for-ev-based-dr">7 Data set and data processing for EV-based DR</a></h2>
+<p>Chapter 7 is one-page description of data sets exchanged between actors in each EV-based DR service in a single table.</p>
+<h2 id="annex-a-informative"><a class="header" href="#annex-a-informative">Annex A (informative)</a></h2>
+<p>is 4 page long and presents 4 different use cases. Each use case is described within a table, containing service type, customer, charging control, location of charging station and data exchange actors, and complemented with a figure of the communication architecture.</p>
+<h2 id="annex-b-informative"><a class="header" href="#annex-b-informative">Annex B (informative)</a></h2>
+<p>is 3 page long and presents 3 forms to be filled in: DR customer application for registration, Consent to collection and use of personal information and Consent to collection and use of information</p>
+<h2 id="the-bibliography"><a class="header" href="#the-bibliography">The bibliography</a></h2>
+<p>provides 1 reference to the use cases and architecture of distributed energy storage systems (IEC CDV 63382).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_15622/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_21214/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_15622/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_21214/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

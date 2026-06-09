@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ISO 14823-1 - ITS Standard Extracts</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ITS Standard Extracts</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="intelligent-transport-systems--graphic-data-dictionary--part-1-specification"><a class="header" href="#intelligent-transport-systems--graphic-data-dictionary--part-1-specification">Intelligent transport systems – Graphic Data Dictionary – Part 1: Specification</a></h1>
+<p><strong>ISO 14823-1</strong> · Published 2024 · 73 pages</p>
+<p><em>This Extract does not replace the technical standard itself; it is only informative material about the standard.</em></p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>The standard ISO 14823-1:2024 defines the <strong>Graphic Data Dictionary (GDD)</strong> – a unified, language-independent system for encoding traffic signs and pictograms for the needs of Intelligent Transport Systems (ITS). Its purpose is to enable <strong>efficient transmission, interpretation, and display of traffic information</strong> across different countries, systems, and technologies. This dictionary is used for information exchange between centres (DATEX II) and between infrastructure and vehicles (cooperative systems, C-ITS) for describing traffic signs displayed, for example, on variable message signs.</p>
+<p>This revision of the standard is a fundamental rework of the original ISO 14823:2017. The original standard, due to its use of a simple identifier based on ISO 3166-1 and a five-digit structure (service category – nature – sequence number), had two essential limitations: there was <strong>no globally unique identification of pictograms, and adding new pictograms was inflexible</strong> because the numeric space was rigidly structured and difficult to extend.</p>
+<p>This revision therefore introduces a more robust mechanism based on the <strong>relative object identifier (OID)</strong>, which enables global identification, hierarchy, and extensibility without breaking compatibility. The revision contains following essential technical and conceptual changes:</p>
+<ul>
+<li>
+<p>an updated <strong>version 2</strong> of the GDD based on OID and relative object identifiers, enabling global identification, hierarchical generalisation and adding new codes without collisions,</p>
+</li>
+<li>
+<p>support for more complex messages thanks to the possibility of including up to <strong>four pictograms</strong> in a single object,</p>
+</li>
+<li>
+<p>addition of new codes and removal of redundant ones, adjustment of attributes for better compatibility with other ITS standards,</p>
+</li>
+<li>
+<p>marking codes as <strong>“current”</strong> or <strong>“deprecated”</strong> for controlled evolution,</p>
+</li>
+<li>
+<p>preservation of full backward compatibility with ISO 14823:2017.</p>
+</li>
+</ul>
+<p>This Extract describes Part 1 of the GDD standard (hereinafter “the described document”) with the specification of the format and the tables of pictograms of individual signs.</p>
+<p><em>Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.</em></p>
+<h2 id="use"><a class="header" href="#use">Use</a></h2>
+<p>The described document defines the encoding of various traffic signs and serves as the technical foundation for systems that need to uniquely identify and process traffic pictograms in digital form. It provides a unified and extensible framework that enables consistent handling of traffic pictograms regardless of national differences or the communication technology used.</p>
+<p>The standard is intended especially for <strong>developers and architects of ITS systems</strong> who implement support for digital traffic signs in C-ITS, V2X communication or navigation services, <strong>vehicle manufacturers and their suppliers</strong> who integrate pictograms into onboard systems, ADAS and in-vehicle signage, <strong>infrastructure operators and traffic centres</strong> that publish traffic information through VMS, C-ITS or DATEX II**, providers of traffic and navigation services** who need interoperable encoding across countries and systems and, <strong>manufacturers of end-user devices</strong> and applications that display traffic information to users.</p>
+<h2 id="related-documents-selection"><a class="header" href="#related-documents-selection">Related Documents (Selection)</a></h2>
+<p>The described document lists six normative references to the following standards ISO 3166-1 (Country codes), ISO 8601-1 (Date and time representation), ISO 8824-1 (ASN.1 notation), ISO/IEC 8825-5 (Mapping XML schemas to ASN.1), ISO/IEC 8859-1 (Two-letter country codes) and, ISO/IEC 19505-1 (UML modelling).</p>
+<p>The text also mentions the previous edition ISO 14823:2017, with which this version is backward compatible.</p>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
+<p>The document defines the structure of the <strong>GDD</strong> and the rules for encoding pictograms as a unified mechanism for encoding, transmitting, and interpreting graphical elements (traffic signs) within ITS. It does not address the method of their graphical rendering nor the formats of transmission protocols. The standard is intended for use in ITS applications that need to uniquely identify and share the meaning of traffic signs in digital form.</p>
+<h2 id="3-terms-and-definitions"><a class="header" href="#3-terms-and-definitions">3 Terms and definitions</a></h2>
+<p>This clause defines the basic concepts used within the Graphic Data Dictionary (GDD). It contains a total of 12 terms describing the structure of codes, their meaning and related concepts. The key ones include:</p>
+<p><strong>graphic data dictionary</strong> – a systematically organised catalogue of pictogram codes used in ITS,</p>
+<p><strong>pictogram</strong> – a graphic symbol or icon displayed on a static traffic sign or on an IT system display (e.g. VMS), providing travellers with information about traffic conditions, restrictions, or public facilities</p>
+<p><strong>pictogram code</strong> – a combination of a service category code and a pictogram category code, optionally supplemented by a country code (in version 1)</p>
+<p><strong>relative object identifier</strong> – an identifier that determines an object by its position within the OID tree relative to a defined root</p>
+<p><strong>attribute</strong> – additional coded information that clarifies the meaning of the pictogram (e.g. direction, distance, time)</p>
+<p><strong>specialization</strong> – a relationship between a general class and its more specific variant that adds additional semantic elements</p>
+<h2 id="4-abbreviations"><a class="header" href="#4-abbreviations">4 Abbreviations</a></h2>
+<p>The clause lists 10 abbreviations used in the document. For the purposes of this Extract, the following are the most important:</p>
+<p><strong>ASN.1</strong> Abstract Syntax Notation One, the formal language used to define the structure and encoding of the GDD</p>
+<p><strong>GDD</strong> Graphic Data Dictionary, the dictionary defined by this standard</p>
+<p><strong>OID</strong> Object Identifier, the identifier used in version 2 for unique identification of pictograms</p>
+<p><strong>VMS</strong> Variable Message Sign, variable traffic signage capable of displaying pictograms defined in the GDD</p>
+<p>Other terms and abbreviations from the ITS domain can be found in the <em>ITS Terminology</em> dictionary (<a href="http://www.itsterminology.org">www.itsterminology.org</a>), the <em>StandardLand</em> website (<a href="http://www.standardland.cz">www.standardland.cz</a>) or the <em>OBP platform</em> (<a href="http://www.iso.org/obp">www.iso.org/obp</a>).</p>
+<h2 id="5-conformance"><a class="header" href="#5-conformance">5 Conformance</a></h2>
+<p>This clause, in four lines, defines two basic conditions for conformance. The implementation must use the GDD structure defined in the standard, and it must select pictogram codes exclusively from the tables provided in the document.</p>
+<h2 id="6-requirements"><a class="header" href="#6-requirements">6 Requirements</a></h2>
+<p>This clause, one page long, lists ten basic functional requirements for the use of the GDD in ITS, with references to parts of the standard. Among the requirements are, for example: graphic data must contain a version and an identifier (OID or country code), the selection of the pictogram code must correspond to the appropriate table according to the type of sign (warning, regulatory, informational, public facilities, supplementary panels, etc.).</p>
+<h2 id="7-structure-of-the-pictogram-code"><a class="header" href="#7-structure-of-the-pictogram-code">7 Structure of the pictogram code</a></h2>
+<p>This clause, four pages in length, defines <strong>two parallel mechanisms for pictograms identification</strong>, their hierarchy, and the rules for extension, including the marking of obsolete codes.</p>
+<p>Clause <strong>7.1 General</strong> explains the existence of two versions of the GDD. <strong>Version 1</strong> (country code + pictogram code) and <strong>Version 2</strong> (relative OID). Both versions are supported in parallel for backward compatibility.</p>
+<p>Clause <strong>7.2 Current and deprecated signs</strong> define the lifecycle of pictogram codes. All codes must be marked as <strong>current</strong> or <strong>deprecated</strong>.</p>
+<p>Clause <strong>7.3 Relative object identifier (relative OID)</strong> describes the OID hierarchy registered under <code>{joint-iso-itut(2) its(28) gdd(5)}</code> and the way pictograms can be generalized according to the required level of detail. It provides examples showing how an application may generalize a relative OID to distinct levels depending on the needed detail (warning sign: specific animal → general animal → general warning).</p>
+<p>Clause <strong>7.4 Country code</strong> states that the country code used is the two-letter code according to <strong>ISO 3166-1</strong> (version 1).</p>
+<p>Clause <strong>7.5 Pictogram code and OID</strong> contains <strong>Table 1</strong>, which defines the structure and numbering of pictograms for version 1 in the form <strong>“service category → subcategory → nature → sequence number”</strong> (e.g. <code>trafficSign (1) + regulatory (2) + mandatory (7) + xx </code>⇒<code> {1 2 7 xx}</code>).</p>
+<h2 id="8-numbering-of-pictogram-codes"><a class="header" href="#8-numbering-of-pictogram-codes">8 Numbering of pictogram codes</a></h2>
+<p>The clause, spanning 40 pages, defines the numerical ranges and mnemonics for all pictogram categories and provides the complete list of codes used in the GDD. It consists primarily of extensive code tables.</p>
+<p>Clause <strong>8.1 General</strong> states that each pictogram is assigned a code and a mnemonic name. The codes are divided according to the type of sign.</p>
+<p>Clause <strong>8.2 Mnemonics of the codes</strong> describes the rules for forming names in lowerCamelCase, without spaces and without articles. One illustrative example is provided.</p>
+<p><strong>Table 1 (excerpt from Table 2 of the standard) Assigning a service category code and pictogram category code to a specific phrase (mnemonic):</strong></p>
+<table>
+  <tr>
+    <th>Pictogram code</th>
+    <th></th>
+    <th>Pictogram name</th>
+    <th>Mnemonic</th>
+  </tr>
+  <tr>
+    <td>Service category code</td>
+    <td>Pictogram category code</td>
+    <td rowspan="2">Intersection where priority is prescribed by the general priority rule (crossroads)</td>
+    <td rowspan="2">intersectionWherePriorityIsPrescribed GeneralByPriorityRuleCrossroads</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>111</td>
+  </tr>
+</table>
+<p>The following clauses (8.3–8.9) contain the definitions of codes presented through an extensive table in which each pictogram code is assigned a name and a mnemonic. The codes in the tables are grouped into sets, and the sizes of these sets range from tens to hundreds of pictogram codes, with gaps between the sets reserved for future use.</p>
+<p>Clause <strong>8.3 Warning traffic signs</strong> (pictogram codes 11111–11999, approximately 9 pages of tables) includes pictograms used to provide <strong>advance warning</strong> to drivers about dangerous or deteriorated road conditions. These include warnings about obstacles, hazardous sections, animals, weather phenomena, or other situations requiring increased attention.</p>
+<p>Clause <strong>8.4 Regulatory traffic signs</strong> (pictogram codes 12111–12999, approximately 10 pages of tables) contains pictograms expressing <strong>obligations, prohibitions, and restrictions</strong>. The standard divides them into three groups:</p>
+<ul>
+<li>
+<p>signs regulating priority (12111–12399),</p>
+</li>
+<li>
+<p>prohibitions and restrictions (12411–12699),</p>
+</li>
+<li>
+<p>mandatory signs (12711–12999).</p>
+</li>
+</ul>
+<p>Clause <strong>8.5 Guidance traffic signs</strong> (pictogram codes 13111–13999, approximately 11 pages of tables) includes pictograms providing navigational, directional, and general informational content. The standard divides them into six subgroups:</p>
+<ul>
+<li>
+<p>advance directional information (13111–13399),</p>
+</li>
+<li>
+<p>instructions (13411–13499),</p>
+</li>
+<li>
+<p>notifications (13511–13599),</p>
+</li>
+<li>
+<p>lane guidance (13611–13699),</p>
+</li>
+<li>
+<p>warnings (13711–13799),</p>
+</li>
+<li>
+<p>identification of places and roads (13811–13999).</p>
+</li>
+</ul>
+<p>Clause <strong>8.6 Public facilities</strong> (pictogram codes 21111–21999, approximately 3 pages of tables) contains pictograms indicating public services and facilities such as parking areas, fuel stations, restaurants, hospitals, toilets, etc.</p>
+<p>Clause <strong>8.7 Ambient conditions</strong> (pictogram codes 31111–31999, approximately 2 pages of tables) includes pictograms indicating weather and other environmental conditions that may affect traffic (e.g. rain, fog, wind, snow).</p>
+<p>Clause <strong>8.8 Road conditions</strong> (pictogram codes 32111–32999, approximately 1 page of tables) contains pictograms informing about road surface conditions and events along the route (e.g. accidents, congestion, closures, slippery road).</p>
+<h2 id="annex-a--asn1-description-of-gdd-version-2"><a class="header" href="#annex-a--asn1-description-of-gdd-version-2">Annex A – ASN.1 description of GDD (version 2)</a></h2>
+<p>This annex contains a one-paragraph reference to the complete formal definition of GDD version 2 in ASN.1, maintained at: <a href="https://standards.iso.org/iso/14823/-1/ed-1/en/">https://standards.iso.org/iso/14823/-1/ed-1/en/</a></p>
+<h2 id="annex-b--attributes-of-gdd-version-2"><a class="header" href="#annex-b--attributes-of-gdd-version-2">Annex B – Attributes of GDD (version 2)</a></h2>
+<p>This annex, approximately 10 pages long, contains the definition of attributes applicable to pictograms in version 2, including their types, ranges, and meanings. It also includes tables of values (e.g. directions, distances, time information). It serves as a reference catalogue for interpreting supplementary information.</p>
+<h2 id="annex-c--uml-diagram-of-gdd-version-2"><a class="header" href="#annex-c--uml-diagram-of-gdd-version-2">Annex C – UML diagram of GDD (version 2)</a></h2>
+<p>This annex, approximately 3 pages long, contains four UML diagrams of the GDD version 2 structures. The diagrams illustrate relationships between pictograms, attributes, specializations and OIDs.</p>
+<h2 id="annex-d--specializations-version-2"><a class="header" href="#annex-d--specializations-version-2">Annex D – Specializations (version 2)</a></h2>
+<p>This annex, approximately 2 pages long, describes the mechanism of specializations — the method for creating derived pictograms or regional variants without disrupting the basic GDD structure. It provides rules for extending the OID tree.</p>
+<h2 id="annex-e--asn1-description-of-gdd-version-1"><a class="header" href="#annex-e--asn1-description-of-gdd-version-1">Annex E – ASN.1 description of GDD (version 1)</a></h2>
+<p>This annex contains a one-paragraph reference to the original ASN.1 definition of GDD from ISO 14823:2017. It serves for backward compatibility and support of older implementations using country-code-based identifiers.</p>
+<h2 id="annex-f--attributes-of-gdd-version-1"><a class="header" href="#annex-f--attributes-of-gdd-version-1">Annex F – Attributes of GDD (version 1)</a></h2>
+<p>This annex, approximately 6 pages long, lists the attributes used in version 1. The structure is simpler than in version 2 and corresponds to the original 2017 model. It includes tables of values for directions, distances, and other supplementary information.</p>
+<h2 id="annex-g--uml-diagram-of-gdd-version-1"><a class="header" href="#annex-g--uml-diagram-of-gdd-version-1">Annex G – UML diagram of GDD (version 1)</a></h2>
+<p>This annex, one page long, contains a single UML model of the original GDD version 1. It serves as visual documentation of the older model.</p>
+<h2 id="annex-h--list-of-directions-at-diverging-point"><a class="header" href="#annex-h--list-of-directions-at-diverging-point">Annex H – List of directions at diverging point</a></h2>
+<p>This annex, approximately 5 pages long, contains one extensive table of numerical values for directional information used with pictograms, especially in the context of diverging lanes or branching roads. These values are used as attributes.</p>
+<h2 id="annex-i--example-gdd-dataset-for-the-un-and-selected-countries"><a class="header" href="#annex-i--example-gdd-dataset-for-the-un-and-selected-countries">Annex I – Example GDD dataset for the U.N. and selected countries</a></h2>
+<p>This annex, half a page long, refers to a URL with illustrative examples of pictogram codes for the U.N. and some countries. It serves as a demonstration of how national variants can be incorporated into the GDD.</p>
+<h2 id="annex-j--mapping-oid-to-pictogram-code-version-1"><a class="header" href="#annex-j--mapping-oid-to-pictogram-code-version-1">Annex J – Mapping OID to pictogram code (version 1)</a></h2>
+<p>This annex, approximately 2 pages long, provides an informative overview of the relationships between version 1 pictogram codes and their corresponding nodes in the OID tree. It explains how the original numeric codes (version 1) can be mapped to the OID structure used in version 2, enabling comparison or conversion between the two versions. The annex serves as a tool for interoperability and understanding the relationship between the historical coding and the new OID-based model.</p>
+<h2 id="bibliography"><a class="header" href="#bibliography">Bibliography</a></h2>
+<p>The bibliography, half a page long, contains non-normative references to documents related to GDD, ASN.1 and the ITS domain. These sources provide supplementary information for implementation or deeper understanding of the context of the standard but are not mandatory for conformance.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ISO_4448-1/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ISO_15622/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ISO_4448-1/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ISO_15622/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
