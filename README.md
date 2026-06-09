@@ -79,6 +79,27 @@ mise run all      # convert  →  generate nav  →  build site into book/
 mise run serve    # local preview with live reload
 ```
 
+## GitHub Pages Deployment
+
+The repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically:
+
+1. **Runs tests** on every push to `master`
+2. **Converts documents** from Word to Markdown
+3. **Builds the mdBook** static site
+4. **Deploys to GitHub Pages**
+
+### Setup
+
+1. **Enable GitHub Pages** in repository settings:
+   - Go to Settings → Pages
+   - Source: "GitHub Actions"
+
+2. **Push to master** — the workflow runs automatically
+
+3. **Access the site** at: `https://<username>.github.io/<repository>/`
+
+The workflow ensures that only tested, validated content is deployed.
+
 ### Tasks
 
 | Task                   | Description                                               |
