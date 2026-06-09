@@ -20,7 +20,7 @@ The concept of ITS communications (formerly CALM) is a set of requirements aimed
 
 A key feature of the ITS station is its ability to use various communication protocols with different access technologies. The described document specifies the method of data exchange, via an infrared interface operating at wavelengths from 850 nm to 1010 nm, and expands the interface specification with compatibility with the ITS station according to ISO 21217. For the purposes of the standard, this interface is referred to as IR. This is the second edition of the standard.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note**:* *This* ***Extract* ***presents* ***selected* ***chapters* ***of* ***the* ***described* ***document* *and* *retains* ***the* ***original* ***chapter* ***numbering**.*
 
 ## Usage
 
@@ -40,9 +40,9 @@ The related standards are primarily those of the ITS communication group (CALM).
 
 In addition to the ITS communication (CALM) standards, it references the following two standards:
 
-ISO/IEC 8802-11:1999, Information technology — Telecommunications and information exchange between systems — Local and metropolitan area networks — Specific requirements — Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications
+*ISO/IEC 8802-11:1999, Information technology — Telecommunications and information exchange between systems — Local and metropolitan area networks — Specific requirements — Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications*
 
-IEC 60825-1, Safety of laser products – Part 1: Equipment classification, requirements and user’s guide
+*IEC 60825-1, Safety of laser products – Part 1: Equipment classification, requirements and user’s guide*
 
 ## 2 Conformance
 
@@ -52,39 +52,39 @@ This clause contains a short paragraph with a single-line declaration stating th
 
 The standard introduces 36 new terms. Other terms and abbreviations are provided in ISO 21217 and other CALM standards. In a separate paragraph, the standard introduces terms for the optical characteristics of the interface. Examples of terms and definitions:
 
-communication zone – spatial zone in which two CALM-IR units are able to communicate with acceptable performance
+**communication** **zone** – spatial zone in which two CALM-IR units are able to communicate with acceptable performance
 
-registration phase – phase where a master identifies devices newly entering his communication zone
+**registration** **phase** – phase where a master identifies devices newly entering his communication zone
 
-wake-up window; WuW – special case of a broadcast window and is used to “wake-up” sleeping units entering the communication zone of an active master
+**wake-up** **window;** **WuW** – special case of a broadcast window and is used to “wake-up” sleeping units entering the communication zone of an active master
 
 ## 5 Symbols and abbreviated terms
 
 The standard contains 82 abbreviations. Example abbreviations:
 
-CIR circular QAM (a type of quadrature amplitude modulationcircular QAM)
+**CIR** circular QAM ***(**a type of quadrature amplitude* *modulation**circular* *QAM)*
 
-HHH Hirt, Hassner, Heise (inventors of the HHH(1,13) code) (packet coding and modulation developed specifically for IR communication)
+**HHH** Hirt, Hassner, Heise (inventors of the HHH(1,13) code) *(packet coding and modulation developed specifically for IR communication**)*
 
-IR infrared (infrared-based communication interface)
+**IR** infrared *(infrared-based communication interface**)*
 
-McW multicast window
+**McW** multicast window
 
-TDMA time division multiple access
+**TDMA** time division multiple access
 
-θH horizontal opening angle
+***θH*** **horizontal opening angle
 
-θV vertical opening angle
+***θV*** **vertical opening angle
 
-NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+*NOTE:* *Other* ***terms* *and* *abbreviations* ***from* ***the* *ITS* *domain* ***can* ***be* ***found* *in* *the* ***ITSTerminology* ***dictionary* *(**)**,* *the* *StandardLand* *website* *(**)* *or* ***the* *OBP* *platform* *(**).*
 
 ## 6 Requirements: Transmitter and Receiver Parameters
 
 This clause, spanning 3 pages, defines the requirements for the IR receiver and IR transmitter in the form of parameter tables.
 
-Article 6.1 Transmitter wavelengths and bandwidth and Article 6.2 – Radiated power, both on a single page, define the technical requirements for the transmitter (wavelength, bandwidth, radiated power). For example parameters, see Table 1. The clause also defines 11 transmitter classes (based on radiated power).
+Article **6.1 Transmitter wavelengths and bandwidth and** Article **6.2 – Radiated power**, both on a single page, define the technical requirements for the transmitter (wavelength, bandwidth, radiated power). For example parameters, see Table 1. The clause also defines 11 transmitter classes (based on radiated power).
 
-*Table 1– IR transmitter parameter specification (Tab. 1 of the source standard)*
+**Table 1– IR transmitter parameter specification** **(Tab. 1 of the source standard)**
 
 <table>
   <tr>
@@ -121,7 +121,7 @@ Article 6.1 Transmitter wavelengths and bandwidth and Article 6.2 – Radiated p
   </tr>
 </table>
 
-Article 6.3 Receiver wavelengths and bandwidths and Article 6.4 – Receiver class span two pages and define, in the form of two tables, the technical requirements for the receiver (wavelength, bandwidth).
+Article **6.3** **Receiver wavelengths and** **bandwidths** and Article **6.4 – Receiver class** span two pages and define, in the form of two tables, the technical requirements for the receiver (wavelength, bandwidth).
 
 Clause 6 also defines 16 receiver classes (based on receiver sensitivity).
 
@@ -129,7 +129,7 @@ Clause 6 also defines 16 receiver classes (based on receiver sensitivity).
 
 This clause, spanning 3 pages, defines the basic set of requirements for modulation and coding in the IR environment. It provides the basic structure of a data packet at the OSI model physical layer, including pulse durations in μs. It also defines interface communication profiles (see Table 2 (Table 9 of the standard) – Communication profiles).
 
-*Table 2 – Excerpt of Table 9 of the source standard: Communication profiles*
+**Table 2** **– Excerpt of Table 9 of the** **source standard:** **Communication profiles**
 
 ![Table 2 – Excerpt of Table 9 of the source standard: Communication profiles](fig-1.png)
 
@@ -139,8 +139,8 @@ This clause, spanning 3 pages, defines the geometrical and spatial requirements 
 
 ![](fig-2.png)
 
-*Figure 1 – Horizontal opening and vertical opening angles in IR communication 
-(Fig. 5 of the source standard)*
+**Figure 1** **– Horizontal opening and vertical opening angles in IR communication** **
+(Fig. 5 of the source standard)**
 
 ## 9 Frames and Windows
 
@@ -166,7 +166,7 @@ This clause, spanning 4 pages, describes, in text and tables, the basic features
 
 This clause, spanning 6 pages, describes in text, diagrams, and tables, how to integrate the IR interface into the structure of the ITS station. The adaptation structure of the IR interface into the ITS station is shown in Figure 2.
 
-*Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)*
+**Figure 2** **– Medium adaptation of the IR interface into the ITS station** **(Fig. 17 of the source standard)**
 
 ![Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)](fig-3.png)
 

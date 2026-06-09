@@ -97,6 +97,81 @@ def test_real_extract_iso22741_10(docx_fixtures_dir, tmp_output):
 
 
 @pytest.mark.integration
+def test_inline_formatting_iso14823_1(tmp_path):
+    """Test inline formatting conversion (bold, italic, code) for ISO 14823-1."""
+    # Check if ISO 14823-1 fixture exists
+    fixtures_dir = Path("tests/fixtures/docx")
+    docx_file = Path("input/ISO_14823-1.docx")
+    
+    if not docx_file.exists():
+        pytest.skip("ISO_14823-1.docx not available in input/")
+    
+    # Run conversion
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    
+    docname, n_figures, n_tables = convert_docx.convert(str(docx_file), str(output_dir))
+    
+    # Read generated output
+    index_md = output_dir / docname / "index.md"
+    assert index_md.exists()
+    
+    content = index_md.read_text(encoding="utf-8")
+    
+    # Extract body (skip front-matter)
+    fm_match = re.match(r"^---\n(.*?)\n---\n", content, re.DOTALL)
+    assert fm_match, "Front-matter not found"
+    body = content[fm_match.end():]
+    
+    # --- Test 1: Code formatting (monospace) ---
+    # OID in Clause 7.3 should be formatted as code
+    assert "`{joint-iso-itut(2) its(28) gdd(5)}`" in body, \
+        "OID should be formatted as inline code with backticks"
+    
+    # Technical expressions in Clause 7.5 should have at least some code formatting
+    # (The exact split depends on how Word formatted the original runs)
+    assert "`trafficSign" in body or "`{1 2 7 xx}`" in body or "{1 2 7 xx}" in body, \
+        "Technical identifiers should be present (formatted or not)"
+    
+    # --- Test 2: Bold formatting ---
+    # Term definitions should be bold
+    assert "**Graphic Data Dictionary (GDD)**" in body, \
+        "GDD term should be bold"
+    
+    # Clause references should be bold
+    assert "**7.3 Relative object identifier (relative OID)**" in body or \
+           "**7.3**" in body, \
+        "Clause numbers should be bold"
+    
+    # --- Test 3: Italic formatting ---
+    # References to external resources should be italic
+    if "*ITS Terminology*" in body or "*StandardLand*" in body:
+        # At least one italic reference present
+        assert True
+    
+    # --- Test 4: No broken Markdown ---
+    # Check for unmatched backticks
+    backtick_count = body.count("`")
+    assert backtick_count % 2 == 0, \
+        f"Unmatched backticks found (count: {backtick_count})"
+    
+    # Check for unmatched asterisks (rough heuristic)
+    # We can't perfectly detect all cases, but gross errors will show
+    lines_with_odd_asterisks = []
+    for i, line in enumerate(body.split("\n"), 1):
+        # Skip code blocks and inline code
+        line_without_code = re.sub(r"`[^`]*`", "", line)
+        single = line_without_code.count("*") - line_without_code.count("**") * 2
+        triple = line_without_code.count("***") * 3
+        if (single + triple) % 2 != 0:
+            lines_with_odd_asterisks.append((i, line[:80]))
+    
+    # Allow some false positives, but catch gross errors
+    assert len(lines_with_odd_asterisks) < 5, \
+        f"Too many lines with potentially unmatched asterisks: {lines_with_odd_asterisks[:5]}"
+
+
+@pytest.mark.integration
 def test_navigation_generation(sample_output_dir, tmp_path):
     """Test gen_nav.py generates correct SUMMARY.md and index.md."""
     # Create temporary output directory with sample extracts

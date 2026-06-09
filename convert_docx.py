@@ -41,6 +41,7 @@ CT_EXT = {
     "image/x-wmf": "wmf", "image/wmf": "wmf",
 }
 VECTOR = {"emf", "wmf"}
+MONOSPACE_FONTS = {'courier', 'courier new', 'consolas', 'monaco', 'monospace'}
 
 
 def _trim_whitespace(png, pad=12):
@@ -226,9 +227,68 @@ def table_html(table, imgs: ImgState) -> str:
 
 # ---------- paragraph rendering ----------
 
+def render_paragraph_runs(p) -> str:
+    """Convert paragraph runs to Markdown, preserving inline formatting."""
+    chunks = []
+    
+    for run in p.runs:
+        text = run.text
+        if not text:
+            continue
+        
+        # Detect monospace font
+        is_code = (
+            run.font.name and 
+            run.font.name.lower() in MONOSPACE_FONTS
+        )
+        
+        # Move leading/trailing spaces outside of formatting markers
+        # This prevents broken Markdown like "**text **" or "** text**"
+        leading_space = ''
+        trailing_space = ''
+        
+        if text and not is_code:  # Don't strip spaces from code
+            if text[0] in ' \t':
+                leading_space = text[0]
+                text = text[1:]
+            if text and text[-1] in ' \t':
+                trailing_space = text[-1]
+                text = text[:-1]
+        
+        # Apply Markdown formatting to the stripped text
+        # IMPORTANT: Code takes precedence. If monospace, ignore bold/italic.
+        if is_code:
+            text = f"`{text}`"
+        elif run.bold and run.italic:
+            text = f"***{text}***"
+        elif run.bold:
+            text = f"**{text}**"
+        elif run.italic:
+            text = f"*{text}*"
+        # Underline is ignored (no Markdown equivalent)
+        
+        # Reassemble with spaces outside formatting
+        chunks.append(leading_space + text + trailing_space)
+    
+    # Join runs and apply standard cleaning
+    txt = ''.join(chunks)
+    
+    # Merge adjacent formatting markers (handles cases where Word splits formatted text across multiple runs)
+    # Merge adjacent backticks: `foo``bar` → `foobar`
+    while '``' in txt:
+        txt = txt.replace('``', '')
+    
+    # Merge adjacent bold markers: **foo****bar** → **foobar**
+    while '****' in txt:
+        txt = txt.replace('****', '')
+    
+    txt = clean(txt).replace("\t", " — ")
+    return txt
+
+
 def render_paragraph(p) -> str:
     style = p.style.name or ""
-    txt = clean(p.text).replace("\t", " — ")
+    txt = render_paragraph_runs(p)
     if not txt:
         return ""
     if style.startswith("Heading") or style == "Nadpis":

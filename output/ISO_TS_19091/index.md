@@ -16,7 +16,7 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 ISO/TS 19091 (hereinafter referred to as "this document") describes the use cases for several applications in the domain of signalized intersections, the goal of which is to improve safety, mobility, and environmental sustainability. For each use case, the information needs are defined that must be fulfilled through communication between vehicles and the infrastructure. In this way, the requirements for individual applications are defined, and these are subsequently mapped to data frames and data elements through which the individual requirements are fulfilled within the defined message set.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.*
 
 ## Usage
 
@@ -54,35 +54,35 @@ The following documents are referred to in the text in such a way that some or a
 
 The technical specification defines 52 terms. The most important include:
 
-MAP data message (MAP) – data elements and frames comprising a message, the contents of which describe the geometry of a roadway intersection
+**MAP data message (MAP)** – data elements and frames comprising a message, the contents of which describe the geometry of a roadway intersection
 
-signal phase and timing (SPaT) – a message sent from the infrastructure to C-ITS devices describing the current state of the traffic signal controller (at one or more intersections), its phases, and the relationship to possible intersection manoeuvres
+**signal** **phase and timing (SPaT)** – a message sent from the infrastructure to C-ITS devices describing the current state of the traffic signal controller (at one or more intersections), its phases, and the relationship to possible intersection manoeuvres
 
-signal request message (SRM) – a message sent from C-ITS devices to the infrastructure, by which a vehicle requests preferential treatment from the traffic signal controller for passage through the intersection
+**signal** **request message (SRM)** – a message sent from C-ITS devices to the infrastructure, by which a vehicle requests preferential treatment from the traffic signal controller for passage through the intersection
 
-signal status message (SSM) – a message sent from the infrastructure to C-ITS devices, containing the details of the traffic signal controller's response to a request for preferential treatment at the intersection
+**signal** **status message (SSM)** – a message sent from the infrastructure to C-ITS devices, containing the details of the traffic signal controller's response to a request for preferential treatment at the intersection
 
-roadside equipment (RSE) – equipment located at the infrastructure side that creates and transmits messages to vehicles and receives messages from vehicles for the purpose of supporting V2I and I2V applications
+**roadside** **equipment (RSE)** – equipment located at the infrastructure side that creates and transmits messages to vehicles and receives messages from vehicles for the purpose of supporting V2I and I2V applications
 
 ## 4 Abbreviated Terms
 
 The technical specification contains 51 abbreviations. The most important include:
 
-CV Connected Vehicle
+**CV** Connected Vehicle
 
-OBE On-Board Equipment
+**OBE** On-Board Equipment
 
-RSE Roadside Equipment
+**RSE** Roadside Equipment
 
-SPaT Signal Phase and Timing
+**SPaT** Signal Phase and Timing
 
-SRM Signal Request Message (J2735™)
+**SRM** Signal Request Message (J2735™)
 
-SSM Signal Status Message (J2735™)
+**SSM** Signal Status Message (J2735™)
 
-TSC Traffic Signal Controller
+**TSC** Traffic Signal Controller
 
-Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP plataform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP plataform ().
 
 ## 5 General Description (informative)
 
@@ -94,7 +94,7 @@ Within the functional model, the general system architecture is also described, 
 
 ![Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the source standard)](fig-1.png)
 
-*Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the source standard)*
+**Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the** **source** **standard)**
 
 Furthermore, the Functional model addresses message interactions, i.e. an explanation of the broadcast principle within DSRC communications and the implications and requirements this has for message transmission (frequent repetition of the same message "over the air" instead of interactive information exchange used in TCP/IP).
 
@@ -162,21 +162,21 @@ In this very brief clause, the following is literally stated:
 
 "This document specifies the data dictionary to be used internationally for the deployment of the following messages:
 
-- map data (MAP);
+- *map data (MAP);*
 
-- signal phase and timing (SPaT);
+- *signal phase and timing (**SPaT**);*
 
-- signal request message (SRM);
+- *signal request message (SRM);*
 
-- signal status message (SSM).
+- *signal* *status message (SSM).*
 
 The structure of these messages is defined by selection of an annex and the message requirements therein. The annexes with message structure requirements are as follows:
 
-- Annex E Profile A for J2735™;
+- *Annex E* *Profile A for J2735™;*
 
-- Annex F Profile B for J2735™;
+- *Annex F* *Profile B for J2735™;*
 
-- Annex G Profile C for J2735™."
+- *Annex G* *Profile C for J2735™."*
 
 ## 8 Conformance
 

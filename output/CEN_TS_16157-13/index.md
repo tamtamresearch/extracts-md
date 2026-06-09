@@ -21,7 +21,7 @@ The series establishes specifications for data exchange between any two instance
 
 The described document supersedes CEN/TS 17241:2019.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.*
 
 ## Usage
 
@@ -67,27 +67,27 @@ The described document also builds on class models published at http://www.datex
 
 The clause contains the following 3 terms and definitions relevant to this standard:
 
-device — logical object, realised by physical equipment, at a known location, that is desired to deliver a service
+**device** — logical object, realised by physical equipment, at a known location, that is desired to deliver a service
 
-NOTE 1 to entry: The definition does not apply in the context of the term "physical device".
+*NOTE 1 to entry: The definition does not apply in the context of the term "physical device".*
 
-NOTE 2 to entry: In the context of this document a device is a logical object which could be realised by different physical objects at different points in time, for example if a faulty item is replaced by a spare of the same type.
+*NOTE 2 to entry: In the context of this document a device is a logical object which could be realised by different physical objects at different points in time, for example if a faulty item is replaced by a spare of the same type.*
 
-status — ability of a device or system to perform its functions at a given point in time in terms of its own technical condition, external operational configuration and the state of all underlying support systems
+**status** — ability of a device or system to perform its functions at a given point in time in terms of its own technical condition, external operational configuration and the state of all underlying support systems
 
-fault — a failure or deficiency in a device or system that signifies a potential or actual change in status resulting in reduced ability to perform functions
+**fault** — a failure or deficiency in a device or system that signifies a potential or actual change in status resulting in reduced ability to perform functions
 
 ## Abbreviations
 
 The clause contains 2 abbreviations relevant to this standard, to which we also add OID:
 
-UML Unified Modeling Language
+**UML** Unified Modeling Language
 
-XML eXtensible Markup Language
+**XML** eXtensible Markup Language
 
-OID Object Identifier
+**OID** Object Identifier
 
-NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+*NOTE: Other terms and abbreviations from the ITS domain can be found in the* *ITSTerminology* *dictionary (**)**, the StandardLand website (**) or the OBP platform (**).*
 
 ## 6 The FaultAndStatus namespace
 
@@ -99,7 +99,7 @@ This sub-clause (1 page) provides a basic overview of the dependencies of the Fa
 
 ![Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)](fig-1.png)
 
-*Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)*
+**Figure 1 — Namespace dependencies of the** **FaultAndStatus** **namespace (Fig. 1 of the source standard)**
 
 The FaultAndStatus namespace contains the following sub-packages:
 
@@ -121,7 +121,7 @@ This sub-clause (2 pages, 1 diagram) defines the DevicePublication class, enabli
 
 ![Figure 2 — DevicePublication class (Fig. 2 of the source standard)](fig-2.png)
 
-*Figure 2 — DevicePublication class (Fig. 2 of the source standard)*
+**Figure 2 —** **DevicePublication** **class (Fig.** **2 of the** **source standard)**
 
 A DevicePublication contains information on a collection of devices, either directly or via one or more DeviceTable objects. A single DevicePublication object should contain either DeviceTable objects or Device objects directly, not both.
 
@@ -165,7 +165,7 @@ This sub-clause describes, using one diagram and one paragraph of text, the Obje
 
 This annex (18 pages, 25 tables) provides a data dictionary identifying the definitions and characteristics of all classes, attributes, association ends, data types and enumerations appearing in the data model defined in Clause 6. Among other things it defines enumerated values for device types (Table 1 below) and enumerated values for the impact of a device fault on provided data (Table 2 below).
 
-*Table 1 — Values contained in the enumeration “DeviceTypeEnum” (Tab. A.18 of the source standard)*
+**Table 1 — Values contained in the enumeration “DeviceTypeEnum” (Tab.** **A.18 of the** **source standard)**
 
 <table>
   <tr>
@@ -280,8 +280,8 @@ This annex (18 pages, 25 tables) provides a data dictionary identifying the defi
   </tr>
 </table>
 
-*Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum” 
-(Tab. A.19 of the source standard)*
+**Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum”** **
+(Tab.** **A.19 of the** **source standard)**
 
 <table>
   <tr>

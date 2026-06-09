@@ -15,7 +15,7 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 This document specifies a framework and general requirements for Level 3 automated driving systems intended for motorway operation. The standard defines the concept of a Motorway Chauffeur System (MCS) as a specific implementation of an automated driving system (ADS) that performs the entire dynamic driving task (DDT) within the current lane of travel in the presence of a fallback-ready user (FRU). The document establishes a systematic framework including system characteristics, operational design domain (ODD), state models and state transitions, functional requirements, minimum DDT performance requirements, and test scenarios.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected chapters of the described document and retains the original* *chapter* *numbering.*
 
 ## Use
 
@@ -41,13 +41,13 @@ Most additional related standards, technical specifications, and research docume
 
 The document explicitly defines 6 terms and definitions (selection):
 
-motorway – road specially designed and built for motorized traffic that does not serve properties bordering on it
+**motorway** **–** road specially designed and built for motorized traffic that does not serve properties bordering on it
 
-route – planned sequence of waypoints to reach a destination
+**route** **–** planned sequence of waypoints to reach a destination
 
-trajectory – sequence of locations that define the intended motion vector of the subject vehicle
+**trajectory** **–** sequence of locations that define the intended motion vector of the subject vehicle
 
-vehicle motion control (VMC) – activities necessary to adjust vehicle movement continuously in real time, which include “lateral vehicle motion control” and “longitudinal vehicle motion control”
+**vehicle motion control (VMC)** **–** activities necessary to adjust vehicle movement continuously in real time, which include “lateral vehicle motion control” and “longitudinal vehicle motion control”
 
 ## 4 Symbols and abbreviated terms
 
@@ -69,7 +69,7 @@ OEDR object and event detection and response
 
 TTC time to collision
 
-Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP plataform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP plataform ().
 
 ## 5 Characteristics of MCS
 
@@ -81,13 +81,13 @@ This subclause defines the fundamental nature of MCS as a Level 3 implementation
 
 ### 5.2 Operational design domain
 
-This subclause is further divided into five parts and systematically describes the ODD. Subclause 5.2.1 General specifies the requirement to define a pre-defined ODD for the system (Figure 2). Subclause 5.2.2 Roadway physical characteristics describes the physical structure of the motorway, lane configurations, profiles, curvatures, and related characteristics. Subclause 5.2.3 Traffic in the surrounding environment addresses characteristics of surrounding traffic and other vehicles.
+This subclause is further divided into five parts and systematically describes the ODD. Subclause **5.2.1 General** specifies the requirement to define a pre-defined ODD for the system (Figure 2). Subclause **5.2.2 Roadway physical characteristics** describes the physical structure of the motorway, lane configurations, profiles, curvatures, and related characteristics. Subclause **5.2.3 Traffic in the surrounding environment** addresses characteristics of surrounding traffic and other vehicles.
 
-Subclause 5.2.4 Abnormalities in roadway operational condition includes extraordinary situations such as road works or incidents. Subclause 5.2.5 Ambient environmental conditions describes weather and lighting conditions.
+Subclause 5**.2.4 Abnormalities in roadway operational condition** includes extraordinary situations such as road works or incidents. Subclause **5.2.5** **Ambient** **environmental conditions** describes weather and lighting conditions.
 
 ![Figure 1 — Example of geographic boundary (geofence) of an ODD (Fig. 2 in the source document)](fig-1.png)
 
-*Figure 1 — Example of geographic boundary (geofence) of an ODD (Fig. 2 in the source document)*
+**Figure** **1** **— Example of geographic boundary (geofence) of an ODD** **(Fig. 2 in the source document)**
 
 ### 5.3 System functionalities
 
@@ -117,7 +117,7 @@ Subclause 6.2 State transition includes subdivisions 6.2.1 to 6.2.5. Subclause 6
 
 ### 6.3 System functions
 
-Subclause 6.3 is the most extensive part and contains 14 subclauses.
+Subclause **6.3 is the most extensive part and contains 14 subclauses.**
 
 Subclause 6.3.1 General includes an overview of system functions in tabular form.
 
@@ -137,15 +137,15 @@ Subclause 6.4.2 introduces five severity levels of situations, ranging from situ
 
 Clause 7 represents the normative core defining functional performance parameters of the system. While Clause 6 defines operational logic and functional architecture, Clause 7 specifies concrete minimum behavioural requirements for performing the dynamic driving task (DDT) during normal and degraded operation.
 
-7.1 General
+**7.1** **General**
 
 This subclause defines the scope of Clause 7 and emphasizes that the requirements apply to system behaviour within the prescribed operational design domain.
 
-7.2 Operating speed range
+**7.2** **Operating speed range**
 
 This subclause specifies that the minimum operating speed range of the system shall include 0 km/h, meaning capability for complete stopping and subsequent restarting.
 
-7.3 Normal operation
+**7.3** **Normal operation**
 
 This subclause is further divided into 7.3.1 Sustained longitudinal vehicle motion control, 7.3.2 Sustained lateral vehicle motion control, and 7.3.3 Crash avoidance. This part contains the most specific technical limits.
 
@@ -155,11 +155,11 @@ Subclause 7.3.2 specifies requirements for sustained lateral vehicle motion cont
 
 Subclause 7.3.3 specifies minimum requirements for system response in situations involving sudden changes in traffic conditions. The standard provides specific reference scenarios, such as aggressive cut-in from the adjacent lane with a time to collision (TTC) greater than 2,5 s, and response to an obstacle at least the size of a passenger vehicle’s free-standing tyre. This part establishes a direct link to the test scenarios in Clause 8.
 
-7.4 Performance-impaired operation
+**7.4** **Performance-impaired operation**
 
 This subclause builds upon the classification of adverse situations defined in 6.4.2 and specifies minimum requirements and recommendations for performance-impaired operation.
 
-7.5 MCS reaction to unresponsive FRU
+**7.5** **MCS reaction to unresponsive FRU**
 
 This subclause specifies the required system response when the fallback-ready user does not adequately respond to a request to intervene and no performance-impairing or incapacitating situation is present. This part creates a direct linkage to the functional requirements related to minimal risk manoeuvres specified in 6.3.14.1 and to the test scenarios defined in Clause 8.
 
@@ -171,37 +171,37 @@ Clause 8 specifies test procedures intended to verify compliance with the operat
 
 Subclause 8.1 is divided into 8.1.1 Purpose, 8.1.2 Driving environment, 8.1.3 System settings and test driver roles, 8.1.4 Common test pass criteria, 8.1.5 Confirmation of the HMI design, 8.1.6 Success rate and number of trials, 8.1.7 List of test scenarios, and 8.1.8 Test sites.
 
-Clause 8 describes the following scenarios:
+**Clause** **8** **describes the following scenarios:**
 
-8.2 Scenario 1: MCS reaction to unresponsive FRU
+**8.2** **Scenario 1: MCS reaction to unresponsive FRU**
 
 This scenario verifies system behaviour when the fallback-ready user does not respond to an RTI.
 
-8.3 Scenario 2: Direct disengagement by steering input
+**8.3** **Scenario 2: Direct disengagement by steering input**
 
 This scenario verifies direct disengagement initiated by user steering input.
 
-8.4 Scenario 3: Continued operation after brake intervention
+**8.4** **Scenario 3: Continued operation after brake intervention**
 
 This scenario evaluates the capability of the MCS to continue operation following a brake intervention by the user under specified conditions.
 
-8.5 Scenario 4: Forward vehicle braking hard
+**8.5** **Scenario 4: Forward vehicle braking hard**
 
 This scenario evaluates the response of the MCS to significant deceleration of the forward vehicle.
 
-8.6 Scenario 5: Aggressive cut-in from the adjacent lane
+**8.6** **Scenario 5: Aggressive cut-in from the adjacent lane**
 
 This scenario (performed under two different speed and distance conditions) evaluates system response to a vehicle aggressively entering the lane in front of the subject vehicle from an adjacent lane.
 
-8.7 Scenario 6: Obstacle in lane
+**8.7** **Scenario 6: Obstacle in lane**
 
 This scenario evaluates system behaviour when an obstacle is present within the current lane of travel.
 
-8.8 Scenario 8: Approaching geographical ODD boundary
+**8.8** **Scenario 8: Approaching geographical ODD boundary**
 
 This scenario verifies system behaviour when the subject vehicle approaches the geographical boundary of the prescribed ODD.
 
-8.9 Scenario 9: Engagement restricted outside ODD
+**8.9** **Scenario 9: Engagement restricted outside ODD**
 
 This scenario verifies that the MCS does not engage outside its prescribed operational design domain.
 
@@ -209,4 +209,4 @@ This scenario verifies that the MCS does not engage outside its prescribed opera
 
 The bibliography contains references to additional standards, technical specifications, and research documents related to automated driving systems, operational design domains, safety assessment, validation methodologies, human-machine interaction, and advanced driving functionalities.
 
-Document does not provide any Annexes.
+Document does not provide any **Annexes**.

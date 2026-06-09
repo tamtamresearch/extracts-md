@@ -15,7 +15,7 @@ note: "Note: The extract lists selected chapters of the described document and a
 
 This standard defines data exchange requirements to support Electric Vehicle (EV)-based Demand Response (DR) services utilizing nomadic devices, considering two types of EV-based DR services. One is to reduce demand of electric vehicles charging when there is a shortage on the grid side. The other is to increase demand of electric vehicles charging when the surplus on the grid side is forecasted day ahead.
 
-Note: The extract lists selected chapters of the described document and adopts the original chapter numbering.
+*Note: The extract lists sele**cted chapters of the described document and adopts the original chapter numbering.*
 
 ## Use
 
@@ -39,47 +39,47 @@ The document described refers to ISO Guide 84 on climate change, standards relat
 
 This part of the technical standard defines 13 terms and 23 abbreviations, the key of which are the following:
 
-customer baseline load (CBL) the pattern of electric demand as usual, is needed to measure performance of DR program
+**customer baseline load (CBL)** the pattern of electric demand as usual, is needed to measure performance of DR program
 
-DR meter the meter installed by the service provider to measure load amount of the customer.
+**DR meter** the meter installed by the service provider to measure load amount of the customer.
 
-electric vehicle supply equipment (EVSE) equipment or a combination of equipment, providing dedicated functions to supply electric energy from a fixed electrical installation or supply network to an EV for the purpose of power transfer.
+**electric vehicle supply equipment (EVSE)** equipment or a combination of equipment, providing dedicated functions to supply electric energy from a fixed electrical installation or supply network to an EV for the purpose of power transfer.
 
-EV based DR service DR activity by which the cost of charging electric vehicles is modified to cause consumers to shift consumption patterns
+**EV based DR** **service** DR activity by which the cost of charging electric vehicles is modified to cause consumers to shift consumption patterns
 
-reverse DR resource DR resources for the purpose of large-scale transaction of power load increase, and electricity users of all types of contracts as participating customers without restrictions on the types of electricity use contracts concluded by electricity users in the Jeju area with sales companies or district electric operators
+**reverse DR resource** DR resources for the purpose of large-scale transaction of power load increase, and electricity users of all types of contracts as participating customers without restrictions on the types of electricity use contracts concluded by electricity users in the Jeju area with sales companies or district electric operators
 
-standard DR resource DR resource that refers to national DR and includes electricity users with a contracted power of 200 kW or less, residential electricity users, and individual households belonging to collective buildings among electricity use contracts concluded with sales companies or district electric business operators as customers participating in DR
+**standard DR resource** DR resource that refers to national DR and includes electricity users with a contracted power of 200 kW or less, residential electricity users, and individual households belonging to collective buildings among electricity use contracts concluded with sales companies or district electric business operators as customers participating in DR
 
-virtual end node (VEN) client and can be an EMS, a thermostat or other end device that accepts the OpenADR signal from a server (VTN)
+**virtual end node (VEN)** client and can be an EMS, a thermostat or other end device that accepts the OpenADR signal from a server (VTN)
 
-virtual top node (VTN) server that transmits OpenADR signals to end devices or other intermediate servers
+**virtual top node (VTN)** server that transmits OpenADR signals to end devices or other intermediate servers
 
-CSMS charging station management system
+**CSMS** charging station management system
 
-CSO charging station operator
+**CSO** charging station operator
 
-DR demand response
+**DR** demand response
 
-EMS energy management system
+**EMS** energy management system
 
-EV electric vehicle
+**EV** electric vehicle
 
-Other terms and abbreviations from the ITS domain can be found in the ITS Terminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
 
 ## 4 Supported EV-based DR services
 
 Chapter 4 is 8 pages long and describes supported EV based DR services by 5 figures and 3 tables. A common DR service is described in 4.1, illustrated at the figure 1, the reverse DR service is described in 4.2. The procedures for EV based DR services are described in 4.3 using a figure and a table to describe the steps of the processes for the following services:
 
-- a standard DR service procedure (from Contract & Registration via DR implementation & metering to Calculation & Settlement)
+- **a standard DR service procedure** (from Contract & Registration via DR implementation & metering to Calculation & Settlement)
 
-- a Fine dust DR service procedure (from Contract & Registration via DR Bidding to DR implementation & metering and Calculation & Settlement)
+- **a Fine dust DR service procedure** (from Contract & Registration via DR Bidding to DR implementation & metering and Calculation & Settlement)
 
-- a Reverse DR service procedure (from Contract & Registration via DR Bidding to DR implementation & metering and Calculation & Settlement)
+- **a Reverse DR service procedure** (from Contract & Registration via DR Bidding to DR implementation & metering and Calculation & Settlement)
 
 ![Figure 1 (Figure 1 of the source document) – EV-based standard DR service](fig-1.png)
 
-*Figure 1 (Figure 1 of the source document) – EV-based standard DR service*
+**Figure 1 (Figure 1 of the** **source** **document)** **–** **EV-based standard DR service**
 
 ## 5 Requirements for main actors
 
@@ -87,7 +87,7 @@ Chapter 5 is 5 pages long and describes the requirements for the main actors, as
 
 ![Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service](fig-2.png)
 
-*Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service*
+**Figure 2 (Figure 6 of the** **source** **document)** **–** **Requirement of each actor for EV-based DR service**
 
 ## 6 Requirements for communication
 

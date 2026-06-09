@@ -13,31 +13,31 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 ## Introduction
 
-The standard ISO 14823-1:2024 defines the Graphic Data Dictionary (GDD) – a unified, language-independent system for encoding traffic signs and pictograms for the needs of Intelligent Transport Systems (ITS). Its purpose is to enable efficient transmission, interpretation, and display of traffic information across different countries, systems, and technologies. This dictionary is used for information exchange between centres (DATEX II) and between infrastructure and vehicles (cooperative systems, C-ITS) for describing traffic signs displayed, for example, on variable message signs.
+The standard ISO 14823-1:2024 defines the **Graphic Data Dictionary (GDD)** – a unified, language-independent system for encoding traffic signs and pictograms for the needs of Intelligent Transport Systems (ITS). Its purpose is to enable **efficient transmission,** **interpretation,** **and display of traffic information** across different countries, systems, and technologies. This dictionary is used for information exchange between centres (DATEX II) and between infrastructure and vehicles (cooperative systems, C-ITS) for describing traffic signs displayed, for example, on variable message signs.
 
-This revision of the standard is a fundamental rework of the original ISO 14823:2017. The original standard, due to its use of a simple identifier based on ISO 3166-1 and a five-digit structure (service category – nature – sequence number), had two essential limitations: there was no globally unique identification of pictograms, and adding new pictograms was inflexible because the numeric space was rigidly structured and difficult to extend.
+This revision of the standard is a fundamental rework of the original ISO 14823:2017. The original standard, due to its use of a simple identifier based on ISO 3166-1 and a five-digit structure (service category – nature – sequence number), had two essential limitations: there was **no globally unique identification of pictograms, and adding new pictograms was inflexible** because the numeric space was rigidly structured and difficult to extend.
 
-This revision therefore introduces a more robust mechanism based on the relative object identifier (OID), which enables global identification, hierarchy, and extensibility without breaking compatibility. The revision contains following essential technical and conceptual changes:
+This revision therefore introduces a more robust mechanism based on the **relative object identifier (OID)**, which enables global identification, hierarchy, and extensibility without breaking compatibility. The revision contains following essential technical and conceptual changes:
 
-- an updated version 2 of the GDD based on OID and relative object identifiers, enabling global identification, hierarchical generalisation and adding new codes without collisions,
+- an updated **version** **2** of the GDD based on OID and relative object identifiers, enabling global identification, hierarchical generalisation and adding new codes without collisions,
 
-- support for more complex messages thanks to the possibility of including up to four pictograms in a single object,
+- support for more complex messages thanks to the possibility of including up to **four pictograms** in a single object,
 
 - addition of new codes and removal of redundant ones, adjustment of attributes for better compatibility with other ITS standards,
 
-- marking codes as “current” or “deprecated” for controlled evolution,
+- marking codes as **“current”** or **“deprecated”** for controlled evolution,
 
 - preservation of full backward compatibility with ISO 14823:2017.
 
 This Extract describes Part 1 of the GDD standard (hereinafter “the described document”) with the specification of the format and the tables of pictograms of individual signs.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
 
 ## Use
 
 The described document defines the encoding of various traffic signs and serves as the technical foundation for systems that need to uniquely identify and process traffic pictograms in digital form. It provides a unified and extensible framework that enables consistent handling of traffic pictograms regardless of national differences or the communication technology used.
 
-The standard is intended especially for developers and architects of ITS systems who implement support for digital traffic signs in C-ITS, V2X communication or navigation services, vehicle manufacturers and their suppliers who integrate pictograms into onboard systems, ADAS and in-vehicle signage, infrastructure operators and traffic centres that publish traffic information through VMS, C-ITS or DATEX II, providers of traffic and navigation services who need interoperable encoding across countries and systems and, manufacturers of end-user devices and applications that display traffic information to users.
+The standard is intended especially for **developers and architects of ITS systems** who implement support for digital traffic signs in C-ITS, V2X communication or navigation services, **vehicle manufacturers and their** **suppliers** who integrate pictograms into onboard systems, ADAS and in-vehicle signage, **infrastructure operators and traffic centres** that publish traffic information through VMS, C-ITS or DATEX II**,** **providers of traffic and navigation services** who need interoperable encoding across countries and systems and, **manufacturers of end-user devices** and applications that display traffic information to users.
 
 ## Related Documents (Selection)
 
@@ -47,37 +47,37 @@ The text also mentions the previous edition ISO 14823:2017, with which this vers
 
 ## Scope
 
-The document defines the structure of the GDD and the rules for encoding pictograms as a unified mechanism for encoding, transmitting, and interpreting graphical elements (traffic signs) within ITS. It does not address the method of their graphical rendering nor the formats of transmission protocols. The standard is intended for use in ITS applications that need to uniquely identify and share the meaning of traffic signs in digital form.
+The document defines the structure of the **GDD** and the rules for encoding pictograms as a unified mechanism for encoding, transmitting, and interpreting graphical elements (traffic signs) within ITS. It does not address the method of their graphical rendering nor the formats of transmission protocols. The standard is intended for use in ITS applications that need to uniquely identify and share the meaning of traffic signs in digital form.
 
 ## 3 Terms and definitions
 
 This clause defines the basic concepts used within the Graphic Data Dictionary (GDD). It contains a total of 12 terms describing the structure of codes, their meaning and related concepts. The key ones include:
 
-graphic data dictionary – a systematically organised catalogue of pictogram codes used in ITS,
+**graphic data dictionary** – a systematically organised catalogue of pictogram codes used in ITS,
 
-pictogram – a graphic symbol or icon displayed on a static traffic sign or on an IT system display (e.g. VMS), providing travellers with information about traffic conditions, restrictions, or public facilities
+**pictogram** – a graphic symbol or icon displayed on a static traffic sign or on an IT system display (e.g. VMS), providing travellers with information about traffic conditions, restrictions, or public facilities
 
-pictogram code – a combination of a service category code and a pictogram category code, optionally supplemented by a country code (in version 1)
+**pictogram** **code** – a combination of a service category code and a pictogram category code, optionally supplemented by a country code (in version 1)
 
-relative object identifier – an identifier that determines an object by its position within the OID tree relative to a defined root
+**relative** **object identifier** – an identifier that determines an object by its position within the OID tree relative to a defined root
 
-attribute – additional coded information that clarifies the meaning of the pictogram (e.g. direction, distance, time)
+**attribute** – additional coded information that clarifies the meaning of the pictogram (e.g. direction, distance, time)
 
-specialization – a relationship between a general class and its more specific variant that adds additional semantic elements
+**specialization** – a relationship between a general class and its more specific variant that adds additional semantic elements
 
 ## 4 Abbreviations
 
 The clause lists 10 abbreviations used in the document. For the purposes of this Extract, the following are the most important:
 
-ASN.1 Abstract Syntax Notation One, the formal language used to define the structure and encoding of the GDD
+**ASN.1** Abstract Syntax Notation One, the formal language used to define the structure and encoding of the GDD
 
-GDD Graphic Data Dictionary, the dictionary defined by this standard
+**GDD** Graphic Data Dictionary, the dictionary defined by this standard
 
-OID Object Identifier, the identifier used in version 2 for unique identification of pictograms
+**OID** Object Identifier, the identifier used in version 2 for unique identification of pictograms
 
-VMS Variable Message Sign, variable traffic signage capable of displaying pictograms defined in the GDD
+**VMS** Variable Message Sign, variable traffic signage capable of displaying pictograms defined in the GDD
 
-Other terms and abbreviations from the ITS domain can be found in the ITS Terminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
 
 ## 5 Conformance
 
@@ -89,27 +89,27 @@ This clause, one page long, lists ten basic functional requirements for the use 
 
 ## 7 Structure of the pictogram code
 
-This clause, four pages in length, defines two parallel mechanisms for pictograms identification, their hierarchy, and the rules for extension, including the marking of obsolete codes.
+This clause, four pages in length, defines **two parallel mechanisms for pictograms** **identification**, their hierarchy, and the rules for extension, including the marking of obsolete codes.
 
-Clause 7.1 General explains the existence of two versions of the GDD. Version 1 (country code + pictogram code) and Version 2 (relative OID). Both versions are supported in parallel for backward compatibility.
+Clause **7.1 General** explains the existence of two versions of the GDD. **Version 1** (country code + pictogram code) and **Version 2** (relative OID). Both versions are supported in parallel for backward compatibility.
 
-Clause 7.2 Current and deprecated signs define the lifecycle of pictogram codes. All codes must be marked as current or deprecated.
+Clause **7.2 Current and deprecated signs** define the lifecycle of pictogram codes. All codes must be marked as **current** or **deprecated**.
 
-Clause 7.3 Relative object identifier (relative OID) describes the OID hierarchy registered under {joint-iso-itut(2) its(28) gdd(5)} and the way pictograms can be generalized according to the required level of detail. It provides examples showing how an application may generalize a relative OID to distinct levels depending on the needed detail (warning sign: specific animal → general animal → general warning).
+Clause **7.3 Relative object identifier (relative OID)** describes the OID hierarchy registered under `{joint-iso-itut(2) its(28) gdd(5)}` and the way pictograms can be generalized according to the required level of detail. It provides examples showing how an application may generalize a relative OID to distinct levels depending on the needed detail (warning sign: specific animal → general animal → general warning).
 
-Clause 7.4 Country code states that the country code used is the two-letter code according to ISO 3166-1 (version 1).
+Clause **7.4 Country code** states that the country code used is the two-letter code according to **ISO 3166-1** (version 1).
 
-Clause 7.5 Pictogram code and OID contains Table 1, which defines the structure and numbering of pictograms for version 1 in the form “service category → subcategory → nature → sequence number” (e.g. trafficSign (1) + regulatory (2) + mandatory (7) + xx ⇒ {1 2 7 xx}).
+Clause **7.5 Pictogram code and OID** contains **Table 1**, which defines the structure and numbering of pictograms for version 1 in the form **“service category → subcategory → nature → sequence number”** (e.g. `trafficSign (1) + regulatory (2) + mandatory (7) + xx `⇒` {1 2 7 xx}`).
 
 ## 8 Numbering of pictogram codes
 
 The clause, spanning 40 pages, defines the numerical ranges and mnemonics for all pictogram categories and provides the complete list of codes used in the GDD. It consists primarily of extensive code tables.
 
-Clause 8.1 General states that each pictogram is assigned a code and a mnemonic name. The codes are divided according to the type of sign.
+Clause **8.1 General** states that each pictogram is assigned a code and a mnemonic name. The codes are divided according to the type of sign.
 
-Clause 8.2 Mnemonics of the codes describes the rules for forming names in lowerCamelCase, without spaces and without articles. One illustrative example is provided.
+Clause **8.2 Mnemonics of the codes** describes the rules for forming names in lowerCamelCase, without spaces and without articles. One illustrative example is provided.
 
-*Table 1 (excerpt from Table 2 of the standard) Assigning a service category code and pictogram category code to a specific phrase (mnemonic):*
+**Table 1 (excerpt from Table 2 of the standard)** **Assigning a service category code and pictogram category code to a specific phrase (mnemonic):**
 
 <table>
   <tr>
@@ -132,9 +132,9 @@ Clause 8.2 Mnemonics of the codes describes the rules for forming names in lower
 
 The following clauses (8.3–8.9) contain the definitions of codes presented through an extensive table in which each pictogram code is assigned a name and a mnemonic. The codes in the tables are grouped into sets, and the sizes of these sets range from tens to hundreds of pictogram codes, with gaps between the sets reserved for future use.
 
-Clause 8.3 Warning traffic signs (pictogram codes 11111–11999, approximately 9 pages of tables) includes pictograms used to provide advance warning to drivers about dangerous or deteriorated road conditions. These include warnings about obstacles, hazardous sections, animals, weather phenomena, or other situations requiring increased attention.
+Clause **8.3 Warning traffic signs** (pictogram codes 11111–11999, approximately 9 pages of tables) includes pictograms used to provide **advance warning** to drivers about dangerous or deteriorated road conditions. These include warnings about obstacles, hazardous sections, animals, weather phenomena, or other situations requiring increased attention.
 
-Clause 8.4 Regulatory traffic signs (pictogram codes 12111–12999, approximately 10 pages of tables) contains pictograms expressing obligations, prohibitions, and restrictions. The standard divides them into three groups:
+Clause **8.4 Regulatory traffic signs** (pictogram codes 12111–12999, approximately 10 pages of tables) contains pictograms expressing **obligations,** **prohibitions,** **and restrictions**. The standard divides them into three groups:
 
 - signs regulating priority (12111–12399),
 
@@ -142,7 +142,7 @@ Clause 8.4 Regulatory traffic signs (pictogram codes 12111–12999, approximatel
 
 - mandatory signs (12711–12999).
 
-Clause 8.5 Guidance traffic signs (pictogram codes 13111–13999, approximately 11 pages of tables) includes pictograms providing navigational, directional, and general informational content. The standard divides them into six subgroups:
+Clause **8.5 Guidance traffic signs** (pictogram codes 13111–13999, approximately 11 pages of tables) includes pictograms providing navigational, directional, and general informational content. The standard divides them into six subgroups:
 
 - advance directional information (13111–13399),
 
@@ -156,15 +156,15 @@ Clause 8.5 Guidance traffic signs (pictogram codes 13111–13999, approximately 
 
 - identification of places and roads (13811–13999).
 
-Clause 8.6 Public facilities (pictogram codes 21111–21999, approximately 3 pages of tables) contains pictograms indicating public services and facilities such as parking areas, fuel stations, restaurants, hospitals, toilets, etc.
+Clause **8.6 Public facilities** (pictogram codes 21111–21999, approximately 3 pages of tables) contains pictograms indicating public services and facilities such as parking areas, fuel stations, restaurants, hospitals, toilets, etc.
 
-Clause 8.7 Ambient conditions (pictogram codes 31111–31999, approximately 2 pages of tables) includes pictograms indicating weather and other environmental conditions that may affect traffic (e.g. rain, fog, wind, snow).
+Clause **8.7 Ambient conditions** (pictogram codes 31111–31999, approximately 2 pages of tables) includes pictograms indicating weather and other environmental conditions that may affect traffic (e.g. rain, fog, wind, snow).
 
-Clause 8.8 Road conditions (pictogram codes 32111–32999, approximately 1 page of tables) contains pictograms informing about road surface conditions and events along the route (e.g. accidents, congestion, closures, slippery road).
+Clause **8.8 Road conditions** (pictogram codes 32111–32999, approximately 1 page of tables) contains pictograms informing about road surface conditions and events along the route (e.g. accidents, congestion, closures, slippery road).
 
 ## Annex A – ASN.1 description of GDD (version 2)
 
-This annex contains a one-paragraph reference to the complete formal definition of GDD version 2 in ASN.1, maintained at: https://standards.iso.org/iso/14823/-1/ed-1/en/
+This annex contains a one-paragraph reference to the complete formal definition of GDD version 2 in ASN.1, maintained at:
 
 ## Annex B – Attributes of GDD (version 2)
 

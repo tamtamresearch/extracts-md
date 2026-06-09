@@ -15,7 +15,7 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 This technical standard (hereinafter also referred to as the "described document") specifies the application interface for electronic fee collection (EFC) systems that utilize dedicated short-range communication (DSRC). Specifically, it establishes the technical conditions for the EFC transaction model, EFC functions, and EFC data attributes from which an EFC transaction can be created in a DSRC environment.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
 
 ## Usage
 
@@ -37,7 +37,7 @@ The described document specifies the application interface for electronic fee co
 
 ![Figure 1 – Scope of the original document (Fig. 1 of the source standard)](fig-1.png)
 
-*Figure 1 – Scope of the original document (Fig. 1 of the source standard)*
+- **Figure 1 – Scope** **of the original document (Fig.** **1 of the** **source** **standard)**
 
 ## Related Documents (Selection)
 
@@ -51,27 +51,27 @@ The described document refers to 12 technical standards, the most important of w
 
 This clause contains 17 terms and definitions related to the described document, the most important of which are:
 
-attribute – an addressed data packet consisting of one or a sequence of multiple data elements
+**attribute** – an addressed data packet consisting of one or a sequence of multiple data elements
 
-on-board equipment – equipment installed in a vehicle performing the required EFC functions
+**on-board** **equipment** – equipment installed in a vehicle performing the required EFC functions
 
-roadside equipment – equipment located along the infrastructure performing the required EFC functions
+**roadside** **equipment** – equipment located along the infrastructure performing the required EFC functions
 
-transaction – a complete exchange of information between roadside equipment (RSE) and on-board equipment (OBE)
+**transaction** – a complete exchange of information between roadside equipment (RSE) and on-board equipment (OBE)
 
 ## 4 Abbreviations
 
 This clause contains 35 abbreviations related to the described document, the most important of which are the following:
 
-DSRC dedicated short-range communications
+**DSRC** dedicated short-range communications
 
-EFC electronic fee collection system; electronic fee collection
+**EFC** electronic fee collection system; electronic fee collection
 
-OBE on-board equipment
+**OBE** on-board equipment
 
-RSE roadside equipment
+**RSE** roadside equipment
 
-Other terms and abbreviations from the ITS domain can be found in the ITS Terminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
 
 ## 5 DSRC Application Interface Architecture
 
@@ -91,7 +91,7 @@ During the transaction phase, the services identified within the initialization 
 
 This clause, spanning 2 pages, describes the DSRC application interface functions defined for the EFC application. A total of 16 functions are described here, which are listed in the following table. Each function consists of a pair of service primitives, i.e., a request and a response, the parameters of which are described in detail in this clause.
 
-*Table 1 – Overview of DSRC application interface functions (Tab. 1 of the source standard)*
+**Table 1 – Overview of DSRC application interface functions (Tab.** **1 of the** **source** **standard)**
 
 ![Table 1 – Overview of DSRC application interface functions (Tab. 1 of the source standard)](fig-2.png)
 
@@ -135,7 +135,7 @@ This annex aims to demonstrate the concept of various transactions and show how 
 
 ![Figure 2 – EFC read-only transaction (Fig. C.1 of the source standard)](fig-3.png)
 
-*Figure 2 – EFC read-only transaction (Fig. C.1 of the source standard)*
+**Figure 2 – EFC read-only transaction (Fig.** **C.1 of the** **source standard)**
 
 ## Annex D (normative) – Mapping Table Between Character Sets
 
@@ -145,7 +145,7 @@ Annex D, spanning 1 page, establishes mapping rules for converting characters of
 
 Annex E, spanning 3 pages, establishes mapping rules between attributes recorded in the vehicle registration certificate and the EFC attributes defined by this described document. The aim of this annex is to facilitate the personalization of the OBE with vehicle data. For illustration, the mapping for several of these attributes is provided below.
 
-*Table 2 – Mapping table for vehicle attributes (part of the table E.1 of the original document)*
+**Table 2 – Mapping table for vehicle attributes (part of the table E.1 of the original document)**
 
 ![Table 2 – Mapping table for vehicle attributes (part of the table E.1 of the original document)](fig-4.png)
 

@@ -14,13 +14,13 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 ## Introduction
 
-The ISO/TS 22726 series was created in response to the need to unify the way static map data for automated driving (ADS) are represented and stored. Modern vehicles with a high degree of automation require extremely precise, consistent, and rapidly accessible map data that link detailed descriptions of infrastructure with dynamic traffic information. Existing standards — such as ISO 14296 or GDF 5.1 - cover navigation or data exchange between providers, but they are not optimized for runtime access in onboard systems nor for representing detailed elements such as lanes, their topology, precise geometries, or relationships to traffic events.
+The ISO/TS 22726 series was created in response to the need to unify the way **static map data for automated driving (ADS)** are represented and stored. Modern vehicles with a high degree of automation require extremely precise, consistent, and rapidly accessible map data that link detailed descriptions of infrastructure with dynamic traffic information. Existing standards — such as ISO 14296 or GDF 5.1 - cover navigation or data exchange between providers, but they are not optimized for **runtime access in onboard systems** nor for representing detailed elements such as lanes, their topology, precise geometries, or relationships to traffic events.
 
 ISO/TS 22726-1 therefore defines the logical data model and database structure for storing and directly querying detailed static map entities. ISO/TS 22726-2 builds on this model and specifies physical data structures and implementation rules so that the model can be deployed in databases used by vehicles, backends and map service providers. Together, they form the foundational framework for the next generation of high-precision maps for automated driving.
 
 This Extract describes Part 1 of the standard (hereinafter “the described document”).
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
 
 ## Use
 
@@ -34,37 +34,37 @@ The described document specifies the architecture and logical data model of stat
 
 ## Related Documents (Selection)
 
-The described document lists one normative reference ISO/IEC 19501 UML version 1.4.2
+The described document lists one normative reference **ISO/IEC 19501** UML version 1.4.2
 
 ## 3 Terms and Definitions
 
 The clause contains 11 terms and definitions, the most important of which are:
 
-feature – database representation of a real-world object
+**feature** – database representation of a real-world object
 
-belt – configuration concept for defining an area bounded by side lines and terminal lines, characterized by directions, and represented by one or more linear axes when skeletonized
+**belt** – configuration concept for defining an area bounded by side lines and terminal lines, characterized by directions, and represented by one or more linear axes when skeletonized
 
 The following terms are also used in the standard and in the extract:
 
-package – logical unit of the model that groups related data elements into a single whole and defines their shared namespace
+**package** – logical unit of the model that groups related data elements into a single whole and defines their shared namespace
 
-subpackage – package hierarchically placed inside another package, used for finer structuring of its content
+**subpackage** – package hierarchically placed inside another package, used for finer structuring of its content
 
 ## 4 Abbreviations
 
 This clause lists 33 abbreviations, the most important of which are:
 
-ADS automated driving system
+**ADS** automated driving system
 
-MHAD map for highly automated driving
+**MHAD** map for highly automated driving
 
-RBE RoadBeltElement
+**RBE** RoadBeltElement
 
-LBE LaneBeltElement
+**LBE** LaneBeltElement
 
-RSE RoadStructuresAndEquipment
+**RSE** RoadStructuresAndEquipment
 
-Other terms and abbreviations from the ITS domain can be found in the ITS Terminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
 
 ## 5 Document structure and conformance
 
@@ -91,12 +91,12 @@ It describes the relationships between road features and road structure, and equ
 ![Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) 
 (Fig. 7 of the source standard)](fig-1.png)
 
-*Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) 
-(Fig. 7 of the source standard)*
+**Figure 1** **– Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3)** **
+(Fig. 7 of the** **source** **standard)**
 
 ## 9 MHADCommonProperty package
 
-This clause, 75 pages in length, describes the MHADCommonProperty package, which defines the common data classes and relationships used within the MHAD data model. The package is divided into three main subpackages GeneralCommonProperty, CommonPhysicalCharacteristics and TrafficRegulation, described in separate subclauses. Each subpackage contains a class diagram and detailed descriptions of each class.
+This clause, 75 pages in length, describes the **MHADCommonProperty** package, which defines the common data classes and relationships used within the MHAD data model. The package is divided into three main subpackages **GeneralCommonProperty, CommonPhysicalCharacteristics and TrafficRegulation**, described in separate subclauses. Each subpackage contains a class diagram and detailed descriptions of each class.
 
 The detailed class descriptions (in tabular form) include:
 
@@ -108,7 +108,7 @@ The detailed class descriptions (in tabular form) include:
 
 The stereotype of an attribute may be a primitive type (a Boolean value), another complex class, or a class containing only an enumeration of values. An example of a tabular class definition for the class VerticalGradient from the CommonPhysicalCharacteristics package is shown in the following table.
 
-*Table 1 – Definition of the class VerticalGradient (Tab. 32 of the source standard)*
+**Table 1** **– Definition of the class** **VerticalGradient** **(Tab.** **32 of the** **source** **standard)**
 
 <table>
   <tr>
@@ -154,21 +154,21 @@ TrafficRegulation is linked to belt features and manoeuvre trajectories at the l
 
 ## 10 RoadBeltNetwork package
 
-This clause, spanning 61 pages, describes the model of the road belt network. RoadBeltNetwork consists of the following subpackages: RoadBeltNetworkFeature, RoadBeltFeatureProperty, and RoadBeltSegmentProperty. It defines the class diagram of this package and the detailed rules for modelling the RoadBeltNetwork, that is, how the classes describing intersections, manoeuvre trajectories at the road level, and the elements and segments of the road belt are constructed and interconnected, including examples.
+This clause, spanning 61 pages, describes the model of the **road belt network**. RoadBeltNetwork consists of the following subpackages: **RoadBeltNetworkFeature**, **RoadBeltFeatureProperty**, and **RoadBeltSegmentProperty**. It defines the class diagram of this package and the detailed rules for modelling the RoadBeltNetwork, that is, how the classes describing intersections, manoeuvre trajectories at the road level, and the elements and segments of the road belt are constructed and interconnected, including examples.
 
 The individual classes contained in the package are described in a manner similar to Clause 9.
 
 ![Figure 2 – Diagram of RoadBeltElement and IntersectionBelt (Fig. 16 of the source standard)](fig-2.png)
 
-*Figure 2 – Diagram of RoadBeltElement and IntersectionBelt (Fig. 16 of the source standard)*
+**Figure 2** **–** **Diagram of** **RoadBeltElement** **and** **IntersectionBelt** **(Fig. 16 of the** **source** **standard)**
 
 ## 11 LaneBeltNetwork package
 
-This clause, spanning 35 pages, describes the model of lane belt networks. LaneBeltNetwork models the lane-level structure with an analogous structure to the road-level model, but with higher granularity. It consists of the following subpackages: LaneBeltNetworkFeature, LaneBeltFeatureProperty, and LaneBeltSegmentProperty. It defines the class diagram of this package and the detailed rules for modelling the LaneBeltNetwork, that is, how the classes describing the elements and connections of the lane belt are constructed and interconnected, and how manoeuvre trajectories at the lane level are modelled.
+This clause, spanning 35 pages, describes the model of **lane belt networks**. LaneBeltNetwork models the lane-level structure with an analogous structure to the road-level model, but with higher granularity. It consists of the following subpackages: **LaneBeltNetworkFeature**, **LaneBeltFeatureProperty**, and **LaneBeltSegmentProperty**. It defines the class diagram of this package and the detailed rules for modelling the LaneBeltNetwork, that is, how the classes describing the elements and connections of the lane belt are constructed and interconnected, and how manoeuvre trajectories at the lane level are modelled.
 
 ![Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B) (Fig. 23 of the source standard)](fig-3.png)
 
-*Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B) (Fig. 23 of the source standard)*
+**Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B)** **(Fig. 23 of the** **source** **standard)**
 
 ## 12 RoadStructureAndEquipment package
 
@@ -178,7 +178,7 @@ RoadStructureAndEquipment consists of the following subpackages: RoadEquipment, 
 
 It defines the list of elements (see the example in the following table) and indicates to which preceding network concept they belong.
 
-*Table 2 – Excerpt from Tab. 172 of the source standard: Overview of RSE categories*
+**Table 2** **– Excerpt from Tab.** **172 of the** **source standard: Overview of RSE categories**
 
 <table>
   <tr>
@@ -207,7 +207,7 @@ At the level of each subpackage, the clause contains a class diagram and a detai
 
 ## 13 Relationship between MHAD and dynamic information
 
-This clause, in two sentences, notes that dynamic information defined in TS 22726-2 may refine MHAD through the RoadNetworkElement interface and refers to the diagram in Clause 9.2.
+This clause, in two sentences, notes that dynamic information defined in TS 22726-2 may refine MHAD through the **RoadNetworkElement** interface and refers to the diagram in Clause 9.2.
 
 ## Annex A (normative) – Abstract test suite
 

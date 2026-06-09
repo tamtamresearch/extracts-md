@@ -15,7 +15,7 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 This standard, consisting of a single part (hereinafter referred to as the "described document"), defines the architecture for tolling environments. In these environments, a user who has a contract with only one Service Provider can use their vehicle across various Toll Domains operated by different Toll Chargers.
 
-Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.
+*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
 
 ## Usage
 
@@ -37,33 +37,33 @@ ISO 17427-1: Intelligent Transport Systems – Cooperative ITS – Part 1: Roles
 
 This clause contains 20 terms, the most important of which are the following:
 
-Interoperability – The ability of systems to exchange information and utilize that information.
+**Interoperability** – The ability of systems to exchange information and utilize that information.
 
-tariff scheme – A set of rules required to correctly determine the toll amount for a vehicle using road infrastructure within a toll domain
+**tariff** **scheme** – A set of rules required to correctly determine the toll amount for a vehicle using road infrastructure within a toll domain
 
-toll domain – An area or part of the road infrastructure subject to a toll regime
+**toll** **domain** – An area or part of the road infrastructure subject to a toll regime
 
-toll regime – A set of rules, including enforcement mechanisms, governing toll collection within a specific toll domain
+**toll** **regime** – A set of rules, including enforcement mechanisms, governing toll collection within a specific toll domain
 
-toll scheme – The organizational perspective of a toll regime, including roles and their relationships
+**toll** **scheme** – The organizational perspective of a toll regime, including roles and their relationships
 
 ## 4 Abbreviations
 
 This clause contains 17 abbreviations, the most important of which are the following:
 
-DSRC Dedicated Short-Range Communication
+**DSRC** Dedicated Short-Range Communication
 
-EETS European Electronic Toll Service
+**EETS** European Electronic Toll Service
 
-GNSS Global Navigation Satellite System
+**GNSS** Global Navigation Satellite System
 
-OBU On-Board Unit
+**OBU** On-Board Unit
 
-RSE Road-Side Equipment
+**RSE** Road-Side Equipment
 
-TC Toll Charger
+**TC** Toll Charger
 
-Other terms and abbreviations from the ITS domain can be found in the ITS Terminology dictionary (www.itsterminology.org), the StandardLand website (www.standardland.cz) or the OBP platform (www.iso.org/obp).
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
 
 ## 5 EFC Organization: Roles and Objectives
 
@@ -77,7 +77,7 @@ The distribution of these roles is illustrated in Figure 1 (blue denotes externa
 
 ![Figure 1 – Organizational objects in EFC (Fig. 1 of the source standard)](fig-1.png)
 
-*Figure 1 – Organizational objects in EFC (Fig. 1 of the source standard)*
+**Figure 1 – Organizational** **objects in EFC (Fig.** **1 of the** **source standard)**
 
 ## 6 Internal Roles within the EFC Environment
 
@@ -93,13 +93,13 @@ This clause, spanning five pages, describes various internal roles within the EF
 
 ![Figure 2 – Roles in toll environment (Fig. 2 of the source standard)](fig-2.png)
 
-*Figure 2 – Roles in toll environment (Fig. 2 of the source standard)*
+**Figure 2 – Roles in toll environment (Fig.** **2 of the** **source standard)**
 
 Additionally, this clause provides a summary of the individual roles in terms of their responsibilities and mutual interactions (see Figure 3).
 
 ![Figure 3 – Roles and their interactions and responsibilities (Fig. 3 of the source standard)](fig-3.png)
 
-*Figure 3 – Roles and their interactions and responsibilities (Fig. 3 of the source standard)*
+**Figure 3 – Roles and their interactions and responsibilities (Fig.** **3 of the** **source standard)**
 
 ## 7 Services
 
@@ -114,8 +114,8 @@ This clause, spanning 18 pages, provides a description of the services within th
 ![Figure 4 – Services including toll charger, interoperability manager and service provider 
 (Fig. 5 of the source standard)](fig-4.png)
 
-*Figure 4 – Services including toll charger, interoperability manager and service provider 
-(Fig. 5 of the source standard)*
+**Figure 4 – Services including toll charger, interoperability manager and service provider** **
+(Fig.** **5 of the** **source standard)**
 
 ## 8 Physical Architecture of EFC
 
@@ -129,7 +129,7 @@ Annex A spanning 3 pages, describes the principle of mapping the EFC architectur
 
 Annex B, spanning 6 pages, provides a viewpoint on the EFC architecture within the ODP (Open Distributed Processing) standard, which defines a total of 5 perspectives/viewpoints. Within this viewpoint, individual information classes (including information objects) are defined, which are communicated between the individual roles of the architecture (see Table 1).
 
-*Table 1 – Information classes (Tab. 8 of the source standard)*
+**Table 1 – Information classes (Tab.** **8 of the** **source standard)**
 
 ![Table 1 – Information classes (Tab. 8 of the source standard)](fig-5.png)
 
