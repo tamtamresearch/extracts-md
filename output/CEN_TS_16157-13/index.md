@@ -3,10 +3,10 @@ published: 2025
 pages: 67
 title: "CEN/TS 16157-13 - Extract"
 standard: "CEN/TS 16157-13"
-name: "Intelligent transport systems – Traffic management systems – Status, fault and quality requirements"
+name: "Intelligent transport systems – Traffic management systems – Part 13: Status, fault and quality requirements"
 name_1: "Intelligent transport systems"
 name_2: "Traffic management systems"
-name_3: "Status, fault and quality requirements"
+name_3: "Part 13: Status, fault and quality requirements"
 annotation: "This Extract does not replace the technical standard itself; it is only informative material about the standard."
 note: "Note: This Extract presents selected chapters of the described document and retains the original chapter numbering."
 ---
