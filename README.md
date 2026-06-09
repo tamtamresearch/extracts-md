@@ -90,19 +90,21 @@ The repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml
 1. **Runs tests** on every push to `master`
 2. **Converts documents** from Word to Markdown
 3. **Builds the mdBook** static site
-4. **Deploys to GitHub Pages**
+4. **Deploys to `gh-pages` branch**
 
 ### Setup
 
-1. **Enable GitHub Pages** in repository settings:
-   - Go to Settings → Pages
-   - Source: "GitHub Actions"
+1. **Push to master** — the workflow runs automatically and creates a `gh-pages` branch
 
-2. **Push to master** — the workflow runs automatically
+2. **Enable GitHub Pages** in repository settings:
+   - Go to Settings → Pages
+   - Source: **Deploy from a branch**
+   - Branch: **gh-pages** / **/ (root)**
+   - Save
 
 3. **Access the site** at: `https://<username>.github.io/<repository>/`
 
-The workflow ensures that only tested, validated content is deployed.
+The workflow ensures that only tested, validated content is deployed to the `gh-pages` branch.
 
 ### Tasks
 
