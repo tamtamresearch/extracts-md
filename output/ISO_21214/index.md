@@ -62,7 +62,7 @@ The standard introduces 36 new terms. Other terms and abbreviations are provided
 
 The standard contains 82 abbreviations. Example abbreviations:
 
-**CIR** circular QAM ***(a type of quadrature amplitude modulationcircular QAM)*
+**CIR** circular QAM *(a type of quadrature amplitude modulationcircular QAM)*
 
 **HHH** Hirt, Hassner, Heise (inventors of the HHH(1,13) code) *(packet coding and modulation developed specifically for IR communication)*
 
@@ -72,11 +72,11 @@ The standard contains 82 abbreviations. Example abbreviations:
 
 **TDMA** time division multiple access
 
-***θH*** **horizontal opening angle
+***θH*** horizontal opening angle
 
-***θV*** **vertical opening angle
+***θV*** vertical opening angle
 
-*NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP platform ().*
+*NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (*[www.itsterminology.org](http://www.itsterminology.org/)*), the StandardLand website (*[www.standardland.cz](http://www.standardland.cz/)*) or the OBP platform (*[www.iso.org/obp](http://www.iso.org/obp)*).*
 
 ## 6 Requirements: Transmitter and Receiver Parameters
 
@@ -139,8 +139,7 @@ This clause, spanning 3 pages, defines the geometrical and spatial requirements 
 
 ![](fig-2.png)
 
-**Figure 1 – Horizontal opening and vertical opening angles in IR communication 
-(Fig. 5 of the source standard)**
+**Figure 1 – Horizontal opening and vertical opening angles in IR communication (Fig. 5 of the source standard)**
 
 ## 9 Frames and Windows
 

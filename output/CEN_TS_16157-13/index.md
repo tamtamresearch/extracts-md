@@ -87,7 +87,7 @@ The clause contains 2 abbreviations relevant to this standard, to which we also 
 
 **OID** Object Identifier
 
-*NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP platform ().*
+*NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (*[www.itsterminology.org](http://www.itsterminology.org/)*), the StandardLand website (*[www.standardland.cz](http://www.standardland.cz/)*) or the OBP platform (*[www.iso.org/obp](http://www.iso.org/obp)*).*
 
 ## 6 The FaultAndStatus namespace
 
@@ -280,8 +280,7 @@ This annex (18 pages, 25 tables) provides a data dictionary identifying the defi
   </tr>
 </table>
 
-**Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum” 
-(Tab. A.19 of the source standard)**
+**Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum” (Tab. A.19 of the source standard)**
 
 <table>
   <tr>

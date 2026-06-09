@@ -77,7 +77,7 @@ The clause lists 10 abbreviations used in the document. For the purposes of this
 
 **VMS** Variable Message Sign, variable traffic signage capable of displaying pictograms defined in the GDD
 
-Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 Conformance
 
@@ -164,7 +164,7 @@ Clause **8.8 Road conditions** (pictogram codes 32111–32999, approximately 1 p
 
 ## Annex A – ASN.1 description of GDD (version 2)
 
-This annex contains a one-paragraph reference to the complete formal definition of GDD version 2 in ASN.1, maintained at:
+This annex contains a one-paragraph reference to the complete formal definition of GDD version 2 in ASN.1, maintained at: [https://standards.iso.org/iso/14823/-1/ed-1/en/](https://standards.iso.org/iso/14823/-1/ed-1/en/)
 
 ## Annex B – Attributes of GDD (version 2)
 

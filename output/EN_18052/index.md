@@ -96,7 +96,7 @@ Clause 4 contains 43 symbols and abbreviations. In this extract, the following a
   </tr>
 </table>
 
-Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 Conformity with this Standard
 

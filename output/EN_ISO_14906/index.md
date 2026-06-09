@@ -71,7 +71,7 @@ This clause contains 35 abbreviations related to the described document, the mos
 
 **RSE** roadside equipment
 
-Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 DSRC Application Interface Architecture
 

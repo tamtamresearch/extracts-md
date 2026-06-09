@@ -44,8 +44,7 @@ The following referenced documents are indispensable for the application of this
 
 ISO 2575 — *Road vehicles — Symbols for controls, indicators and tell-tales*
 
-UN/ECE Regulation No. 13-H — *Uniform provisions concerning the approval of passenger cars with 
-regard to braking*
+UN/ECE Regulation No. 13-H — *Uniform provisions concerning the approval of passenger cars with regard to braking*
 
 ## 3 Terms and definitions
 
@@ -75,7 +74,7 @@ Additional ITS-related terminology may be found in dedicated ITS terminology dat
 
 The standard defines 26 symbols and abbreviated terms related to longitudinal control, time-gap calculation, detection range, acceleration and deceleration parameters, curve radius, operational speeds and sensor characteristics.
 
-Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 Classification
 
@@ -93,21 +92,21 @@ This chapter describes the functional design of the system and its behaviour and
 
 ### 6.1 Basic control strategy
 
-ACC systems shall provide the following minimum control behaviour and state transitions:
+**ACC systems shall provide the following minimum control behaviour and state transitions:**
 
-when ACC is active, vehicle speed shall be controlled automatically either to maintain clearance to a forward vehicle or to maintain the set speed, whichever is lower;
+**when ACC is active, vehicle speed shall be controlled automatically either to maintain clearance to a forward vehicle or to maintain the set speed, whichever is lower;**
 
-transition between speed-control and following-control modes shall be performed automatically by the ACC system;
+**transition between speed-control and following-control modes shall be performed automatically by the ACC system;**
 
-the steady-state clearance may be adjustable either by the system or by the driver;
+**the steady-state clearance may be adjustable either by the system or by the driver;**
 
-if more than one forward vehicle is present, the target vehicle shall be selected automatically;
+**if more than one forward vehicle is present, the target vehicle shall be selected automatically;**
 
-for FSRA systems, transition from following control to hold state shall occur after vehicle standstill;
+**for FSRA systems, transition from following control to hold state shall occur after vehicle standstill;**
 
-for LSRA systems, activation of ACC shall be inhibited below the minimum operational speed.
+**for LSRA systems, activation of ACC shall be inhibited below the minimum operational speed.**
 
-The standard also defines ACC system states and transitions between “ACC off”, “ACC stand-by”, “ACC speed control”, “ACC following control” and “FSRA hold” states (see Figure 2).
+**The standard also defines ACC system states and transitions between “ACC off”, “ACC stand-by”, “ACC speed control”, “ACC following control” and “FSRA hold” states (see Figure 2).**
 
 ![Figure 2 — ACC states and transitions (Fig. 2 of the source standard)](fig-3.png)
 
@@ -123,15 +122,15 @@ The requirements related to automatic transitions between ACC control modes and 
 
 The standard specifies the following operational requirements (in **11** **subclauses):**
 
-the ACC system shall provide means for the driver to select a desired set speed;
+**the ACC system shall provide means for the driver to select a desired set speed;**
 
-driver braking input shall deactivate ACC functionality if the driver braking demand exceeds the ACC braking demand;
+**driver braking input shall deactivate ACC functionality if the driver braking demand exceeds the ACC braking demand;**
 
-accelerator override by the driver shall always have priority over ACC engine power control;
+**accelerator override by the driver shall always have priority over ACC engine power control;**
 
-ACC systems may automatically adjust the selected time gap according to environmental conditions such as poor weather;
+**ACC systems may automatically adjust the selected time gap according to environmental conditions such as poor weather;**
 
-if both conventional cruise control and ACC are available, automatic switching between these systems shall not occur.
+**if both conventional cruise control and ACC are available, automatic switching between these systems shall not occur.**
 
 #### 6.3.2 Display elements
 
@@ -143,15 +142,15 @@ Chapter **6.3.3 Symbols** notes that standardized symbols according to ISO 2575 
 
 The standard defines operational limits for:
 
-minimum operational speed;
+**minimum operational speed;**
 
-maximum automatic acceleration;
+**maximum automatic acceleration;**
 
-maximum automatic deceleration;
+**maximum automatic deceleration;**
 
-maximum negative jerk;
+**maximum negative jerk;**
 
-behaviour at very short distances to the target vehicle.
+**behaviour at very short distances to the target vehicle.**
 
 ### 6.5 Activation of brake lights
 
@@ -179,9 +178,9 @@ Testing shall be performed on a flat and dry asphalt or concrete surface under s
 
 The standard defines test targets for:
 
-infrared LIDAR systems;
+**infrared LIDAR systems;**
 
-millimetre-wave RADAR systems.
+**millimetre-wave RADAR systems.**
 
 Radar test targets are specified using Radar Cross Section (RCS) values.
 

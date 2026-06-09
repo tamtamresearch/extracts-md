@@ -65,7 +65,7 @@ This part of the technical standard defines 13 terms and 23 abbreviations, the k
 
 **EV** electric vehicle
 
-Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 4 Supported EV-based DR services
 
@@ -87,7 +87,7 @@ Chapter 5 is 5 pages long and describes the requirements for the main actors, as
 
 ![Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service](fig-2.png)
 
-**Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service**
+**Figure 2 (Figure 6 of the source document) ­– Requirement of each actor for EV-based DR service**
 
 ## 6 Requirements for communication
 

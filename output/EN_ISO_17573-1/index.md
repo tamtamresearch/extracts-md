@@ -63,7 +63,7 @@ This clause contains 17 abbreviations, the most important of which are the follo
 
 **TC** Toll Charger
 
-Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 EFC Organization: Roles and Objectives
 
@@ -114,8 +114,7 @@ This clause, spanning 18 pages, provides a description of the services within th
 ![Figure 4 – Services including toll charger, interoperability manager and service provider 
 (Fig. 5 of the source standard)](fig-4.png)
 
-**Figure 4 – Services including toll charger, interoperability manager and service provider 
-(Fig. 5 of the source standard)**
+**Figure 4 – Services including toll charger, interoperability manager and service provider (Fig. 5 of the source standard)**
 
 ## 8 Physical Architecture of EFC
 

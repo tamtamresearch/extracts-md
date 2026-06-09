@@ -33,7 +33,7 @@ CAPTION_RE = re.compile(
 )
 CAPTION_STYLES = {"Caption", "NadpisTabObr"}
 LIST_STYLES = {"List Paragraph", "Seznam v normě"}
-NOTE_STYLES = {"Poznámka"}
+NOTE_STYLES = set()  # Poznámka removed: authors must use proper styles
 CT_EXT = {
     "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif",
     "image/tiff": "tif", "image/bmp": "bmp",
@@ -227,38 +227,135 @@ def table_html(table, imgs: ImgState) -> str:
 
 # ---------- paragraph rendering ----------
 
-def render_paragraph_runs(p) -> str:
-    """Convert paragraph runs to Markdown, preserving inline formatting."""
+def _extract_run_text(run_elem) -> str:
+    """Extract text from a Word run element, handling special elements.
     
-    # First pass: merge consecutive runs with identical formatting
-    # This handles Word's tendency to split formatted text into per-word or per-character runs
-    merged_runs = []
-    for run in p.runs:
-        if not run.text:
-            continue
-        
-        is_code = run.font.name and run.font.name.lower() in MONOSPACE_FONTS
-        
-        # Check if we can merge with the previous run
-        if merged_runs and \
-           merged_runs[-1]['bold'] == run.bold and \
-           merged_runs[-1]['italic'] == run.italic and \
-           merged_runs[-1]['code'] == is_code:
-            # Merge with previous run
-            merged_runs[-1]['text'] += run.text
-        else:
-            # New run with different formatting
-            merged_runs.append({
-                'text': run.text,
-                'bold': run.bold,
-                'italic': run.italic,
+    Word stores text in <w:t> elements but uses special elements for:
+    - <w:noBreakHyphen /> non-breaking hyphen (-)
+    - <w:softHyphen /> soft hyphen (optional line break)
+    - <w:tab /> tab character
+    """
+    text_parts = []
+    for elem in run_elem:
+        if elem.tag == qn('w:t'):
+            if elem.text:
+                text_parts.append(elem.text)
+        elif elem.tag == qn('w:noBreakHyphen'):
+            text_parts.append('-')
+        elif elem.tag == qn('w:softHyphen'):
+            text_parts.append('\u00AD')  # soft hyphen character
+        elif elem.tag == qn('w:tab'):
+            text_parts.append('\t')
+    return ''.join(text_parts)
+
+
+def render_paragraph_runs(p) -> str:
+    """Convert paragraph runs to Markdown, preserving inline formatting.
+    
+    Handles hyperlinks by traversing the paragraph's XML structure directly,
+    since python-docx's p.runs iterator doesn't include hyperlink text.
+    Converts Word hyperlinks to Markdown link syntax: [text](url)
+    """
+    
+    # Extract runs from paragraph XML, including those inside hyperlinks
+    all_runs = []
+    
+    for child in p._element:
+        if child.tag == qn('w:hyperlink'):
+            # Get the URL from the relationship
+            r_id = child.get(qn('r:id'))
+            url = None
+            if r_id:
+                try:
+                    rel = p.part.rels[r_id]
+                    url = rel.target_ref
+                except (KeyError, AttributeError):
+                    pass
+            
+            # Extract all text from runs inside the hyperlink
+            link_text_parts = []
+            for run_elem in child.findall(qn('w:r')):
+                text = _extract_run_text(run_elem)
+                if text:
+                    link_text_parts.append(text)
+            
+            link_text = ''.join(link_text_parts)
+            if not link_text:
+                continue
+            
+            # Create Markdown link if we have a URL, otherwise just use the text
+            if url:
+                # Create a special run that's already formatted as a link
+                all_runs.append({
+                    'text': f'[{link_text}]({url})',
+                    'bold': False,
+                    'italic': False,
+                    'code': False,
+                    'is_link': True  # Mark as already formatted
+                })
+            else:
+                # No URL found, treat as regular text
+                all_runs.append({
+                    'text': link_text,
+                    'bold': False,
+                    'italic': False,
+                    'code': False
+                })
+        elif child.tag == qn('w:r'):
+            # Regular run (not in hyperlink)
+            text = _extract_run_text(child)
+            if not text:
+                continue
+            
+            # Check formatting properties
+            rPr = child.find(qn('w:rPr'))
+            bold = rPr is not None and rPr.find(qn('w:b')) is not None
+            italic = rPr is not None and rPr.find(qn('w:i')) is not None
+            
+            # Check for monospace font
+            is_code = False
+            if rPr is not None:
+                font_elem = rPr.find(qn('w:rFonts'))
+                if font_elem is not None:
+                    font_name = font_elem.get(qn('w:ascii'), '').lower()
+                    is_code = font_name in MONOSPACE_FONTS
+            
+            all_runs.append({
+                'text': text,
+                'bold': bold,
+                'italic': italic,
                 'code': is_code
             })
     
-    # Second pass: apply Markdown formatting
+    # Merge consecutive runs with identical formatting
+    merged_runs = []
+    for run in all_runs:
+        # Don't merge links - they're already fully formatted
+        if run.get('is_link'):
+            merged_runs.append(run)
+            continue
+        
+        # Check if we can merge with the previous run
+        if merged_runs and \
+           not merged_runs[-1].get('is_link') and \
+           merged_runs[-1]['bold'] == run['bold'] and \
+           merged_runs[-1]['italic'] == run['italic'] and \
+           merged_runs[-1]['code'] == run['code']:
+            # Merge with previous run
+            merged_runs[-1]['text'] += run['text']
+        else:
+            # New run with different formatting
+            merged_runs.append(run)
+    
+    # Apply Markdown formatting
     chunks = []
     for run in merged_runs:
         text = run['text']
+        
+        # Skip formatting for links - they're already formatted
+        if run.get('is_link'):
+            chunks.append(text)
+            continue
         
         # Move leading/trailing spaces outside of formatting markers
         # This prevents broken Markdown like "**text **" or "** text**"
@@ -272,6 +369,11 @@ def render_paragraph_runs(p) -> str:
             if text and text[-1] in ' \t':
                 trailing_space = text[-1]
                 text = text[:-1]
+        
+        # Skip empty text after stripping spaces (e.g., a run that's only spaces)
+        if not text:
+            chunks.append(leading_space + trailing_space)
+            continue
         
         # Apply Markdown formatting to the stripped text
         # IMPORTANT: Code takes precedence. If monospace, ignore bold/italic.

@@ -254,17 +254,12 @@ def test_navigation_generation(sample_output_dir, tmp_path):
     
     landing = index_file.read_text(encoding="utf-8")
     assert "# ITS Standard Extracts" in landing, "Landing page missing title"
-    assert "| Standard | Title | Published | Ed. | Pages |" in landing, "Landing page missing table header"
+    assert "An extract does **not** replace the standard itself" in landing, "Landing page missing intro text"
     
-    # Verify all 3 extracts in table
-    assert "CEN/TS 12345" in landing
-    assert "ISO 15622" in landing
-    assert "EN ISO 12855" in landing
-    
-    # Verify metadata columns
-    assert "| 2025 |" in landing
-    assert "| 2018 |" in landing
-    assert "| 2022 |" in landing
+    # Verify all 3 extracts with new format: **[STANDARD:YEAR]**
+    assert "CEN/TS 12345:2025" in landing
+    assert "ISO 15622:2018" in landing
+    assert "EN ISO 12855:2022" in landing
 
 
 @pytest.mark.integration

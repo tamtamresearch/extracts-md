@@ -82,7 +82,7 @@ The technical specification contains 51 abbreviations. The most important includ
 
 **TSC** Traffic Signal Controller
 
-Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP plataform ().
+Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the StandardLand website ([www.standardland.cz](http://www.standardland.cz)) or the OBP plataform ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 General Description (informative)
 

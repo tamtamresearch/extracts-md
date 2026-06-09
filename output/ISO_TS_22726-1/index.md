@@ -64,7 +64,7 @@ This clause lists 33 abbreviations, the most important of which are:
 
 **RSE** RoadStructuresAndEquipment
 
-Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITS Terminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 Document structure and conformance
 
@@ -91,8 +91,7 @@ It describes the relationships between road features and road structure, and equ
 ![Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) 
 (Fig. 7 of the source standard)](fig-1.png)
 
-**Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) 
-(Fig. 7 of the source standard)**
+**Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) (Fig. 7 of the source standard)**
 
 ## 9 MHADCommonProperty package
 

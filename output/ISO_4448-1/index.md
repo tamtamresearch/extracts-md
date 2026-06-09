@@ -61,13 +61,13 @@ This clause lists 12 abbreviations from the field of mobile robots in public spa
 
 **IoT** internet of things
 
-**PMR** public-area mobile robot, **ground-based automated mobile system in public space
+**PMR** public-area mobile robot, ground-based automated mobile system in public space
 
 **PUDO** pickup and drop off
 
 **VRU** vulnerable road user
 
-Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP platform ().
+Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary ([www.itsterminology.org](http://www.itsterminology.org/)), the StandardLand website ([www.standardland.cz](http://www.standardland.cz/)) or the OBP platform ([www.iso.org/obp](http://www.iso.org/obp)).
 
 ## 5 Purpose and justification
 
@@ -84,8 +84,7 @@ Clause 7 is 10 pages long and describes the reasons why standardization is neces
 ![Figure 1 — Example of PMR forms for the distribution of small packages 
 (Source. Urban robotics foundation)](fig-1.png)
 
-**Figure 1 — Example of PMR forms for the distribution of small packages** 
-*(Source. Urban robotics foundation)*
+**Figure 1 — Example of PMR forms for the distribution of small packages** *(Source. Urban robotics foundation)*
 
 Subclause **7.2** describes the need to create a safe space in the public space of the city, where such systems could move, the majority of which is devoted to safety aspects and also to lower operating costs than those associated with robo-vehicles.
 
