@@ -1,6 +1,10 @@
 # ITS Standard Extracts
 
-Convert Microsoft Word *“Extract from the Technical Standard”* documents into
+<!-- Add this badge once pushed to GitHub:
+[![Deploy to GitHub Pages](https://github.com/<username>/<repository>/actions/workflows/deploy.yml/badge.svg)](https://github.com/<username>/<repository>/actions/workflows/deploy.yml)
+-->
+
+Convert Microsoft Word *"Extract from the Technical Standard"* documents into
 clean Markdown — with YAML front-matter, extracted figures and faithful tables —
 and publish them on website for ISO/TC 204. Optionally a searchable [mdBook](https://rust-lang.github.io/mdBook/)
 website can be generated.

@@ -23,6 +23,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install LibreOffice
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice --no-install-recommends
+
       - name: Install mise
         uses: jdx/mise-action@v2
         with:
@@ -41,6 +46,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install LibreOffice
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice --no-install-recommends
 
       - name: Install mise
         uses: jdx/mise-action@v2
