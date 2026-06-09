@@ -1,0 +1,16 @@
+filters:
+  and:
+    - file.folder.startsWith("output")
+    - file.name == "index"
+    - file.ext == "md"
+    - "!standard.isEmpty()"
+views:
+  - type: table
+    name: Table
+    order:
+      - file.name
+      - standard
+      - name_1
+      - name_2
+      - name_3
+      - name
