@@ -20,7 +20,7 @@ ISO/TS 22726-1 therefore defines the logical data model and database structure f
 
 This Extract describes Part 1 of the standard (hereinafter “the described document”).
 
-*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
+*Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.*
 
 ## Use
 
@@ -91,8 +91,8 @@ It describes the relationships between road features and road structure, and equ
 ![Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) 
 (Fig. 7 of the source standard)](fig-1.png)
 
-**Figure 1** **– Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3)** **
-(Fig. 7 of the** **source** **standard)**
+**Figure 1 – Example of the relationship between a road belt (A) with a bridge (B) and a guardrail (C) using anchor positions (1) and projection points (2) and projection lines (3) 
+(Fig. 7 of the source standard)**
 
 ## 9 MHADCommonProperty package
 
@@ -108,7 +108,7 @@ The detailed class descriptions (in tabular form) include:
 
 The stereotype of an attribute may be a primitive type (a Boolean value), another complex class, or a class containing only an enumeration of values. An example of a tabular class definition for the class VerticalGradient from the CommonPhysicalCharacteristics package is shown in the following table.
 
-**Table 1** **– Definition of the class** **VerticalGradient** **(Tab.** **32 of the** **source** **standard)**
+**Table 1 – Definition of the class VerticalGradient (Tab. 32 of the source standard)**
 
 <table>
   <tr>
@@ -160,7 +160,7 @@ The individual classes contained in the package are described in a manner simila
 
 ![Figure 2 – Diagram of RoadBeltElement and IntersectionBelt (Fig. 16 of the source standard)](fig-2.png)
 
-**Figure 2** **–** **Diagram of** **RoadBeltElement** **and** **IntersectionBelt** **(Fig. 16 of the** **source** **standard)**
+**Figure 2 – Diagram of RoadBeltElement and IntersectionBelt (Fig. 16 of the source standard)**
 
 ## 11 LaneBeltNetwork package
 
@@ -168,7 +168,7 @@ This clause, spanning 35 pages, describes the model of **lane belt networks**. L
 
 ![Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B) (Fig. 23 of the source standard)](fig-3.png)
 
-**Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B)** **(Fig. 23 of the** **source** **standard)**
+**Figure 3– Example of a lane-level manoeuvre trajectory (C) containing lane belt elements (A) and their connections (B) (Fig. 23 of the source standard)**
 
 ## 12 RoadStructureAndEquipment package
 
@@ -178,7 +178,7 @@ RoadStructureAndEquipment consists of the following subpackages: RoadEquipment, 
 
 It defines the list of elements (see the example in the following table) and indicates to which preceding network concept they belong.
 
-**Table 2** **– Excerpt from Tab.** **172 of the** **source standard: Overview of RSE categories**
+**Table 2 – Excerpt from Tab. 172 of the source standard: Overview of RSE categories**
 
 <table>
   <tr>

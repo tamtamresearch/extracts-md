@@ -15,7 +15,7 @@ note: "Note: The extract lists selected chapters of the described document and a
 
 This standard defines data exchange requirements to support Electric Vehicle (EV)-based Demand Response (DR) services utilizing nomadic devices, considering two types of EV-based DR services. One is to reduce demand of electric vehicles charging when there is a shortage on the grid side. The other is to increase demand of electric vehicles charging when the surplus on the grid side is forecasted day ahead.
 
-*Note: The extract lists sele**cted chapters of the described document and adopts the original chapter numbering.*
+*Note: The extract lists selected chapters of the described document and adopts the original chapter numbering.*
 
 ## Use
 
@@ -79,7 +79,7 @@ Chapter 4 is 8 pages long and describes supported EV based DR services by 5 figu
 
 ![Figure 1 (Figure 1 of the source document) – EV-based standard DR service](fig-1.png)
 
-**Figure 1 (Figure 1 of the** **source** **document)** **–** **EV-based standard DR service**
+**Figure 1 (Figure 1 of the source document) – EV-based standard DR service**
 
 ## 5 Requirements for main actors
 
@@ -87,7 +87,7 @@ Chapter 5 is 5 pages long and describes the requirements for the main actors, as
 
 ![Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service](fig-2.png)
 
-**Figure 2 (Figure 6 of the** **source** **document)** **–** **Requirement of each actor for EV-based DR service**
+**Figure 2 (Figure 6 of the source document) – Requirement of each actor for EV-based DR service**
 
 ## 6 Requirements for communication
 

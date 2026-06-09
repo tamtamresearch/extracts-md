@@ -21,7 +21,7 @@ The ISO 26683 (FLC‑CIC) set of standards uses advanced information and communi
 
 > (further on also referred to as “the document described”) contains descriptions of various application interface profiles for communication during the identification of cargo or the contents of freight vehicles, linked to other services such as handling in multimodal transport.
 
-*Note: The Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
+*Note: The Extract presents selected chapters of the described document and retains the original chapter numbering.*
 
 ## Usage
 
@@ -43,7 +43,7 @@ used in particular profiles are listed in Clause 6, directly within the individu
 
 This clause defines 33 terms; the Extract lists only selection of the most important ones:
 
-**application** **interface –** communication point where one part of a system communicates with another in order to service an application **
+**application interface –** communication point where one part of a system communicates with another in order to service an application **
 
 **application interface profile** – series and sequence of behaviour and protocols including, where appropriate, the identification of chosen classes, conforming subsets, options and parameters of those base standards necessary to accomplish a defined function at an interface in a particular way such that it can be used interoperably between two parties
 
@@ -61,21 +61,21 @@ The standard contains 35 abbreviations; relevant for understanding this Extract 
 
 **IMS** **–** IP multimedia subsystem (a standard for an architectural framework)
 
-**OBE/** **–** on-board equipment/on-board unit
+**OBE/ –** on-board equipment/on-board unit
 
-**OCR** **–** optical character recognition (ie. a symbol for a product description)
+**OCR –** optical character recognition (ie. a symbol for a product description)
 
-**PDE** **–** portable data collection equipment
+**PDE –** portable data collection equipment
 
-**PHS** **–** personal handy-phone system
+**PHS –** personal handy-phone system
 
-**RFID** **–** radio-frequency identification
+**RFID –** radio-frequency identification
 
-**UBL** **–** universal business language *(**standard by* *, for business, including a library for transport)*
+**UBL –** universal business language *(standard by , for business, including a library for transport)*
 
 **UMTS** **–** universal mobile telecommunication system *(for 3G networks)*
 
-**WPA** **–** WiFi protected access secured *(**WiFi* *access, using encryption**)*
+**WPA –** WiFi protected access secured *(WiFi access, using encryption)*
 
 NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (*)*, the StandardLand website () or the OBP platform (*).*
 
@@ -105,7 +105,7 @@ Level 3 (L3): from the item (incl. item sensors) to the interrogator/OBE of the 
 
 Level D1: for data presentation only; data formatting in UBL, accordingly to potential requirements
 
-The **following** **clauses** deal with application profiles, related standards, requirements, and compliance. The method of data collection and auditing for identifying the cargo list is not defined in the profiles and is of an individual decision of the participant. The clauses below describe the 11 profiles for all of the above mentioned levels, L1 through L3 and D1.
+The **following clauses** deal with application profiles, related standards, requirements, and compliance. The method of data collection and auditing for identifying the cargo list is not defined in the profiles and is of an individual decision of the participant. The clauses below describe the 11 profiles for all of the above mentioned levels, L1 through L3 and D1.
 
 ### 6.3 FLC-CIC Profile No.L1-1: ISO 15628 DSRC (optional)
 

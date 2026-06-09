@@ -13,13 +13,13 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 ## Introduction
 
-The standard ISO 14823-1:2024 defines the **Graphic Data Dictionary (GDD)** – a unified, language-independent system for encoding traffic signs and pictograms for the needs of Intelligent Transport Systems (ITS). Its purpose is to enable **efficient transmission,** **interpretation,** **and display of traffic information** across different countries, systems, and technologies. This dictionary is used for information exchange between centres (DATEX II) and between infrastructure and vehicles (cooperative systems, C-ITS) for describing traffic signs displayed, for example, on variable message signs.
+The standard ISO 14823-1:2024 defines the **Graphic Data Dictionary (GDD)** – a unified, language-independent system for encoding traffic signs and pictograms for the needs of Intelligent Transport Systems (ITS). Its purpose is to enable **efficient transmission, interpretation, and display of traffic information** across different countries, systems, and technologies. This dictionary is used for information exchange between centres (DATEX II) and between infrastructure and vehicles (cooperative systems, C-ITS) for describing traffic signs displayed, for example, on variable message signs.
 
 This revision of the standard is a fundamental rework of the original ISO 14823:2017. The original standard, due to its use of a simple identifier based on ISO 3166-1 and a five-digit structure (service category – nature – sequence number), had two essential limitations: there was **no globally unique identification of pictograms, and adding new pictograms was inflexible** because the numeric space was rigidly structured and difficult to extend.
 
 This revision therefore introduces a more robust mechanism based on the **relative object identifier (OID)**, which enables global identification, hierarchy, and extensibility without breaking compatibility. The revision contains following essential technical and conceptual changes:
 
-- an updated **version** **2** of the GDD based on OID and relative object identifiers, enabling global identification, hierarchical generalisation and adding new codes without collisions,
+- an updated **version 2** of the GDD based on OID and relative object identifiers, enabling global identification, hierarchical generalisation and adding new codes without collisions,
 
 - support for more complex messages thanks to the possibility of including up to **four pictograms** in a single object,
 
@@ -31,13 +31,13 @@ This revision therefore introduces a more robust mechanism based on the **relati
 
 This Extract describes Part 1 of the GDD standard (hereinafter “the described document”) with the specification of the format and the tables of pictograms of individual signs.
 
-*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
+*Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.*
 
 ## Use
 
 The described document defines the encoding of various traffic signs and serves as the technical foundation for systems that need to uniquely identify and process traffic pictograms in digital form. It provides a unified and extensible framework that enables consistent handling of traffic pictograms regardless of national differences or the communication technology used.
 
-The standard is intended especially for **developers and architects of ITS systems** who implement support for digital traffic signs in C-ITS, V2X communication or navigation services, **vehicle manufacturers and their** **suppliers** who integrate pictograms into onboard systems, ADAS and in-vehicle signage, **infrastructure operators and traffic centres** that publish traffic information through VMS, C-ITS or DATEX II**,** **providers of traffic and navigation services** who need interoperable encoding across countries and systems and, **manufacturers of end-user devices** and applications that display traffic information to users.
+The standard is intended especially for **developers and architects of ITS systems** who implement support for digital traffic signs in C-ITS, V2X communication or navigation services, **vehicle manufacturers and their suppliers** who integrate pictograms into onboard systems, ADAS and in-vehicle signage, **infrastructure operators and traffic centres** that publish traffic information through VMS, C-ITS or DATEX II**, providers of traffic and navigation services** who need interoperable encoding across countries and systems and, **manufacturers of end-user devices** and applications that display traffic information to users.
 
 ## Related Documents (Selection)
 
@@ -57,9 +57,9 @@ This clause defines the basic concepts used within the Graphic Data Dictionary (
 
 **pictogram** – a graphic symbol or icon displayed on a static traffic sign or on an IT system display (e.g. VMS), providing travellers with information about traffic conditions, restrictions, or public facilities
 
-**pictogram** **code** – a combination of a service category code and a pictogram category code, optionally supplemented by a country code (in version 1)
+**pictogram code** – a combination of a service category code and a pictogram category code, optionally supplemented by a country code (in version 1)
 
-**relative** **object identifier** – an identifier that determines an object by its position within the OID tree relative to a defined root
+**relative object identifier** – an identifier that determines an object by its position within the OID tree relative to a defined root
 
 **attribute** – additional coded information that clarifies the meaning of the pictogram (e.g. direction, distance, time)
 
@@ -89,7 +89,7 @@ This clause, one page long, lists ten basic functional requirements for the use 
 
 ## 7 Structure of the pictogram code
 
-This clause, four pages in length, defines **two parallel mechanisms for pictograms** **identification**, their hierarchy, and the rules for extension, including the marking of obsolete codes.
+This clause, four pages in length, defines **two parallel mechanisms for pictograms identification**, their hierarchy, and the rules for extension, including the marking of obsolete codes.
 
 Clause **7.1 General** explains the existence of two versions of the GDD. **Version 1** (country code + pictogram code) and **Version 2** (relative OID). Both versions are supported in parallel for backward compatibility.
 
@@ -109,7 +109,7 @@ Clause **8.1 General** states that each pictogram is assigned a code and a mnemo
 
 Clause **8.2 Mnemonics of the codes** describes the rules for forming names in lowerCamelCase, without spaces and without articles. One illustrative example is provided.
 
-**Table 1 (excerpt from Table 2 of the standard)** **Assigning a service category code and pictogram category code to a specific phrase (mnemonic):**
+**Table 1 (excerpt from Table 2 of the standard) Assigning a service category code and pictogram category code to a specific phrase (mnemonic):**
 
 <table>
   <tr>
@@ -134,7 +134,7 @@ The following clauses (8.3–8.9) contain the definitions of codes presented thr
 
 Clause **8.3 Warning traffic signs** (pictogram codes 11111–11999, approximately 9 pages of tables) includes pictograms used to provide **advance warning** to drivers about dangerous or deteriorated road conditions. These include warnings about obstacles, hazardous sections, animals, weather phenomena, or other situations requiring increased attention.
 
-Clause **8.4 Regulatory traffic signs** (pictogram codes 12111–12999, approximately 10 pages of tables) contains pictograms expressing **obligations,** **prohibitions,** **and restrictions**. The standard divides them into three groups:
+Clause **8.4 Regulatory traffic signs** (pictogram codes 12111–12999, approximately 10 pages of tables) contains pictograms expressing **obligations, prohibitions, and restrictions**. The standard divides them into three groups:
 
 - signs regulating priority (12111–12399),
 

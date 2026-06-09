@@ -56,13 +56,13 @@ The technical specification defines 52 terms. The most important include:
 
 **MAP data message (MAP)** – data elements and frames comprising a message, the contents of which describe the geometry of a roadway intersection
 
-**signal** **phase and timing (SPaT)** – a message sent from the infrastructure to C-ITS devices describing the current state of the traffic signal controller (at one or more intersections), its phases, and the relationship to possible intersection manoeuvres
+**signal phase and timing (SPaT)** – a message sent from the infrastructure to C-ITS devices describing the current state of the traffic signal controller (at one or more intersections), its phases, and the relationship to possible intersection manoeuvres
 
-**signal** **request message (SRM)** – a message sent from C-ITS devices to the infrastructure, by which a vehicle requests preferential treatment from the traffic signal controller for passage through the intersection
+**signal request message (SRM)** – a message sent from C-ITS devices to the infrastructure, by which a vehicle requests preferential treatment from the traffic signal controller for passage through the intersection
 
-**signal** **status message (SSM)** – a message sent from the infrastructure to C-ITS devices, containing the details of the traffic signal controller's response to a request for preferential treatment at the intersection
+**signal status message (SSM)** – a message sent from the infrastructure to C-ITS devices, containing the details of the traffic signal controller's response to a request for preferential treatment at the intersection
 
-**roadside** **equipment (RSE)** – equipment located at the infrastructure side that creates and transmits messages to vehicles and receives messages from vehicles for the purpose of supporting V2I and I2V applications
+**roadside equipment (RSE)** – equipment located at the infrastructure side that creates and transmits messages to vehicles and receives messages from vehicles for the purpose of supporting V2I and I2V applications
 
 ## 4 Abbreviated Terms
 
@@ -94,7 +94,7 @@ Within the functional model, the general system architecture is also described, 
 
 ![Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the source standard)](fig-1.png)
 
-**Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the** **source** **standard)**
+**Figure 1 – General architecture for V2I/I2V communications (Fig. 2 of the source standard)**
 
 Furthermore, the Functional model addresses message interactions, i.e. an explanation of the broadcast principle within DSRC communications and the implications and requirements this has for message transmission (frequent repetition of the same message "over the air" instead of interactive information exchange used in TCP/IP).
 
@@ -164,19 +164,19 @@ In this very brief clause, the following is literally stated:
 
 - *map data (MAP);*
 
-- *signal phase and timing (**SPaT**);*
+- *signal phase and timing (SPaT);*
 
 - *signal request message (SRM);*
 
-- *signal* *status message (SSM).*
+- *signal status message (SSM).*
 
 The structure of these messages is defined by selection of an annex and the message requirements therein. The annexes with message structure requirements are as follows:
 
-- *Annex E* *Profile A for J2735™;*
+- *Annex E Profile A for J2735™;*
 
-- *Annex F* *Profile B for J2735™;*
+- *Annex F Profile B for J2735™;*
 
-- *Annex G* *Profile C for J2735™."*
+- *Annex G Profile C for J2735™."*
 
 ## 8 Conformance
 

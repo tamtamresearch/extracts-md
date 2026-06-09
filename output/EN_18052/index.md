@@ -15,7 +15,7 @@ note: "Note: This Extract presents selected chapters of the described document a
 
 eCall is an emergency call triggered automatically by vehicle sensors or manually by the crew, which, via the mobile network, sends a standardized minimum set of data to the most appropriate Public Safety Answering Point (PSAP) containing information about the accident and the vehicle’s location, while simultaneously establishing a voice connection with the crew. European standards define the data structure, application protocols, and operational requirements of eCall for both traditional circuit-switched networks and modern packet-switched IP-based networks (e.g., LTE, 5G, and IMS), which are gradually replacing them. Due to the transitional period of coexistence between both network types, standards and conformity tests have also been developed for hybrid environments to ensure reliable and interoperable pan-European operation of eCall.
 
-*Note: This Extract presents selected* *chapters* *of the described document and retains the original* *chapter* *numbering.*
+*Note: This Extract presents selected chapters of the described document and retains the original chapter numbering.*
 
 ## Usage
 
@@ -51,11 +51,11 @@ Clause 3 contains 27 definitions provided in full in the standard. In this extra
 
 **eCall** – emergency call generated either automatically via activation of in-vehicle sensors or manually by the vehicle occupants, which, when activated, provides notification and relevant location information to the most appropriate Public Safety Answering Point, by means of mobile wireless communications networks, carries a defined standardized Minimum Set of Data (MSD) notifying that there has been an incident that requires response from the emergency services, and establishes an audio channel between the occupants of the vehicle and the most appropriate Public Safety Answering Point
 
-**public** **safety answering point (PSAP)** – physical location working on behalf of the national authorities where emergency calls are first received under the responsibility of a public authority or a private organization recognized by the national government
+**public safety answering point (PSAP)** – physical location working on behalf of the national authorities where emergency calls are first received under the responsibility of a public authority or a private organization recognized by the national government
 
-**minimum** **set of data (MSD)** – standardized data concept comprising data elements of relevant vehicle generated data essential for the performance of the eCall service
+**minimum set of data (MSD)** – standardized data concept comprising data elements of relevant vehicle generated data essential for the performance of the eCall service
 
-**vehicle** **manufacturer** – entity which first assembles the vehicle and provides eCall equipment as part of its specification and subsequently sells the vehicle directly or via an agent
+**vehicle manufacturer** – entity which first assembles the vehicle and provides eCall equipment as part of its specification and subsequently sells the vehicle directly or via an agent
 
 ## 4 Abbreviations
 
@@ -96,7 +96,7 @@ Clause 4 contains 43 symbols and abbreviations. In this extract, the following a
   </tr>
 </table>
 
-Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary (), the *StandardLand* website () or the *OBP* *platform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary (), the *StandardLand* website () or the *OBP platform* ().
 
 ## 5 Conformity with this Standard
 

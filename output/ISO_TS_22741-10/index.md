@@ -37,13 +37,13 @@ The standard refers to only one related document: ISO 22741-1, Intelligent Trans
 
 The described document refers to the terms listed in ISO 22741-1 and the ISO and IEC terminology database. There are 5 terms defined, the most important of which are the following:
 
-**centre** **system** – intelligent transport systems (ITS) component that provides application, management and/or administrative functions from a centralized location (i.e. not at the roadside)
+**centre system** – intelligent transport systems (ITS) component that provides application, management and/or administrative functions from a centralized location (i.e. not at the roadside)
 
 **message** – data concept consisting of a grouping of data elements, data frames, or data elements and data frames, that is used to convey a complete set of information
 
-**traffic** **management** **system** –centre system that monitors and controls traffic and the road network
+**traffic management system** –centre system that monitors and controls traffic and the road network
 
-**variable** **message** **sign (VMS)** **–** field device that can display real-time traveller information to the public
+**variable message sign (VMS) –** field device that can display real-time traveller information to the public
 
 ## 4 Abbreviations
 
@@ -53,7 +53,7 @@ This clause defines ten abbreviations, the most important of which are the follo
 
 **VMS** Variable Message Sign, which allows setting variable traffic symbols and information according to the current traffic situation
 
-Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary (), the *StandardLand* website () or the *OBP* *plataform* ().
+Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary (), the *StandardLand* website () or the *OBP plataform* ().
 
 ## 5 Conformance
 
@@ -61,7 +61,7 @@ The chapter presents two tables with references to the conditions for demonstrat
 
 *Table 1 defines user needs and the obligation to demonstrate their compliance (O = Optional, M = Mandatory).*
 
-**Table** **1 — User** **need** **to** **feature** **conformance** **(Tab.** **1** **of** **the** **source** **standard)**
+**Table 1 — User need to feature conformance (Tab. 1 of the source standard)**
 
 <table>
   <tr>
@@ -95,21 +95,21 @@ The chapter contains a description of the physical arrangement of the VMS device
 
 ![Figure 1 – View of y physical architecture (Fig. 1 of the source standard)](fig-1.png)
 
-**Figure** **1 –** **View** **of** **y** **physical** **architecture** **(Fig. 1** **of** **the** **source** **standard)**
+**Figure 1 – View of y physical architecture (Fig. 1 of the source standard)**
 
 ## 7 User Needs
 
 The chapter describes in detail each of the 5 user requirements: Management of VMS control mode,
 
-- **Management** **of** **VMS** **control** **mode**: Must allow changing the method of control and management of VMS (local, remote from the center, combined with priority from the center)
+- **Management of VMS control mode**: Must allow changing the method of control and management of VMS (local, remote from the center, combined with priority from the center)
 
-- **Management** **of** **VMS display part**: Must allow monitoring and changing displayed symbols, texts on VMS
+- **Management of VMS display part**: Must allow monitoring and changing displayed symbols, texts on VMS
 
-- **Monitoring** **of** **the** **VMS** **door** **part**: Must provide information about the opening/closing of the VMS cabinet door
+- **Monitoring of the VMS door part**: Must provide information about the opening/closing of the VMS cabinet door
 
-- **Monitoring** **of** **mains** **power** **supply**: Must provide information about the status of mains power supply
+- **Monitoring of mains power supply**: Must provide information about the status of mains power supply
 
-- **Monitoring** **of** **power** **supply** **status**: Must provide information about the method of VMS power supply (from mains, from batteries)
+- **Monitoring of power supply status**: Must provide information about the method of VMS power supply (from mains, from batteries)
 
 ## 8 Requirements
 
@@ -117,11 +117,11 @@ The chapter describes in more detail the requirements for VMS properties, includ
 
 Example structure of Chapter 8.8:
 
-- **8.8.1 –** **Definition** **of** **LED matrix** (monitors the current status of each LED in the matrix)
+- **8.8.1 – Definition of LED matrix** (monitors the current status of each LED in the matrix)
 
-- **8.8.2 – Data** **exchange** **requirements** (provides information about pixel size, LED pitch, must allow diagnostics to determine faulty LEDs)
+- **8.8.2 – Data exchange requirements** (provides information about pixel size, LED pitch, must allow diagnostics to determine faulty LEDs)
 
-- **8.8.3 – Reliability** **of** **individual** **LEDs** **in** **the** **matrix** (the device must monitor each LED in the matrix, each LED must ensure display in 16,777,216 colors of the RGB spectrum)
+- **8.8.3 – Reliability of individual LEDs in the matrix** (the device must monitor each LED in the matrix, each LED must ensure display in 16,777,216 colors of the RGB spectrum)
 
 ## 9 Dialogues
 
@@ -139,6 +139,6 @@ It is Table B.1, a small sample of which is given below.
 
 In the complete table of the described document, further requirements and references to specific chapters follow.
 
-**Table** **2 –** **Excerpt of the** **Requirements traceability matrix table** **(Tab.** **B.1** **of** **the source** **standard)**
+**Table 2 – Excerpt of the Requirements traceability matrix table (Tab. B.1 of the source standard)**
 
 ![Table 2 – Excerpt of the Requirements traceability matrix table (Tab. B.1 of the source standard)](fig-2.png)

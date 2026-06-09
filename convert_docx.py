@@ -229,25 +229,43 @@ def table_html(table, imgs: ImgState) -> str:
 
 def render_paragraph_runs(p) -> str:
     """Convert paragraph runs to Markdown, preserving inline formatting."""
-    chunks = []
     
+    # First pass: merge consecutive runs with identical formatting
+    # This handles Word's tendency to split formatted text into per-word or per-character runs
+    merged_runs = []
     for run in p.runs:
-        text = run.text
-        if not text:
+        if not run.text:
             continue
         
-        # Detect monospace font
-        is_code = (
-            run.font.name and 
-            run.font.name.lower() in MONOSPACE_FONTS
-        )
+        is_code = run.font.name and run.font.name.lower() in MONOSPACE_FONTS
+        
+        # Check if we can merge with the previous run
+        if merged_runs and \
+           merged_runs[-1]['bold'] == run.bold and \
+           merged_runs[-1]['italic'] == run.italic and \
+           merged_runs[-1]['code'] == is_code:
+            # Merge with previous run
+            merged_runs[-1]['text'] += run.text
+        else:
+            # New run with different formatting
+            merged_runs.append({
+                'text': run.text,
+                'bold': run.bold,
+                'italic': run.italic,
+                'code': is_code
+            })
+    
+    # Second pass: apply Markdown formatting
+    chunks = []
+    for run in merged_runs:
+        text = run['text']
         
         # Move leading/trailing spaces outside of formatting markers
         # This prevents broken Markdown like "**text **" or "** text**"
         leading_space = ''
         trailing_space = ''
         
-        if text and not is_code:  # Don't strip spaces from code
+        if text and not run['code']:  # Don't strip spaces from code
             if text[0] in ' \t':
                 leading_space = text[0]
                 text = text[1:]
@@ -257,13 +275,13 @@ def render_paragraph_runs(p) -> str:
         
         # Apply Markdown formatting to the stripped text
         # IMPORTANT: Code takes precedence. If monospace, ignore bold/italic.
-        if is_code:
+        if run['code']:
             text = f"`{text}`"
-        elif run.bold and run.italic:
+        elif run['bold'] and run['italic']:
             text = f"***{text}***"
-        elif run.bold:
+        elif run['bold']:
             text = f"**{text}**"
-        elif run.italic:
+        elif run['italic']:
             text = f"*{text}*"
         # Underline is ignored (no Markdown equivalent)
         
@@ -273,7 +291,7 @@ def render_paragraph_runs(p) -> str:
     # Join runs and apply standard cleaning
     txt = ''.join(chunks)
     
-    # Merge adjacent formatting markers (handles cases where Word splits formatted text across multiple runs)
+    # Merge adjacent formatting markers (handles remaining edge cases)
     # Merge adjacent backticks: `foo``bar` → `foobar`
     while '``' in txt:
         txt = txt.replace('``', '')

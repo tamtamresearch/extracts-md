@@ -15,7 +15,7 @@ note: "Note: This Extract presents selected clauses of the described document an
 
 In 2023, there are several hundred companies around the world – mostly start-ups – engaged in the development of small, remote-controlled and sometimes partially automated devices for operation on city sidewalks and cycle paths. Thousands of small retailers and dozens of delivery companies use these systems for last-mile delivery. Already, many more cities have a small number of such PMRs than robotic taxis in pilot operation. This means that cities are likely to face PMR regulation requirements much sooner than the regulation of robotic cars and trucks is expected.
 
-*Note: This Extract presents selected* *clause**s of the described document and retains the original* *clause* *numbering.*
+*Note: This Extract presents selected clauses of the described document and retains the original clause numbering.*
 
 ## Use
 
@@ -29,21 +29,21 @@ The document described refers to only one ISO/TS 14812, which is the normative I
 
 This document provides an overview of the ground-based automated mobility systems deployment paradigm. The paradigm covers such curbsides and pathways as are suitable for co-temporal, collaborative use by various types and combinations of automated and non-automated, wheeled, or ambulatory, motorized and non-motorized, mobility-related vehicles and devices as well as for various levels of automated or remote operation of such vehicles. This includes vehicles and devices that move people as well as goods within proximate distances of human bystanders.
 
-*Note**:* *Aerial (flying) drones are not part of the scope.*
+*Note: Aerial (flying) drones are not part of the scope.*
 
 ## 3 Terms and definitions
 
 This part of the technical standard defines 14 terms, the most important of which are the following:
 
-**delivery** **robot** ***–* a robotic vehicle used to deliver goods, food, and other items, often for "last mile" applications
+**delivery robot** *–* a robotic vehicle used to deliver goods, food, and other items, often for "last mile" applications
 
 Note 1 to the entry: Although the word "drone" is correctly used to describe a robot on wheels, this document uses the term "robot" and the specific abbreviation PMR
 
 **pathway** – infrastructure designed to permit the movement of various combinations of active transportation users and public-area mobile robots (PMRs) within the same space, including outdoor footways, cycleways, crosswalks, road shoulders, trails and indoor passageways, corridors or hallways
 
-*(Note: It usually* *forms* *a network of pathways.)*
+*(Note: It usually forms a network of pathways.)*
 
-**public-area mobile robot (PMR);** **(ground) automated mobile** **systems in public space (PMR)** – wheeled or legged (ambulatory) ground-based device that is designed to travel along public, shared, active transportation pathways without the use of visible human assistance or physical guides
+**public-area mobile robot (PMR); (ground) automated mobile systems in public space (PMR)** – wheeled or legged (ambulatory) ground-based device that is designed to travel along public, shared, active transportation pathways without the use of visible human assistance or physical guides
 
 Note 1 to entry: Physical guides include rails and curbs. Note 2 to entry: While the term public-area mobile robot (PMR) excludes devices with visible human assistance, a PMR can be teleoperated by a human. Note 3 to entry: While the term “PMR” excludes devices with visible human assistance, PMRs can carry humans as passengers, e.g. an automated wheelchair. Note 4 to entry: While the term “PMR” excludes devices with visible human assistance, PMRs can be electronically tethered to follow a human.
 
@@ -85,7 +85,7 @@ Clause 7 is 10 pages long and describes the reasons why standardization is neces
 (Source. Urban robotics foundation)](fig-1.png)
 
 **Figure 1 — Example of PMR forms for the distribution of small packages** 
-*(**Source. Urban robotics foundation**)*
+*(Source. Urban robotics foundation)*
 
 Subclause **7.2** describes the need to create a safe space in the public space of the city, where such systems could move, the majority of which is devoted to safety aspects and also to lower operating costs than those associated with robo-vehicles.
 
@@ -117,7 +117,7 @@ Subclause **7.3** deals with challenges such as common obstacles on the infrastr
 
 ## 8 Operating principles for PMRs
 
-Operating and deployment standards for operations in shared human-social environments should establish general rules for PMRs across various types of pathways used by active transportation users of all abilities.This clause contains two subclauses. **8.1** **Contrasting types of infrastructure** (contrasting pathway, curb, cycleways and footway). **8.2 Behavioural factors** contains *Table 1: Factors that can influence the acceptance and workability of PMRs*, where many important factors for the behavioural aspects for PMRs are listed and described.
+Operating and deployment standards for operations in shared human-social environments should establish general rules for PMRs across various types of pathways used by active transportation users of all abilities.This clause contains two subclauses. **8.1 Contrasting types of infrastructure** (contrasting pathway, curb, cycleways and footway). **8.2 Behavioural factors** contains *Table 1: Factors that can influence the acceptance and workability of PMRs*, where many important factors for the behavioural aspects for PMRs are listed and described.
 
 ## 9 Governance principles for PMRs
 

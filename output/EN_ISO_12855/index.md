@@ -79,7 +79,7 @@ This clause, spanning 9 pages, contains a basic description of the interface fun
 
 ![Figure 1 – Overview of functionalities (Fig. 3 of the source standard)](fig-1.png)
 
-**Figure 1 –** **Overview of functionalities (Fig.** **3 of the** **source standard)**
+**Figure 1 – Overview of functionalities (Fig. 3 of the source standard)**
 
 ## 6 Specification
 
@@ -87,17 +87,17 @@ This clause, spanning 121 pages, contains a description of the structure of 19 a
 
 ![](fig-2.png)
 
-**Table 1 – Overview of ADUs (Tab.** **5 of the** **source standard)**
+**Table 1 – Overview of ADUs (Tab. 5 of the source standard)**
 
 For illustration, the definition of the ExceptionListADU data unit is provided below.
 
-**Table 2 – Definition of** **ExceptionListADU** **(Tab.** **77 of the** **source standard)**
+**Table 2 – Definition of ExceptionListADU (Tab. 77 of the source standard)**
 
 ![Table 2 – Definition of ExceptionListADU (Tab. 77 of the source standard)](fig-3.png)
 
 Individual data types are explained sequentially in the text, or their definition is provided. For illustration, the definition of the ExceptionListEntry data type is provided below.
 
-**Table 3 – Definition of** **ExceptionListEntry** **(Tab.** **78 of the** **source standard)**
+**Table 3 – Definition of ExceptionListEntry (Tab. 78 of the source standard)**
 
 ![Table 3 – Definition of ExceptionListEntry (Tab. 78 of the source standard)](fig-4.png)
 

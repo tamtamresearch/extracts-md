@@ -87,7 +87,7 @@ The clause contains 2 abbreviations relevant to this standard, to which we also 
 
 **OID** Object Identifier
 
-*NOTE: Other terms and abbreviations from the ITS domain can be found in the* *ITSTerminology* *dictionary (**)**, the StandardLand website (**) or the OBP platform (**).*
+*NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (), the StandardLand website () or the OBP platform ().*
 
 ## 6 The FaultAndStatus namespace
 
@@ -99,7 +99,7 @@ This sub-clause (1 page) provides a basic overview of the dependencies of the Fa
 
 ![Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)](fig-1.png)
 
-**Figure 1 — Namespace dependencies of the** **FaultAndStatus** **namespace (Fig. 1 of the source standard)**
+**Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)**
 
 The FaultAndStatus namespace contains the following sub-packages:
 
@@ -121,7 +121,7 @@ This sub-clause (2 pages, 1 diagram) defines the DevicePublication class, enabli
 
 ![Figure 2 — DevicePublication class (Fig. 2 of the source standard)](fig-2.png)
 
-**Figure 2 —** **DevicePublication** **class (Fig.** **2 of the** **source standard)**
+**Figure 2 — DevicePublication class (Fig. 2 of the source standard)**
 
 A DevicePublication contains information on a collection of devices, either directly or via one or more DeviceTable objects. A single DevicePublication object should contain either DeviceTable objects or Device objects directly, not both.
 
@@ -165,7 +165,7 @@ This sub-clause describes, using one diagram and one paragraph of text, the Obje
 
 This annex (18 pages, 25 tables) provides a data dictionary identifying the definitions and characteristics of all classes, attributes, association ends, data types and enumerations appearing in the data model defined in Clause 6. Among other things it defines enumerated values for device types (Table 1 below) and enumerated values for the impact of a device fault on provided data (Table 2 below).
 
-**Table 1 — Values contained in the enumeration “DeviceTypeEnum” (Tab.** **A.18 of the** **source standard)**
+**Table 1 — Values contained in the enumeration “DeviceTypeEnum” (Tab. A.18 of the source standard)**
 
 <table>
   <tr>
@@ -280,8 +280,8 @@ This annex (18 pages, 25 tables) provides a data dictionary identifying the defi
   </tr>
 </table>
 
-**Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum”** **
-(Tab.** **A.19 of the** **source standard)**
+**Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum” 
+(Tab. A.19 of the source standard)**
 
 <table>
   <tr>
