@@ -7,7 +7,6 @@ import pytest
 
 import convert_docx
 import gen_nav
-import frontmatter_preprocessor
 
 
 @pytest.mark.integration
@@ -80,11 +79,34 @@ def test_real_extract_iso22741_10(docx_fixtures_dir, tmp_output):
     assert fig1.stat().st_size > 100, "fig-1.png too small (likely empty)"
     assert fig2.stat().st_size > 100, "fig-2.png too small (likely empty)"
     
-    # Verify markdown image references
-    assert "![" in body and "](fig-1.png)" in body, "fig-1.png not referenced in markdown"
-    assert "![" in body and "](fig-2.png)" in body, "fig-2.png not referenced in markdown"
+    # Verify mkdocs-style image references with the .figure class
+    assert "(fig-1.png){.figure}" in body, "fig-1.png not referenced with {.figure}"
+    assert "(fig-2.png){.figure}" in body, "fig-2.png not referenced with {.figure}"
+
+    # --- Test 4b: Captions emitted as pymdownx caption blocks (once each) ---
+    # pymdownx wraps the *preceding* block, so the caption block is emitted
+    # AFTER its object. Figure caption uses plain `/// caption` (renders below).
+    fig1_caption = "Figure 1 – View of y physical architecture (Fig. 1 of the source standard)"
+    assert re.search(
+        r"!\[Figure 1\]\(fig-1\.png\)\{\.figure\}\n\n/// caption\n" + re.escape(fig1_caption),
+        body,
+    ), "Figure 1 caption must follow its image as a plain caption block"
+    # The caption text must appear exactly once (no duplicated bold line)
+    assert body.count(fig1_caption) == 1, "Figure 1 caption duplicated or missing"
+    assert f"**{fig1_caption}**" not in body, "Legacy bold caption line still present"
+
+    # Table-as-image: image first, then `/// caption | <` (figcaption above)
+    assert re.search(
+        r"!\[Table 2\]\(fig-2\.png\)\{\.figure\}\n\n/// caption \| <\nTable 2",
+        body,
+    ), "Table 2 (image) caption must follow the image with `| <`"
+
+    # The false-positive prose line stays normal body text (not a caption)
+    assert "Table 1 defines user needs" in body
+    assert "/// caption\nTable 1 defines" not in body
+    assert "/// caption | <\nTable 1 defines" not in body
     
-    # --- Test 5: Table rendered as HTML ---
+    # --- Test 5: Table rendered as HTML with the caption after it ---
     assert n_tables == 1, f"Expected 1 table, got {n_tables}"
     
     assert "<table>" in body, "No <table> tag found"
@@ -94,6 +116,35 @@ def test_real_extract_iso22741_10(docx_fixtures_dir, tmp_output):
     
     # Verify colspan attribute present (merged cells)
     assert 'colspan="' in body, "No colspan attribute found (merged cells not preserved)"
+
+    # The real-table caption is placed AFTER the table with `| <` (renders above)
+    assert re.search(r"</table>\n\n/// caption \| <\nTable 1 —", body), \
+        "Real table caption must follow the table with `| <`"
+
+
+@pytest.mark.integration
+def test_self_captioning_image_keeps_image_and_caption(tmp_path):
+    """A paragraph that holds BOTH a Table caption and its image must render the
+    image (not drop it) with the caption directly above it (not disjoint)."""
+    docx_file = Path("input/EN_ISO_12855.docx")
+    if not docx_file.exists():
+        pytest.skip("EN_ISO_12855.docx not available in input/")
+
+    out = tmp_path / "output"
+    out.mkdir()
+    docname, n_figures, _ = convert_docx.convert(str(docx_file), str(out))
+    body = (out / docname / "index.md").read_text(encoding="utf-8")
+
+    # The "Table 1 – Overview of ADUs" caption is in the same paragraph as its
+    # image. It must render the image immediately followed by a `| <` caption
+    # block (figcaption above) — never a bare caption with the image dropped.
+    m = re.search(
+        r"!\[Table 1\]\(fig-\d+\.png\)\{\.figure\}\n\n/// caption \| <\nTable 1 – Overview of ADUs",
+        body,
+    )
+    assert m, "Table 1 image is not immediately followed by its caption block"
+    # All four embedded figures (incl. the previously-dropped Table 1 image).
+    assert n_figures == 4, f"Expected 4 figures, got {n_figures}"
 
 
 @pytest.mark.integration
@@ -173,41 +224,37 @@ def test_inline_formatting_iso14823_1(tmp_path):
 
 @pytest.mark.integration
 def test_navigation_generation(sample_output_dir, tmp_path):
-    """Test gen_nav.py generates correct SUMMARY.md and index.md."""
-    # Create temporary output directory with sample extracts
+    """Test gen_nav.py generates mkdocs nav + landing page from front-matter."""
     output_dir = tmp_path / "output"
-    output_dir.mkdir()
-    
-    # Create 3 sample extracts with front-matter
+    extracts_dir = output_dir / "extracts"
+    extracts_dir.mkdir(parents=True)
+
+    # A temp mkdocs.yml with the GENERATED NAV markers, and a temp css source.
+    mkdocs_yml = tmp_path / "mkdocs.yml"
+    mkdocs_yml.write_text(
+        "site_name: t\n\n"
+        f"{gen_nav.NAV_START}\n"
+        "nav:\n  - Overview: index.md\n"
+        f"{gen_nav.NAV_END}\n",
+        encoding="utf-8",
+    )
+    css_src = tmp_path / "extra.css"
+    css_src.write_text("figcaption { text-align: center; }\n", encoding="utf-8")
+
     extracts = [
-        ("CEN_TS_12345", {
-            "standard": "CEN/TS 12345",
-            "name": "Traffic Management Systems – Example Standard",
-            "published": "2025",
-            "edition": "1",
-            "pages": "100"
-        }),
-        ("ISO_15622", {
-            "standard": "ISO 15622",
-            "name": "Intelligent transport systems – Adaptive cruise control systems – Performance requirements",
-            "published": "2018",
-            "edition": "3",
-            "pages": "24"
-        }),
-        ("EN_ISO_12855", {
-            "standard": "EN ISO 12855",
-            "name": "Intelligent transport systems – Information exchange – Part 1",
-            "published": "2022",
-            "edition": "3",
-            "pages": "153"
-        }),
+        ("CEN_TS_12345", {"standard": "CEN/TS 12345",
+                          "name": "Traffic Management Systems – Example Standard",
+                          "published": "2025", "edition": "1", "pages": "100"}),
+        ("ISO_15622", {"standard": "ISO 15622",
+                       "name": "Intelligent transport systems – Adaptive cruise control systems – Performance requirements",
+                       "published": "2018", "edition": "3", "pages": "24"}),
+        ("EN_ISO_12855", {"standard": "EN ISO 12855",
+                          "name": "Intelligent transport systems – Information exchange – Part 1",
+                          "published": "2022", "edition": "3", "pages": "153"}),
     ]
-    
     for folder, meta in extracts:
-        extract_dir = output_dir / folder
-        extract_dir.mkdir()
-        
-        # Write index.md with front-matter
+        d = extracts_dir / folder
+        d.mkdir()
         fm = [
             "---",
             f"published: {meta['published']}",
@@ -222,134 +269,98 @@ def test_navigation_generation(sample_output_dir, tmp_path):
             "",
             "This is a test extract.",
         ]
-        (extract_dir / "index.md").write_text("\n".join(fm), encoding="utf-8")
-    
-    # Run gen_nav
-    gen_nav.main.__globals__["OUT"] = str(output_dir)
+        (d / "index.md").write_text("\n".join(fm), encoding="utf-8")
+
+    # Point gen_nav at the temp tree/config.
+    g = gen_nav.main.__globals__
+    g["OUT"] = str(output_dir)
+    g["EXTRACTS"] = str(extracts_dir)
+    g["MKDOCS_YML"] = str(mkdocs_yml)
+    g["CSS_SRC"] = str(css_src)
     gen_nav.main()
-    
-    # --- Test SUMMARY.md ---
-    summary_file = output_dir / "SUMMARY.md"
-    assert summary_file.exists(), "SUMMARY.md not generated"
-    
-    summary = summary_file.read_text(encoding="utf-8")
-    assert "# Summary" in summary, "SUMMARY.md missing header"
-    assert "[Overview](index.md)" in summary, "SUMMARY.md missing overview link"
-    
-    # Verify all 3 extracts present and sorted
-    assert "[CEN/TS 12345](CEN_TS_12345/index.md)" in summary
-    assert "[ISO 15622](ISO_15622/index.md)" in summary
-    assert "[EN ISO 12855](EN_ISO_12855/index.md)" in summary
-    
-    # Verify natural sort order (CEN before EN before ISO)
-    lines = summary.split("\n")
-    cen_line = next(i for i, l in enumerate(lines) if "CEN_TS_12345" in l)
-    en_line = next(i for i, l in enumerate(lines) if "EN_ISO_12855" in l)
-    iso_line = next(i for i, l in enumerate(lines) if "ISO_15622" in l and "EN_ISO" not in l)
-    assert cen_line < en_line < iso_line, "Extracts not sorted correctly"
-    
-    # --- Test index.md landing page ---
-    index_file = output_dir / "index.md"
-    assert index_file.exists(), "index.md not generated"
-    
-    landing = index_file.read_text(encoding="utf-8")
-    assert "# ITS Standard Extracts" in landing, "Landing page missing title"
-    assert "An extract does **not** replace the standard itself" in landing, "Landing page missing intro text"
-    
-    # Verify all 3 extracts with new format: **[STANDARD:YEAR]**
+
+    # --- Test mkdocs nav block ---
+    yml = mkdocs_yml.read_text(encoding="utf-8")
+    assert "- Extracts:" in yml, "nav missing Extracts section"
+    assert "extracts/CEN_TS_12345/index.md" in yml
+    assert "extracts/ISO_15622/index.md" in yml
+    assert "extracts/EN_ISO_12855/index.md" in yml
+
+    # Natural sort order (CEN before EN before ISO)
+    lines = yml.split("\n")
+    cen = next(i for i, l in enumerate(lines) if "CEN_TS_12345" in l)
+    en = next(i for i, l in enumerate(lines) if "EN_ISO_12855" in l)
+    iso = next(i for i, l in enumerate(lines) if "ISO_15622" in l and "EN_ISO" not in l)
+    assert cen < en < iso, "Extracts not sorted correctly"
+
+    # --- Test landing page ---
+    landing = (output_dir / "index.md").read_text(encoding="utf-8")
+    assert "# ITS Standard Extracts" in landing
+    assert "An extract does **not** replace the standard itself" in landing
     assert "CEN/TS 12345:2025" in landing
     assert "ISO 15622:2018" in landing
     assert "EN ISO 12855:2022" in landing
+    # Landing links use the extracts/ path
+    assert "(extracts/CEN_TS_12345/index.md)" in landing
+
+    # --- Test CSS copied into output/stylesheets ---
+    assert (output_dir / "stylesheets" / "extra.css").exists()
 
 
 @pytest.mark.integration
-def test_preprocessor_transform():
-    """Test frontmatter_preprocessor.py transform function."""
-    # Test content with full front-matter
-    input_md = """---
-published: 2025
-edition: 2
-pages: 123
-title: "ISO 12345 - Extract"
-standard: "ISO 12345"
-name: "Intelligent transport systems – Example Standard – Part 1: Specification"
-annotation: "This Extract does not replace the technical standard itself."
-note: "Note: This Extract presents selected chapters."
----
+def test_metadata_macro_render():
+    """The macros module renders the standard-metadata box from front matter."""
+    import macros
 
-## Introduction
+    meta = {
+        "name": "Intelligent transport systems – Example – Part 1",
+        "standard": "ISO 12345",
+        "published": "2025",
+        "edition": "2",
+        "pages": "123",
+        "annotation": "This Extract does not replace the technical standard itself.",
+    }
 
-This is the body content.
+    class _Env:
+        pass
 
-## 3 Terms and definitions
+    env = _Env()
+    env.macro = lambda f: f  # capture decorator
+    # define_env registers the macro on env; emulate by calling the inner fn.
+    captured = {}
 
-Some terms here.
-"""
-    
-    output = frontmatter_preprocessor.transform(input_md)
-    
-    # --- Test YAML stripped ---
-    assert not output.startswith("---"), "YAML front-matter not stripped"
-    assert "published: 2025" not in output, "Front-matter fields still present"
-    
-    # --- Test H1 title injected ---
-    assert output.startswith("# Intelligent transport systems"), "H1 title not injected from 'name'"
-    
-    # --- Test metadata line formatted ---
-    assert "**ISO 12345**" in output, "Standard not in metadata line"
-    assert "Published 2025 (Edition 2)" in output, "Published/Edition not formatted correctly"
-    assert "123 pages" in output, "Pages not in metadata line"
-    
-    # --- Test annotation rendered ---
-    assert "*This Extract does not replace" in output, "Annotation not italicized"
-    
-    # --- Test body preserved ---
-    assert "## Introduction" in output, "Body content not preserved"
-    assert "## 3 Terms and definitions" in output, "Body headings not preserved"
+    class _Reg:
+        def macro(self, f):
+            captured[f.__name__] = f
+            return f
+
+    macros.define_env(_Reg())
+    html = captured["render_standard_metadata"](meta)
+
+    assert "<strong><em>Intelligent transport systems" in html
+    assert "standard-metadata" in html
+    assert "<strong>Published:</strong> 2025" in html
+    assert "<strong>Edition:</strong> 2" in html
+    assert "<strong>Pages:</strong> 123" in html
+    assert "does not replace" in html
 
 
 @pytest.mark.integration
-def test_preprocessor_transform_missing_fields():
-    """Test preprocessor handles missing optional fields gracefully."""
-    input_md = """---
-published: 2025
-pages: 100
-title: "ISO 99999 - Extract"
-standard: "ISO 99999"
-name: "Test Standard"
----
+def test_metadata_macro_missing_fields():
+    """Macro omits absent optional fields gracefully."""
+    import macros
 
-## Content
+    captured = {}
 
-Body text.
-"""
-    
-    output = frontmatter_preprocessor.transform(input_md)
-    
-    # Title injected
-    assert output.startswith("# Test Standard"), "Title not injected"
-    
-    # Published without edition
-    assert "Published 2025" in output
-    assert "(Edition" not in output, "Edition mentioned when not present"
-    
-    # Pages present
-    assert "100 pages" in output
+    class _Reg:
+        def macro(self, f):
+            captured[f.__name__] = f
+            return f
 
-
-@pytest.mark.integration
-def test_preprocessor_transform_no_frontmatter():
-    """Test preprocessor leaves content unchanged when no front-matter present."""
-    input_md = """# Regular Markdown
-
-This has no front-matter.
-
-## Section
-
-Content here.
-"""
-    
-    output = frontmatter_preprocessor.transform(input_md)
-    
-    # Content unchanged
-    assert output == input_md, "Content without front-matter was modified"
+    macros.define_env(_Reg())
+    html = captured["render_standard_metadata"](
+        {"name": "Test Standard", "standard": "ISO 99999", "published": "2025", "pages": "100"}
+    )
+    assert "<strong>Published:</strong> 2025" in html
+    assert "Edition:" not in html, "Edition shown when not present"
+    assert "<strong>Pages:</strong> 100" in html

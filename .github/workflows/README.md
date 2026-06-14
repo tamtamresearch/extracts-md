@@ -1,174 +1,66 @@
 # GitHub Actions Workflows
 
-## deploy.yml - Deploy to GitHub Pages
+## deploy.yml — CI (validate, no deploy)
 
-This workflow automatically builds and deploys the mdBook site to GitHub Pages whenever changes are pushed to the `master` branch.
+> Despite the filename, this workflow **does not deploy** anything. This
+> repository only produces the Markdown in `output/`. The production ISO-TC204
+> site is built and deployed from a separate repository; the
+> `output/extracts/<doc>/` folders are copied there manually.
 
-### Workflow Steps
+The workflow validates the conversion pipeline on every push to `master`, on
+pull requests, and on manual dispatch.
 
-The workflow runs as a single job with sequential steps:
+### Steps
 
-**Steps:**
-1. **Checkout repository** - Get the latest code
-2. **Install mise** - Tool version manager (provides uv, mdbook, Python, watchexec)
-3. **Run preflight checks** - Validates Python dependencies
-4. **Run test suite** - All tests must pass
-5. **Check documents** - Fail early if any `.docx` has unconvertible content (e.g. vector EMF/WMF figures)
-6. **Convert documents** - Word `.docx` → Markdown with figures
-7. **Generate navigation** - Create `SUMMARY.md` and landing page
-8. **Build mdBook** - Generate static site in `book/` directory
-9. **Deploy to gh-pages** - Push `book/` contents to `gh-pages` branch
+1. **Checkout repository** — get the latest code.
+2. **Install mise** — tool version manager (provides `uv`, Python, `watchexec`).
+3. **Run preflight checks** — validate Python dependencies.
+4. **Run test suite** — all tests must pass (`mise run test`).
+5. **Check documents** — fail early if any `.docx` has unconvertible content
+   (e.g. vector EMF/WMF figures); see `mise run check`.
+6. **Convert documents** — `input/*.docx` → `output/extracts/<doc>/index.md`.
+7. **Generate navigation** — regenerate the mkdocs `nav:` block + landing page.
+8. **Build mkdocs site (strict)** — `uv run mkdocs build --strict` to catch
+   broken links / config.
+9. **Upload artifact** — the built `site/` is uploaded for inspection.
 
-**If any step fails:** The workflow stops and no deployment occurs.
+**If any step fails:** the workflow stops; nothing is published.
 
 ### Triggers
 
-- **Push to master:** Automatically runs on every push
-- **Manual trigger:** Can be run manually via GitHub Actions UI (workflow_dispatch)
+- **Push to `master`** and **pull requests** — runs automatically.
+- **Manual** — via the Actions UI (`workflow_dispatch`).
 
 ### Permissions
 
-The workflow requires:
-- `contents: write` - Push to `gh-pages` branch
-
-### Concurrency
-
-Only one deployment can run at a time (`group: "pages"`). If a new deployment starts while one is running, the old one is cancelled.
-
-## Setup Instructions
-
-### 1. Push to Master
-
-The workflow will run automatically on the next push to `master` and create a `gh-pages` branch with the built site.
-
-### 2. Enable GitHub Pages
-
-1. Go to repository **Settings** → **Pages**
-2. Under "Source", select **Deploy from a branch**
-3. Select branch: **gh-pages**
-4. Select folder: **/ (root)**
-5. Click **Save**
-
-### 3. Monitor Workflow
-
-1. Go to the **Actions** tab in GitHub
-2. Click on the latest workflow run
-3. View logs for the deployment
-
-### 4. Access the Site
-
-Once deployed, the site will be available at:
-```
-https://<username>.github.io/<repository>/
-```
+`contents: read` only — the workflow never writes to the repository.
 
 ## Troubleshooting
 
-### Tests Fail
+### Tests fail
 
-**Problem:** The test job fails, preventing deployment.
+1. Check the job logs.
+2. Reproduce locally: `mise run test`.
+3. Fix and push.
 
-**Solution:**
-1. Check the test job logs in GitHub Actions
-2. Run tests locally: `mise run test`
-3. Fix any failing tests
-4. Push the fix
+### Vector figure rejected
 
-### Build Fails
+`mise run check` / `mise run convert` fails with a `vector image (EMF/WMF)`
+error when a `.docx` contains a vector figure. Open the document, convert the
+figure to PNG/JPEG, re-embed it, and rerun. `mise run check` lists every
+affected document in one pass.
 
-**Problem:** The build job fails to convert documents or build the site.
+### Build fails
 
-**Solution:**
-1. Check the build job logs
-2. Verify all Word documents are valid: `mise run convert`
-3. Test the build locally: `mise run all`
-4. Check for missing dependencies or configuration issues
+`uv run mkdocs build --strict` fails on broken links or bad config. Reproduce
+locally with `mise run build` (or `uv run mkdocs serve`) and inspect the output.
 
-### Deploy Fails
-
-**Problem:** The deploy step fails to push to `gh-pages` branch.
-
-**Solution:**
-1. Check workflow has `contents: write` permission (already configured)
-2. Verify no branch protection rules on `gh-pages`
-3. Check the Actions logs for specific error messages
-
-### Vector Figure Rejected (in CI)
-
-**Problem:** The "Convert documents" (or "Check documents") step fails with a `vector image (EMF/WMF)` error.
-
-**Cause:** A `.docx` in `input/` contains a vector (EMF/WMF) figure. The converter
-no longer depends on LibreOffice and rejects vector figures outright.
-
-**Solution:**
-1. Run `mise run check` locally to list every offending document.
-2. Open each one, convert the vector figure to PNG/JPEG, re-embed it, and save.
-3. Push the fixed `.docx`. CI will then convert cleanly.
-
-## Local Testing
-
-Before pushing, test the workflow steps locally:
+## Local testing
 
 ```sh
-# Run what the test job does
 mise run preflight
 mise run test
-
-# Run what the build job does
-mise run convert
-mise run gen
-mise run build
-
-# Preview the result
-mise run serve
+mise run check
+mise run all      # convert + gen + build (site/)
+mise run serve    # preview locally
 ```
-
-## Workflow Customization
-
-### Change Branch
-
-To deploy from a different branch, edit `deploy.yml`:
-
-```yaml
-on:
-  push:
-    branches:
-      - main  # Change from 'master' to 'main'
-```
-
-### Add Slack/Discord Notifications
-
-Add a notification step at the end of the deploy job:
-
-```yaml
-- name: Notify on deployment
-  if: success()
-  run: |
-    curl -X POST ${{ secrets.WEBHOOK_URL }} \
-      -d '{"text":"Deployed to GitHub Pages!"}'
-```
-
-### Cache Dependencies
-
-Speed up the workflow by caching mise tools:
-
-```yaml
-- name: Cache mise tools
-  uses: actions/cache@v3
-  with:
-    path: ~/.local/share/mise
-    key: ${{ runner.os }}-mise-${{ hashFiles('mise.toml') }}
-```
-
-## Security
-
-- **Secrets:** No secrets are required for basic deployment
-- **Permissions:** Minimal permissions are granted (read contents, write pages)
-- **Isolation:** Each job runs in a fresh Ubuntu container
-
-## Monitoring
-
-View deployment status:
-1. **Actions tab:** See all workflow runs
-2. **Commit badges:** Green checkmark = tests passed and deployed
-3. **Environment:** Settings → Environments → `github-pages` shows deployment history

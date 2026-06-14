@@ -1,11 +1,14 @@
 [project]
 name = "its-extracts"
 version = "0.1.0"
-description = "Convert ISO/CEN/EN standard extracts (docx) to Markdown for an mdBook site"
+description = "Convert ISO/CEN/EN standard extracts (docx) to Markdown for an mkdocs site"
 requires-python = ">=3.10"
 dependencies = [
     "python-docx>=1.1",
     "pillow>=10.0",
+    "mkdocs-material>=9.5",
+    "pymdown-extensions>=10.12",
+    "mkdocs-macros-plugin>=1.0",
 ]
 
 [dependency-groups]

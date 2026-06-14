@@ -6,8 +6,10 @@
 
 Convert Microsoft Word *"Extract from the Technical Standard"* documents into
 clean Markdown — with YAML front-matter, extracted figures and faithful tables —
-and publish them on website for ISO/TC 204. Optionally a searchable [mdBook](https://rust-lang.github.io/mdBook/)
-website can be generated.
+for the ISO/TC 204 website. The Markdown in `output/` is the deliverable (copied
+into the production [mkdocs](https://www.mkdocs.org/) site repository); a local
+[mkdocs Material](https://squidfunk.github.io/mkdocs-material/) build mirrors the
+production rendering for preview.
 
 > An *extract* summarises selected chapters of a source standard and retains the
 > original chapter numbering. It is **informative only** and does not replace the
@@ -26,9 +28,13 @@ website can be generated.
   rejected; convert them to PNG/JPEG inside the `.docx` first.
 - **Tables.** Renders Word tables as HTML `<table>` with `colspan`/`rowspan`, so
   merged cells survive and the text stays selectable, searchable and translatable.
-- **Site.** Generates the mdBook navigation and builds a static, full-text-search
-  website. A preprocessor strips the YAML front-matter and injects a title header
-  so pages render cleanly.
+- **Captions.** Figure/table captions are emitted as `pymdownx.blocks.caption`
+  blocks (`/// caption`) — verbatim docx text, no auto-numbering. Figure captions
+  render **below** the image; table captions **above** the table. They are
+  centred/styled by the mkdocs Material theme.
+- **Site.** Builds a local mkdocs Material site (full-text search) that mirrors
+  the production ISO-TC204 site; `gen_nav.py` regenerates the nav and a landing
+  page, and `macros.py` injects the standard-metadata box from front matter.
 - **Reproducible toolchain.** [`mise`](https://mise.jdx.dev) pins the tools;
   [`uv`](https://docs.astral.sh/uv/) manages Python and dependencies.
 
@@ -37,24 +43,25 @@ website can be generated.
 ```
 extracts-md/
 ├── input/                       # source .docx files
-├── output/                      # generated Markdown — the canonical deliverable
-│   ├── index.md                 # landing page          (generated)
-│   ├── SUMMARY.md               # mdBook table of contents (generated)
-│   └── <STANDARD>/
+├── output/                      # generated Markdown — the canonical deliverable; mkdocs docs_dir
+│   ├── index.md                 # landing page             (generated)
+│   ├── stylesheets/extra.css    # figure/caption styling   (generated copy)
+│   └── extracts/<STANDARD>/
 │       ├── index.md             # the extract, with YAML front-matter
 │       └── fig-N.png            # extracted figures
-├── book/                        # built static site (git-ignored)
+├── site/                        # built mkdocs site (git-ignored)
 ├── tests/                       # pytest test suite
 │   ├── test_preflight.py        # environment validation
 │   ├── test_integration.py      # end-to-end tests
 │   ├── unit/                    # function-level tests
 │   └── fixtures/                # test data (real .docx + expected output)
-├── convert_docx.py              # docx → output/<doc>/index.md (+ figures, HTML tables)
-├── gen_nav.py                   # regenerate SUMMARY.md + landing index.md
-├── frontmatter_preprocessor.py  # mdBook preprocessor: strip front-matter, add H1
-├── book.toml                    # mdBook configuration (src = output/)
+├── convert_docx.py              # docx → output/extracts/<doc>/index.md (+ figures, captions, tables)
+├── gen_nav.py                   # regenerate mkdocs nav + landing page; copy theme/extra.css
+├── macros.py                    # mkdocs-macros: standard-metadata box
+├── mkdocs.yml                   # mkdocs site config (docs_dir = output/)
+├── theme/extra.css              # source CSS for figure/caption styling
 ├── pytest.ini                   # pytest configuration
-├── pyproject.toml               # Python dependencies (python-docx, Pillow, pytest)
+├── pyproject.toml               # Python dependencies (python-docx, Pillow, mkdocs-material, …)
 ├── .python-version              # Python version, provisioned by uv
 └── mise.toml                    # tool + task definitions
 ```
@@ -69,52 +76,36 @@ extracts-md/
   # or: brew install mise   |   curl https://mise.run | sh
   ```
 
-`mise` provides `uv`, `mdbook`, and `watchexec`; `uv` provides Python
-(`.python-version`) and the packages in `pyproject.toml`. No external binaries
-need to be installed by hand.
+`mise` provides `uv` and `watchexec`; `uv` provides Python (`.python-version`)
+and the packages in `pyproject.toml` (including mkdocs Material). No external
+binaries need to be installed by hand.
 
 ## Quick start
 
 ```sh
-mise install      # install pinned tools: uv + mdbook + watchexec
-mise run setup    # uv installs Python + dependencies
-mise run all      # convert  →  generate nav  →  build site into book/
-mise run serve    # local preview with live reload
+mise install      # install pinned tools: uv + watchexec
+mise run setup    # uv installs Python + dependencies (incl. mkdocs)
+mise run all      # convert  →  generate nav  →  build site into site/
+mise run serve    # local preview with live reload (mkdocs)
 mise run dev      # watch input/*.docx → convert/gen + serve with browser reload
 ```
 
-## GitHub Pages Deployment
+## Publishing
 
-The repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically:
-
-1. **Runs tests** on every push to `master`
-2. **Converts documents** from Word to Markdown
-3. **Builds the mdBook** static site
-4. **Deploys to `gh-pages` branch**
-
-### Setup
-
-1. **Push to master** — the workflow runs automatically and creates a `gh-pages` branch
-
-2. **Enable GitHub Pages** in repository settings:
-   - Go to Settings → Pages
-   - Source: **Deploy from a branch**
-   - Branch: **gh-pages** / **/ (root)**
-   - Save
-
-3. **Access the site** at: `https://<username>.github.io/<repository>/`
-
-The workflow ensures that only tested, validated content is deployed to the `gh-pages` branch.
+This repository **only produces `output/`**. The production ISO-TC204 site is
+built and deployed from a separate repository; the `output/extracts/<doc>/`
+folders are copied there manually. The local mkdocs build (`mise run build` →
+`site/`) exists so the preview matches the production Material rendering.
 
 ### Tasks
 
 | Task                   | Description                                               |
 |------------------------|-----------------------------------------------------------|
 | `mise run setup`       | `uv sync` — install Python and dependencies               |
-| `mise run convert`     | `input/*.docx` → `output/<doc>/index.md` (+ figures)      |
-| `mise run gen`         | regenerate `SUMMARY.md` and the landing page              |
-| `mise run build`       | build the static site into `book/`                        |
-| `mise run serve`       | serve locally with live reload                            |
+| `mise run convert`     | `input/*.docx` → `output/extracts/<doc>/index.md` (+ figures) |
+| `mise run gen`         | regenerate the mkdocs nav + landing page                  |
+| `mise run build`       | build the static mkdocs site into `site/`                 |
+| `mise run serve`       | serve locally with live reload (mkdocs)                   |
 | `mise run all`         | `convert` + `gen` + `build`                               |
 | `mise run check`       | scan `input/*.docx` for unconvertible content (vector figures) |
 | `mise run watch`       | re-run `convert` + `gen` whenever an input `.docx` changes |
@@ -152,7 +143,7 @@ After (Markdown): `` `{joint-iso-itut(2) its(28) gdd(5)}` ``
 
 ### Front-matter
 
-Each `output/<doc>/index.md` begins with YAML front-matter:
+Each `output/extracts/<doc>/index.md` begins with YAML front-matter:
 
 ```yaml
 ---
@@ -177,28 +168,33 @@ line (`edition`/`pages` are omitted when absent).
 ### Body
 
 - Starts at the **Introduction**; original clause numbering is preserved.
-- Word `Heading 1` is demoted to `##`, so each page has a single H1 — injected
-  from `name` by the preprocessor at build time (the front-matter never appears
-  on the rendered page).
+- Word `Heading 1` is demoted to `##`. mkdocs reads the YAML front matter
+  natively, and `macros.py` injects the standard-metadata box (name +
+  Published/Edition/Pages + annotation) at the top of each extract page.
 - **Inline formatting preserved:**
   - Bold text → `**text**`
   - Italic text → `*text*`
   - Monospace/code → `` `text` ``
   - Code formatting takes precedence (monospace text ignores bold/italic)
   - Consecutive runs with identical formatting are merged for clean output
-- Tables → HTML; figures → `![…](fig-N.png)` with their captions.
+- Tables → HTML; figures → `![Figure N](fig-N.png){.figure}`.
+- **Captions** → `pymdownx.blocks.caption` blocks. Figure captions are appended
+  (below the image, `/// caption`); table captions are prepended (above,
+  `/// caption | <`). Caption text is kept verbatim from the docx.
 
 ## Customisation
 
-- **Page title.** The injected H1 uses the full `name`. To use the shorter
-  `{standard} — Extract` instead, edit `transform()` in
-  `frontmatter_preprocessor.py`.
-- **mdBook theme / search / folding.** Configure in `book.toml`.
-- **Tool versions.** Pin in `mise.toml` (`uv`, `mdbook`) and `.python-version`.
+- **Metadata box.** Edit `render_standard_metadata` in `macros.py`.
+- **Figure/caption styling.** Edit `theme/extra.css` (copied to
+  `output/stylesheets/extra.css` by `gen_nav.py`).
+- **mkdocs theme / extensions / search.** Configure in `mkdocs.yml`. The `nav:`
+  block between the `GENERATED NAV` markers is regenerated by `gen_nav.py`.
+- **Tool versions.** Pin in `mise.toml` (`uv`, `watchexec`) and `.python-version`.
 
 ## Testing
 
-The project includes a comprehensive pytest-based test suite with 35 tests:
+A pytest-based test suite covers conversion, captions, navigation, and the
+metadata macro:
 
 ```sh
 mise run preflight        # validate environment (dependencies)
@@ -209,16 +205,19 @@ mise run test-unit        # function-level tests (implementation-specific)
 
 ### Test Coverage
 
-- **Pre-flight tests** (5): Environment validation, dependency checks
-- **Integration tests** (6): Real extract conversion, navigation generation, preprocessor, inline formatting
-- **Unit tests** (24): Function-level tests for `clean()`, `yaml_q()`, formatting conversion, etc.
+- **Pre-flight tests**: environment validation, dependency checks
+- **Integration tests**: real extract conversion (figures, captions, tables),
+  navigation generation, metadata macro
+- **Unit tests**: `clean()`, `yaml_q()`, inline formatting, caption detection
+  (`is_caption`/`caption_kind`/`caption_block`), vector-figure rejection
 
 The integration tests use a real extract (`ISO_TS_22741-10.docx`) and validate:
 - Front-matter structure and all required fields
-- Figure extraction (2 PNG files)
+- Figure extraction (2 PNG files) with `{.figure}` references
+- Caption blocks: figure caption appended, table caption prepended (once each)
 - Table rendering as HTML with `colspan`/`rowspan`
 - Heading demotion (H1 → H2)
-- Navigation file generation (`SUMMARY.md`, `index.md`)
+- mkdocs nav block + landing page generation
 
 ## Troubleshooting
 

@@ -1,18 +1,28 @@
 #!/usr/bin/env python3
-"""Generate the mdBook navigation from the converted extracts.
+"""Generate mkdocs navigation and the landing page from the converted extracts.
 
-Scans  output/<doc>/index.md , reads each front-matter, and writes:
-  * output/SUMMARY.md   - mdBook table of contents
-  * output/index.md     - landing page (overview table of all extracts)
+Scans  output/extracts/<doc>/index.md , reads each front-matter, and:
+  * rewrites the `nav:` block in mkdocs.yml (between GENERATED NAV markers)
+  * writes  output/index.md   - landing page (overview of all extracts)
+  * copies  theme/extra.css -> output/stylesheets/extra.css  (preview styling)
 
 Standard library only. Re-run whenever extracts are added or changed.
 """
 import glob
 import os
 import re
+import shutil
 import sys
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else "output"
+EXTRACTS = os.path.join(OUT, "extracts")
+
+REPO = os.path.dirname(os.path.abspath(__file__))
+MKDOCS_YML = os.path.join(REPO, "mkdocs.yml")
+CSS_SRC = os.path.join(REPO, "theme", "extra.css")
+
+NAV_START = "# >>> GENERATED NAV START"
+NAV_END = "# <<< GENERATED NAV END"
 
 
 def field(fm, key):
@@ -42,23 +52,28 @@ def sort_key(folder):
             for t in re.split(r"(\d+)", folder)]
 
 
-def main():
-    docs = []
-    for idx in glob.glob(os.path.join(OUT, "*", "index.md")):
-        folder = os.path.basename(os.path.dirname(idx))
-        meta = read_meta(idx)
-        docs.append((folder, meta))
-    docs.sort(key=lambda d: sort_key(d[0]))
-
-    # ---- SUMMARY.md ----
-    s = ["# Summary", "", "[Overview](index.md)", ""]
+def write_nav(docs):
+    """Rewrite the nav block in mkdocs.yml between the GENERATED markers."""
+    nav = ["nav:", "  - Overview: index.md", "  - Extracts:"]
     for folder, m in docs:
         label = m["standard"] or folder
-        s.append(f"- [{label}]({folder}/index.md)")
-    with open(os.path.join(OUT, "SUMMARY.md"), "w", encoding="utf-8") as fh:
-        fh.write("\n".join(s) + "\n")
+        nav.append(f"      - {label}: extracts/{folder}/index.md")
+    block = NAV_START + "\n" + "\n".join(nav) + "\n" + NAV_END
 
-    # ---- landing index.md ----
+    text = open(MKDOCS_YML, encoding="utf-8").read()
+    pattern = re.compile(
+        re.escape(NAV_START) + r".*?" + re.escape(NAV_END), re.S
+    )
+    if not pattern.search(text):
+        raise SystemExit(
+            "mkdocs.yml is missing the GENERATED NAV markers; cannot update nav."
+        )
+    text = pattern.sub(block, text)
+    with open(MKDOCS_YML, "w", encoding="utf-8") as fh:
+        fh.write(text)
+
+
+def write_landing(docs):
     p = [
         "# ITS Standard Extracts",
         "",
@@ -68,33 +83,45 @@ def main():
         "An extract does **not** replace the standard itself.",
         "",
     ]
-    
     for folder, m in docs:
-        # Build standard identifier with year
-        std_line = f"**[{m['standard'] or folder}:{m['published']}]({folder}/index.md)**"
-        
+        std_line = (
+            f"**[{m['standard'] or folder}:{m['published']}]"
+            f"(extracts/{folder}/index.md)**"
+        )
         p.append(std_line)
-        
-        # Build name parts: combine earlier parts, show last part separately
-        name_parts = [m['name_1'], m['name_2'], m['name_3']]
-        name_parts = [part for part in name_parts if part]  # filter empty
-        
+
+        name_parts = [m["name_1"], m["name_2"], m["name_3"]]
+        name_parts = [part for part in name_parts if part]
         if len(name_parts) == 1:
-            # Only one part - show as single line
             p.append(name_parts[0])
         elif len(name_parts) > 1:
-            # Multiple parts - combine all but last with "–", add hard break before last part
             combined = " – ".join(name_parts[:-1])
-            # Two spaces at end = hard line break in Markdown
-            p.append(combined + "  ")
+            p.append(combined + "  ")  # two trailing spaces = hard break
             p.append(name_parts[-1])
-        
-        p.append("")  # blank line between entries
-    
+        p.append("")
+
     with open(os.path.join(OUT, "index.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(p) + "\n")
 
-    print(f"wrote SUMMARY.md and index.md for {len(docs)} extracts")
+
+def copy_css():
+    dst_dir = os.path.join(OUT, "stylesheets")
+    os.makedirs(dst_dir, exist_ok=True)
+    shutil.copyfile(CSS_SRC, os.path.join(dst_dir, "extra.css"))
+
+
+def main():
+    docs = []
+    for idx in glob.glob(os.path.join(EXTRACTS, "*", "index.md")):
+        folder = os.path.basename(os.path.dirname(idx))
+        docs.append((folder, read_meta(idx)))
+    docs.sort(key=lambda d: sort_key(d[0]))
+
+    write_nav(docs)
+    write_landing(docs)
+    copy_css()
+
+    print(f"wrote nav + landing page for {len(docs)} extracts")
 
 
 if __name__ == "__main__":

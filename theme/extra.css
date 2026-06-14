@@ -1,0 +1,38 @@
+/* extra.css — figure/table caption styling for the local mkdocs preview.
+ * Mirrors the production ISO-TC204 site so local == production.
+ * Copied into output/stylesheets/extra.css by gen_nav.py. */
+
+/* Figure/table caption text */
+figcaption {
+  font-style: italic;          /* Italicize the caption text */
+  font-size: 0.9em;            /* Slightly smaller font size */
+  color: #666;                 /* Subtle gray for contrast */
+  text-align: center;          /* Center the caption */
+  margin-top: 8px;
+  margin-bottom: 16px;
+  max-width: 100%;
+  line-height: 1.4;
+}
+
+/* Figure container: centered and responsive */
+figure {
+  display: block;
+  margin: 1em auto;
+  text-align: center;
+}
+
+/* Center tables wrapped in a figure (table captions) */
+figure table {
+  margin: 0 auto;
+}
+
+/* Images flagged with the .figure class */
+img.figure {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
+}

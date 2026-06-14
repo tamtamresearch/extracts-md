@@ -15,7 +15,12 @@ from convert_docx import (
     scan_doc,
     check,
     VectorFigureError,
+    is_caption,
+    caption_kind,
+    caption_label,
+    caption_block,
 )
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 
 def _vector_docx():
@@ -340,3 +345,66 @@ def test_check_returns_bad_count(tmp_path, capsys):
     assert check(str(empty)) == 0
     out = capsys.readouterr().out
     assert "All documents are convertible." in out
+
+
+# ---------- caption helpers ----------
+
+def _para(text, *, center=False, bold=False):
+    doc = docx.Document()
+    p = doc.add_paragraph()
+    if center:
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = p.add_run(text)
+    if bold:
+        r.bold = True
+    return p
+
+
+@pytest.mark.unit
+def test_is_caption_accepts_centered_figure():
+    p = _para("Figure 1 – Architecture overview", center=True)
+    assert is_caption(p) is True
+
+
+@pytest.mark.unit
+def test_is_caption_accepts_bold_table():
+    p = _para("Table 2 — Conformance matrix", bold=True)
+    assert is_caption(p) is True
+
+
+@pytest.mark.unit
+def test_is_caption_rejects_plain_prose():
+    # Starts with "Table 1" but is neither centred nor bold -> not a caption.
+    p = _para("Table 1 defines user needs and the obligation to comply.")
+    assert is_caption(p) is False
+
+
+@pytest.mark.unit
+def test_is_caption_rejects_non_figure_text():
+    p = _para("This is just a normal centred sentence.", center=True)
+    assert is_caption(p) is False
+
+
+@pytest.mark.unit
+def test_caption_kind():
+    assert caption_kind("Figure 1 – x") == "figure"
+    assert caption_kind("Table 3 — y") == "table"
+    assert caption_kind("table 3") == "table"
+
+
+@pytest.mark.unit
+def test_caption_label():
+    assert caption_label("Figure 1 – Long descriptive text") == "Figure 1"
+    assert caption_label("Table 2 — Another") == "Table 2"
+
+
+@pytest.mark.unit
+def test_caption_block_figure_appends():
+    out = caption_block("Figure 1 – x", above=False)
+    assert out == "/// caption\nFigure 1 – x\n///"
+
+
+@pytest.mark.unit
+def test_caption_block_table_prepends():
+    out = caption_block("Table 1 — x", above=True)
+    assert out == "/// caption | <\nTable 1 — x\n///"

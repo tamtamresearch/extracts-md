@@ -2,48 +2,54 @@
 
 ## Project Overview
 
-Converts Word `.docx` extracts of ISO/CEN/EN standards to Markdown with YAML front-matter, then builds an mdBook static site. Three Python scripts orchestrate the pipeline; `mise` manages tooling and tasks.
+Converts Word `.docx` extracts of ISO/CEN/EN standards to Markdown with YAML front-matter, then previews them with an mkdocs (Material) static site that mirrors the production ISO-TC204 site. Python scripts orchestrate the pipeline; `mise` manages tooling and tasks.
+
+> **This repo only produces `output/`.** The production site is built/deployed
+> from a separate repository; `output/extracts/<doc>/` is copied there manually.
+> The local mkdocs build exists so the preview matches production rendering.
 
 ## Critical Commands
 
 **Always use `mise run <task>` — never call Python scripts directly.**
 
 ```sh
-mise install              # first time: install uv + mdbook
-mise run setup            # first time: install Python 3.12 + deps
+mise install              # first time: install uv + watchexec
+mise run setup            # first time: install Python 3.12 + deps (incl. mkdocs)
 mise run all              # full pipeline: convert + gen + build
-mise run serve            # preview with live reload
+mise run serve            # preview with live reload (mkdocs)
 mise run dev              # watch input/*.docx → convert/gen + serve with browser reload
 ```
 
 ### Individual Tasks
 
 ```sh
-mise run convert          # input/*.docx → output/<doc>/index.md (+ figures)
-mise run gen              # regenerate SUMMARY.md + landing page from front-matter
-mise run build            # mdbook build (auto-runs `gen` first)
+mise run convert          # input/*.docx → output/extracts/<doc>/index.md (+ figures)
+mise run gen              # regenerate mkdocs nav + landing page from front-matter
+mise run build            # mkdocs build (auto-runs `gen` first)
 mise run check            # scan input/*.docx for unconvertible content (e.g. vector figures)
 mise run watch            # re-run convert + gen whenever an input .docx changes
 ```
 
 `mise run dev` is the live-development entry point: it runs `watch` (re-converts
-on `.docx` edits) alongside `mdbook serve --open`, so editing a source document
+on `.docx` edits) alongside `mkdocs serve --open`, so editing a source document
 triggers conversion and the browser reloads automatically.
 
 ## Key Architecture
 
-- **Toolchain**: `mise` → `uv` → Python 3.12 + `python-docx` + `Pillow`; `mdbook` for site build
+- **Toolchain**: `mise` → `uv` → Python 3.12 + `python-docx` + `Pillow` + `mkdocs-material` + `pymdown-extensions` + `mkdocs-macros-plugin`
 - **Input**: `input/*.docx` files (Word extracts)
-- **Output**: `output/<doc>/index.md` (Markdown) + `output/<doc>/fig-N.png` (extracted images)
-- **Build**: `book/` (static site; git-ignored)
+- **Output**: `output/extracts/<doc>/index.md` (Markdown) + `output/extracts/<doc>/fig-N.png` (extracted images)
+- **Build**: `site/` (static mkdocs site; git-ignored)
 
-### Scripts
+### Scripts & config
 
-| Script                         | Purpose                                                   |
-|--------------------------------|-----------------------------------------------------------|
-| `convert_docx.py`              | Parse `.docx`, emit Markdown with YAML + HTML tables     |
-| `gen_nav.py`                   | Generate `SUMMARY.md` + landing page from front-matter   |
-| `frontmatter_preprocessor.py`  | mdBook preprocessor: strip YAML, inject title header     |
+| File                | Purpose                                                            |
+|---------------------|--------------------------------------------------------------------|
+| `convert_docx.py`   | Parse `.docx`, emit Markdown with YAML + HTML tables + caption blocks |
+| `gen_nav.py`        | Regenerate the mkdocs `nav:` block + landing page; copy `theme/extra.css` |
+| `macros.py`         | mkdocs-macros: inject the standard-metadata box on extract pages   |
+| `mkdocs.yml`        | mkdocs site config (Material, attr_list, md_in_html, blocks.caption) |
+| `theme/extra.css`   | Figure/figcaption styling (copied to `output/stylesheets/extra.css`) |
 
 **Never invoke scripts directly**; use `mise run <task>` so the uv-managed environment is active.
 
@@ -54,11 +60,11 @@ triggers conversion and the browser reloads automatically.
 1. Drop `.docx` in `input/`
 2. `mise run all`
 
-File naming: `input/ISO_12345.docx` → `output/ISO_12345/index.md`
+File naming: `input/ISO_12345.docx` → `output/extracts/ISO_12345/index.md`
 
 ### Front-Matter Structure
 
-Each `output/<doc>/index.md` begins with:
+Each `output/extracts/<doc>/index.md` begins with:
 
 ```yaml
 ---
@@ -82,9 +88,18 @@ note: "Note: This Extract presents selected chapters..."
 - Starts at **Introduction** heading; original clause numbering preserved
 - Word `Heading 1` → `##` (H2); `Heading 2` → `###`, etc.
 - Tables → HTML `<table>` with `colspan`/`rowspan` (merged cells preserved)
-- Figures → `![caption](fig-N.png)` with extracted images
+- Figures → `![Figure N](fig-N.png){.figure}` with extracted images
+- **Captions** → `pymdownx.blocks.caption` blocks (verbatim docx text, no
+  auto-numbering). pymdownx wraps the **preceding** block in a `<figure>`, so the
+  caption block is always emitted **after** its object: figures use `/// caption`
+  (figcaption renders below the image); tables/table-images use `/// caption | <`
+  (figcaption renders above). Caption paragraphs are detected by a
+  `Figure N`/`Table N` prefix **and** being centred / all-bold / a caption style
+  — so ordinary prose starting with "Table" is left untouched.
 
-At build time, `frontmatter_preprocessor.py` strips YAML and injects H1 title from `name` field.
+At render time, `macros.py` (`on_pre_page_macros`) injects the standard-metadata
+box (name + Published/Edition/Pages + annotation) from the YAML front matter.
+mkdocs reads the YAML front matter natively.
 
 ## Dependencies
 
@@ -108,34 +123,39 @@ every problematic document in one pass.
 
 ## Quirks & Gotchas
 
-1. **Task dependency**: `mise run build` and `mise run serve` both depend on `gen`, so SUMMARY.md is always regenerated before building.
-2. **Preprocessor execution**: `book.toml` calls `uv run python frontmatter_preprocessor.py` to ensure the venv is active.
+1. **Task dependency**: `mise run build` and `mise run serve` both depend on `gen`, so the nav + landing page are regenerated before building.
+2. **Nav generation**: `gen_nav.py` rewrites the `nav:` block in `mkdocs.yml` between the `# >>> GENERATED NAV START` / `# <<< GENERATED NAV END` markers — keep those markers intact.
 3. **Czech custom styles**: `convert_docx.py` maps Czech Word styles (`Text normy`, `Seznam v normě`, `Poznámka`, `NadpisTabObr`) to Markdown equivalents.
 4. **Vector figures abort conversion**: a `.docx` with EMF/WMF figures fails fast (`VectorFigureError`); convert those figures to raster (PNG/JPEG) first. `mise run check` reports them without aborting.
+5. **Captions need mkdocs**: the `/// caption ///` syntax only renders under mkdocs (the production renderer + the local preview). It is plain text in other Markdown viewers.
 
 ## File Locations
 
 ```
-input/           # source .docx files (add new extracts here)
-output/          # canonical Markdown deliverable (commit these)
-  index.md       # landing page (generated)
-  SUMMARY.md     # mdBook TOC (generated)
-  <STANDARD>/
-    index.md     # the extract with YAML front-matter
-    fig-N.png    # extracted figures
-book/            # built static site (git-ignored)
+input/                  # source .docx files (add new extracts here)
+output/                 # canonical Markdown deliverable (commit these); = mkdocs docs_dir
+  index.md              # landing page (generated)
+  stylesheets/extra.css # figure/caption styling (copied from theme/extra.css)
+  extracts/<STANDARD>/
+    index.md            # the extract with YAML front-matter
+    fig-N.png           # extracted figures
+site/                   # built mkdocs site (git-ignored)
+mkdocs.yml              # site config; nav block regenerated by gen_nav.py
+macros.py               # metadata-box macro (mkdocs-macros)
+theme/extra.css         # source CSS, copied into output/stylesheets/
 ```
 
 ## Common Mistakes to Avoid
 
 - **Don't run Python scripts directly** — always use `mise run <task>`
-- **Don't edit `output/SUMMARY.md` or `output/index.md` manually** — regenerated by `gen_nav.py`
-- **Don't edit front-matter in `output/<doc>/index.md`** unless fixing a parser bug
-- **Don't commit `book/` or `.venv/`** — both git-ignored
+- **Don't edit `output/index.md` manually** — regenerated by `gen_nav.py`
+- **Don't hand-edit the `nav:` block in `mkdocs.yml`** — regenerated by `gen_nav.py`
+- **Don't edit front-matter in `output/extracts/<doc>/index.md`** unless fixing a parser bug
+- **Don't commit `site/` or `.venv/`** — both git-ignored
 
 ## Testing
 
-Pytest-based test suite with 26 tests covering conversion, navigation, and preprocessing.
+Pytest-based test suite covering conversion, captions, navigation, and the metadata macro.
 
 ### Test Commands
 
@@ -154,8 +174,7 @@ tests/
 ├── test_integration.py       # end-to-end tests (safe during refactoring)
 ├── unit/                     # implementation-specific tests
 │   ├── test_unit_convert.py
-│   ├── test_unit_gen_nav.py
-│   └── test_unit_preprocessor.py
+│   └── test_unit_gen_nav.py
 └── fixtures/
     ├── docx/                 # real test extract (ISO_TS_22741-10.docx)
     └── sample_output/        # minimal extracts for gen_nav tests
@@ -163,9 +182,10 @@ tests/
 
 ### Key Tests
 
-- **Real extract conversion** (`test_real_extract_iso22741_10`): validates front-matter, figures, tables, heading demotion
-- **Navigation generation** (`test_navigation_generation`): validates SUMMARY.md and index.md generation
-- **Preprocessor transform** (`test_preprocessor_transform`): validates YAML stripping and H1 injection
+- **Real extract conversion** (`test_real_extract_iso22741_10`): validates front-matter, figures, caption blocks, tables, heading demotion
+- **Navigation generation** (`test_navigation_generation`): validates the mkdocs `nav:` block + landing page generation
+- **Metadata macro** (`test_metadata_macro_render`): validates the standard-metadata box rendering
+- **Caption detection** (`test_is_caption_*`): validates `Figure N`/`Table N` caption recognition vs. prose
 - **Vector figure rejection** (`test_convert_rejects_vector_figure`): validates that EMF/WMF figures fail fast
 
 ### Manual Verification
@@ -173,5 +193,5 @@ tests/
 After making changes, also verify:
 
 1. `mise run all` (should complete without errors)
-2. `mise run serve` (inspect site at http://localhost:3000)
-3. Spot-check a converted extract for correct front-matter, figures, and tables
+2. `mise run serve` (inspect site; mkdocs serves at http://127.0.0.1:8000)
+3. Spot-check a converted extract for correct front-matter, figures, captions, and tables

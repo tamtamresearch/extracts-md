@@ -374,13 +374,83 @@ def render_paragraph(p) -> str:
         m = re.search(r"(\d+)", style)
         level = int(m.group(1)) if m else 1
         return "#" * min(level + 1, 6) + " " + txt
-    if style in CAPTION_STYLES or re.match(r"^(Figure|Table)\b", txt):
-        return f"*{txt}*"
     if style in LIST_STYLES:
         return "- " + txt
     if style in NOTE_STYLES:
         return "> " + txt
     return txt
+
+
+# ---------- captions ----------
+
+CAPTION_RE_PREFIX = re.compile(r"^(Figure|Table)\b", re.IGNORECASE)
+
+
+def _para_centered(p) -> bool:
+    """True if the paragraph is centre-aligned (w:jc=center)."""
+    pPr = p._p.find(qn("w:pPr"))
+    if pPr is None:
+        return False
+    jc = pPr.find(qn("w:jc"))
+    return jc is not None and jc.get(qn("w:val")) == "center"
+
+
+def _para_all_bold(p) -> bool:
+    """True if the paragraph has runs and every run with text is bold."""
+    runs = p._p.findall(qn("w:r"))
+    saw_text = False
+    for r in runs:
+        if not _extract_run_text(r).strip():
+            continue
+        saw_text = True
+        rPr = r.find(qn("w:rPr"))
+        if rPr is None or rPr.find(qn("w:b")) is None:
+            return False
+    return saw_text
+
+
+def is_caption(p) -> bool:
+    """Detect a figure/table caption paragraph.
+
+    Requires the text to start with ``Figure N``/``Table N`` AND for the
+    paragraph to look like a caption (centred, all-bold, or a caption style).
+    This rejects ordinary prose that merely begins with the word "Table".
+    """
+    txt = clean(p.text)
+    if not CAPTION_RE_PREFIX.match(txt):
+        return False
+    style = p.style.name or ""
+    return (
+        style in CAPTION_STYLES
+        or _para_centered(p)
+        or _para_all_bold(p)
+    )
+
+
+def caption_kind(text: str) -> str:
+    """Return 'figure' or 'table' from the caption's leading word."""
+    return "table" if re.match(r"^Table\b", text.strip(), re.IGNORECASE) else "figure"
+
+
+def caption_label(text: str) -> str:
+    """Short alt text, e.g. 'Figure 1' / 'Table 2', from a caption string."""
+    m = re.match(r"^(Figure|Table)\s+([\w.\-]+)", text.strip(), re.IGNORECASE)
+    if m:
+        return f"{m.group(1)} {m.group(2)}"
+    return text.strip().split("\u2013")[0].strip()[:40]
+
+
+def caption_block(text: str, above: bool) -> str:
+    """Render a pymdownx generic caption block.
+
+    The block must be placed **immediately after** the object it captions
+    (image/table); pymdownx always wraps the *preceding* block in a ``<figure>``.
+    ``above=True`` (``| <``) renders the ``<figcaption>`` above the object
+    (for tables); otherwise it renders below (for figures). The generic
+    ``caption`` type adds no auto-number, so the verbatim docx text is preserved.
+    """
+    header = "/// caption | <" if above else "/// caption"
+    return f"{header}\n{text}\n///"
 
 
 # ---------- main convert ----------
@@ -434,23 +504,87 @@ def convert(path, outdir):
             if in_body:
                 blocks.append(("tbl", Table(child, doc)))
 
-    lines = []
-    for i, (kind, obj) in enumerate(blocks):
-        if kind == "tbl":
-            lines.append(table_html(obj, imgs))
+    # Identify caption paragraphs / image-bearing paragraphs up front.
+    is_cap = [kind == "p" and is_caption(obj) for kind, obj in blocks]
+    has_img = [kind == "p" and bool(para_blip_rids(obj._p))
+               for kind, obj in blocks]
+    # A caption paragraph that also carries its own image is "self-captioning";
+    # it is rendered on its own and must not be claimed by another caption.
+    self_cap = [is_cap[i] and has_img[i] for i in range(len(blocks))]
+
+    def _is_object(j):
+        """A figure/table object that a *separate* caption can attach to."""
+        return (
+            0 <= j < len(blocks)
+            and not self_cap[j]
+            and (blocks[j][0] == "tbl" or (has_img[j] and not is_cap[j]))
+        )
+
+    # Assign each (non-self) caption to exactly one owning object.
+    #   Figure caption -> the image *before* it.
+    #   Table caption  -> the object (table or image) *after* it; else before.
+    owner = {}  # caption_index -> object_index
+    for i, cap in enumerate(is_cap):
+        if not cap or self_cap[i]:
             continue
-        rids = para_blip_rids(obj._p)
+        kind_cap = caption_kind(clean(blocks[i][1].text))
+        order = (i - 1, i + 1) if kind_cap == "figure" else (i + 1, i - 1)
+        for j in order:
+            if _is_object(j) and j not in owner.values():
+                owner[i] = j
+                break
+
+    cap_for = {oj: ci for ci, oj in owner.items()}  # object_index -> caption_index
+
+    def _emit_image(rids, ctext):
+        """Emit an image (+ optional caption) for a paragraph's blip rids.
+
+        The pymdownx caption block always attaches to the *preceding* block, so
+        the caption is emitted **after** the image; ``above`` only controls
+        whether the figcaption renders above (tables) or below (figures) the
+        image inside the figure.
+        """
+        above = caption_kind(ctext) == "table" if ctext else False
+        label = caption_label(ctext) if ctext else ""
+        first = True
         for rid in rids:
             rel = imgs.save(rid)
-            # alt text from neighbouring caption block
-            alt = ""
-            for j in (i + 1, i - 1):
-                if 0 <= j < len(blocks) and blocks[j][0] == "p":
-                    t = clean(blocks[j][1].text)
-                    if re.match(r"^(Figure|Table)\b", t):
-                        alt = t
-                        break
-            lines.append(f"![{alt}]({rel})")
+            img_md = f"![{label if first else ''}]({rel}){{.figure}}"
+            lines.append(img_md)
+            if first and ctext:
+                lines.append(caption_block(ctext, above=above))
+            first = False
+
+    lines = []
+    for i, (kind, obj) in enumerate(blocks):
+        if self_cap[i]:
+            # Caption text and image live in the same paragraph: render the
+            # image with its own caption (table -> above, figure -> below).
+            _emit_image(para_blip_rids(obj._p), clean(obj.text))
+            continue
+
+        if is_cap[i]:
+            if i not in owner:
+                # Caption with no object: keep it as a standalone caption.
+                lines.append(caption_block(clean(obj.text), above=False))
+            continue
+
+        ctext = clean(blocks[cap_for[i]][1].text) if i in cap_for else ""
+
+        if kind == "tbl":
+            # The caption block attaches to the preceding block, so it must be
+            # emitted *after* the table; ``above=True`` (`| <`) renders the
+            # figcaption above the table inside the figure.
+            lines.append(table_html(obj, imgs))
+            if ctext:
+                lines.append(caption_block(ctext, above=True))
+            continue
+
+        rids = para_blip_rids(obj._p)
+        if rids:
+            _emit_image(rids, ctext)
+            continue
+
         md = render_paragraph(obj)
         if md:
             lines.append(md)
@@ -524,10 +658,13 @@ def main():
         sys.exit(1 if check(indir) else 0)
 
     indir, outdir = args[0], args[1]
-    os.makedirs(outdir, exist_ok=True)
+    # Extracts live under <outdir>/extracts/<doc>/ to mirror the production
+    # mkdocs site layout (docs/extracts/<doc>/index.md).
+    extracts_dir = os.path.join(outdir, "extracts")
+    os.makedirs(extracts_dir, exist_ok=True)
     for f in _docx_inputs(indir):
         try:
-            name, nimg, ntbl = convert(f, outdir)
+            name, nimg, ntbl = convert(f, extracts_dir)
         except VectorFigureError as exc:
             print(f"ERROR: {exc}", file=sys.stderr)
             print(
