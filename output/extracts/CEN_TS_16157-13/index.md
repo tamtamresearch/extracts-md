@@ -81,11 +81,11 @@ The clause contains the following 3 terms and definitions relevant to this stand
 
 The clause contains 2 abbreviations relevant to this standard, to which we also add OID:
 
-**UML** Unified Modeling Language
+**UML** – Unified Modeling Language
 
-**XML** eXtensible Markup Language
+**XML** – eXtensible Markup Language
 
-**OID** Object Identifier
+**OID** – Object Identifier
 
 *NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (*[www.itsterminology.org](http://www.itsterminology.org/)*), the StandardLand website (*[www.standardland.cz](http://www.standardland.cz/)*) or the OBP platform (*[www.iso.org/obp](http://www.iso.org/obp)*).*
 
@@ -97,9 +97,11 @@ This clause describes, over 9 pages using 6 sub-clauses, the model of the <<D2Na
 
 This sub-clause (1 page) provides a basic overview of the dependencies of the FaultAndStatus namespace with related namespaces (e.g. the Common package and LocationReferencing namespace, see Figure 1).
 
-![Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)](fig-1.png)
+![Figure 1](fig-1.png){.figure}
 
-**Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)**
+/// caption
+Figure 1 — Namespace dependencies of the FaultAndStatus namespace (Fig. 1 of the source standard)
+///
 
 The FaultAndStatus namespace contains the following sub-packages:
 
@@ -119,9 +121,11 @@ The FaultAndStatus namespace contains the following sub-packages:
 
 This sub-clause (2 pages, 1 diagram) defines the DevicePublication class, enabling description of device inventory (static publication, see Figure 2). The DevicePublication constructs are designed for use when no more specific kind of device publication (such as a VmsPublication as defined in EN 16157-4) is needed.
 
-![Figure 2 — DevicePublication class (Fig. 2 of the source standard)](fig-2.png)
+![Figure 2](fig-2.png){.figure}
 
-**Figure 2 — DevicePublication class (Fig. 2 of the source standard)**
+/// caption
+Figure 2 — DevicePublication class (Fig. 2 of the source standard)
+///
 
 A DevicePublication contains information on a collection of devices, either directly or via one or more DeviceTable objects. A single DevicePublication object should contain either DeviceTable objects or Device objects directly, not both.
 
@@ -164,8 +168,6 @@ This sub-clause describes, using one diagram and one paragraph of text, the Obje
 ## Annex A (normative) Data Dictionary
 
 This annex (18 pages, 25 tables) provides a data dictionary identifying the definitions and characteristics of all classes, attributes, association ends, data types and enumerations appearing in the data model defined in Clause 6. Among other things it defines enumerated values for device types (Table 1 below) and enumerated values for the impact of a device fault on provided data (Table 2 below).
-
-**Table 1 — Values contained in the enumeration “DeviceTypeEnum” (Tab. A.18 of the source standard)**
 
 <table>
   <tr>
@@ -280,7 +282,9 @@ This annex (18 pages, 25 tables) provides a data dictionary identifying the defi
   </tr>
 </table>
 
-**Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum” (Tab. A.19 of the source standard)**
+/// caption | <
+Table 1 — Values contained in the enumeration “DeviceTypeEnum” (Tab. A.18 of the source standard)
+///
 
 <table>
   <tr>
@@ -314,6 +318,11 @@ This annex (18 pages, 25 tables) provides a data dictionary identifying the defi
     <td>The impact on data of the fault is not specified.</td>
   </tr>
 </table>
+
+/// caption | <
+Table 2 — Values contained in the enumeration “FaultImpactOnDataEnum” 
+(Tab. A.19 of the source standard)
+///
 
 ## Annex B (normative) XML Schema
 

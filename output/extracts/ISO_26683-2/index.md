@@ -143,15 +143,17 @@ Profile L2-1 describes usage of an RFID tag attached to a cargo item, and transm
 
 The profile is similar to L2-1, but for multiple containers or trailers. First, data is collected from items/sensors/seals into the interrogator or OBE of a trailer or a semi-trailer. Then, as the second step, the data is transferred to the vehicle OBE. Figure 1 below provides a schematic description of the physical architecture, but other solutions are also possible.
 
-![Figure 1 – Communication diagram – a tractor unit with semi-trailer and trailer and two loaded containers with items monitored by sensors (Fig. 7 of the source standard)](fig-1.png)
+![Figure 1](fig-1.png){.figure}
 
-*Figure 1 – Communication diagram – a tractor unit with semi-trailer and trailer and two loaded containers with items monitored by sensors (Fig. 7 of the source standard)*
+/// caption
+Figure 1 – Communication diagram – a tractor unit with semi-trailer and trailer and two loaded containers with items monitored by sensors (Fig. 7 of the source standard)
+///
 
 ### 6.10 FLC-CIC Profile No.L3-1: Item data agglomeration to trailer interrogator using RFID (optional)
 
 In this scenario, items have an attached RFID tag, from which data is transmitted to the interrogator of a semi-trailer or a trailer.
 
-### 6.11 FLC-CIC **Profile** No.L3-2: Item data agglomeration to vehicle OBE using short range RFID and/or bar-code or OCR (optional)
+### 6.11 FLC-CIC Profile No.L3-2: Item data agglomeration to vehicle OBE using short range RFID and/or bar-code or OCR (optional)
 
 In this scenario, the cargo contents are identified and audited only after loading: by an RFID interrogator or a barcode reader or by scanning an OCR marking. These devices do not have the range and capability to reliably collect data from items during loading.
 

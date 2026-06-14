@@ -61,40 +61,21 @@ Clause 3 contains 27 definitions provided in full in the standard. In this extra
 
 Clause 4 contains 43 symbols and abbreviations. In this extract, the following appear in particular:
 
-<table>
-  <tr>
-    <th>CS</th>
-    <th>Circuit Switched</th>
-  </tr>
-  <tr>
-    <td>CTP</td>
-    <td>Conformance Test Procedure</td>
-  </tr>
-  <tr>
-    <td>IMS</td>
-    <td>IP-Multimedia Subsystem</td>
-  </tr>
-  <tr>
-    <td>IVS</td>
-    <td>In-Vehicle System</td>
-  </tr>
-  <tr>
-    <td>LTE</td>
-    <td>Long Term Evolution</td>
-  </tr>
-  <tr>
-    <td>MNO</td>
-    <td>Mobile Network Operator</td>
-  </tr>
-  <tr>
-    <td>PS</td>
-    <td>Packet Switched</td>
-  </tr>
-  <tr>
-    <td>PSAP</td>
-    <td>Public Safety Answering Point</td>
-  </tr>
-</table>
+**CS** – Circuit Switched
+
+**CTP** – Conformance Test Procedure
+
+**IMS** – IP-Multimedia Subsystem
+
+**IVS** – In-Vehicle System
+
+**LTE** – Long Term Evolution
+
+**MNO** – Mobile Network Operator
+
+**PS** – Packet Switched
+
+**PSAP** – Public Safety Answering Point
 
 Other terms and abbreviations from the ITS domain can be found in the *ITSTerminology* dictionary ([www.itsterminology.org](http://www.itsterminology.org)), the *StandardLand* website ([www.standardland.cz](http://www.standardland.cz)) or the *OBP platform* ([www.iso.org/obp](http://www.iso.org/obp)).
 
@@ -114,9 +95,11 @@ This clause (approximately 1.5 pages of text) explains how to work with the stan
 
 This clause (covering 11 pages including figures and diagrams) summarizes the key requirements for performing conformity testing. Essentially, it presents the relationships between individual actors and identifies the interfaces that will be subject to conformity verification. It describes the naming conventions used in conformity tests and provides an overview matrix linking individual tests to eCall call phases and the type of test.
 
-![Figure 1 – Conformity Testing Points (not part of the described document)](fig-1.jpg)
+![Figure 1](fig-1.jpg){.figure}
 
-**Figure 1 – Conformity Testing Points (not part of the described document)**
+/// caption
+Figure 1 – Conformity Testing Points (not part of the described document)
+///
 
 ## 9 Conformity Tests for In-Vehicle Systems (IVS)
 

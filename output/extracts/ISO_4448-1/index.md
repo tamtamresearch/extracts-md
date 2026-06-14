@@ -55,17 +55,17 @@ Note 1 to entry: This is a form of ADS-DV (Automated Driving System – Dedicate
 
 This clause lists 12 abbreviations from the field of mobile robots in public space, the most important of which are the following:
 
-**ADS** automated driving system
+**ADS** – automated driving system
 
-**DDT** dynamic driving task
+**DDT** – dynamic driving task
 
-**IoT** internet of things
+**IoT** – internet of things
 
-**PMR** public-area mobile robot, ground-based automated mobile system in public space
+**PMR** – public-area mobile robot, ground-based automated mobile system in public space
 
-**PUDO** pickup and drop off
+**PUDO** – pickup and drop off
 
-**VRU** vulnerable road user
+**VRU** – vulnerable road user
 
 Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary ([www.itsterminology.org](http://www.itsterminology.org/)), the StandardLand website ([www.standardland.cz](http://www.standardland.cz/)) or the OBP platform ([www.iso.org/obp](http://www.iso.org/obp)).
 
@@ -81,10 +81,12 @@ Clause 6 is 4 pages long and elaborates on the necessary steps that the standard
 
 Clause 7 is 10 pages long and describes the reasons why standardization is necessary. Subclause 7.1 discusses the comparison of robotic vehicles and delivery robots in terms of quantity and timing of deployment, with standardisation of these means being more urgent.
 
-![Figure 1 — Example of PMR forms for the distribution of small packages 
-(Source. Urban robotics foundation)](fig-1.png)
+![Figure 1](fig-1.png){.figure}
 
-**Figure 1 — Example of PMR forms for the distribution of small packages** *(Source. Urban robotics foundation)*
+/// caption
+Figure 1 — Example of PMR forms for the distribution of small packages 
+(Source. Urban robotics foundation)
+///
 
 Subclause **7.2** describes the need to create a safe space in the public space of the city, where such systems could move, the majority of which is devoted to safety aspects and also to lower operating costs than those associated with robo-vehicles.
 

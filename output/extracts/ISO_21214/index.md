@@ -62,19 +62,19 @@ The standard introduces 36 new terms. Other terms and abbreviations are provided
 
 The standard contains 82 abbreviations. Example abbreviations:
 
-**CIR** circular QAM *(a type of quadrature amplitude modulationcircular QAM)*
+**CIR** – circular QAM *(a type of quadrature amplitude modulationcircular QAM)*
 
-**HHH** Hirt, Hassner, Heise (inventors of the HHH(1,13) code) *(packet coding and modulation developed specifically for IR communication)*
+**HHH** – Hirt, Hassner, Heise (inventors of the HHH(1,13) code) *(packet coding and modulation developed specifically for IR communication)*
 
-**IR ** infrared *(infrared-based communication interface)*
+**IR** – infrared *(infrared-based communication interface)*
 
-**McW** multicast window
+**McW** – multicast window
 
-**TDMA** time division multiple access
+**TDMA** – time division multiple access
 
-***θH*** horizontal opening angle
+***θH*** – horizontal opening angle
 
-***θV*** vertical opening angle
+***θV*** – vertical opening angle
 
 *NOTE: Other terms and abbreviations from the ITS domain can be found in the ITSTerminology dictionary (*[www.itsterminology.org](http://www.itsterminology.org/)*), the StandardLand website (*[www.standardland.cz](http://www.standardland.cz/)*) or the OBP platform (*[www.iso.org/obp](http://www.iso.org/obp)*).*
 
@@ -83,8 +83,6 @@ The standard contains 82 abbreviations. Example abbreviations:
 This clause, spanning 3 pages, defines the requirements for the IR receiver and IR transmitter in the form of parameter tables.
 
 Article **6.1 Transmitter wavelengths and bandwidth and** Article **6.2 – Radiated power**, both on a single page, define the technical requirements for the transmitter (wavelength, bandwidth, radiated power). For example parameters, see Table 1. The clause also defines 11 transmitter classes (based on radiated power).
-
-**Table 1– IR transmitter parameter specification (Tab. 1 of the source standard)**
 
 <table>
   <tr>
@@ -121,6 +119,10 @@ Article **6.1 Transmitter wavelengths and bandwidth and** Article **6.2 – Radi
   </tr>
 </table>
 
+/// caption | <
+Table 1– IR transmitter parameter specification (Tab. 1 of the source standard)
+///
+
 Article **6.3 Receiver wavelengths and bandwidths** and Article **6.4 – Receiver class** span two pages and define, in the form of two tables, the technical requirements for the receiver (wavelength, bandwidth).
 
 Clause 6 also defines 16 receiver classes (based on receiver sensitivity).
@@ -129,17 +131,22 @@ Clause 6 also defines 16 receiver classes (based on receiver sensitivity).
 
 This clause, spanning 3 pages, defines the basic set of requirements for modulation and coding in the IR environment. It provides the basic structure of a data packet at the OSI model physical layer, including pulse durations in μs. It also defines interface communication profiles (see Table 2 (Table 9 of the standard) – Communication profiles).
 
-**Table 2 – Excerpt of Table 9 of the source standard: Communication profiles**
+![Table 2](fig-1.png){.figure}
 
-![Table 2 – Excerpt of Table 9 of the source standard: Communication profiles](fig-1.png)
+/// caption | <
+Table 2 – Excerpt of Table 9 of the source standard: Communication profiles
+///
 
 ## 8 Directivity and Communication Zones
 
 This clause, spanning 3 pages, defines the geometrical and spatial requirements for the interaction of IR-based communication interfaces. It first graphically displays the geometric space of IR communication, and then shows the geometric intersection of two IR communication interfaces (see Figure 1). The next part of the clause defines communication zone shortcuts, which are essentially various geometric configurations of IR communication in space, with specific parameter values assigned according to the spatial arrangement shown in Figure 1.
 
-![](fig-2.png)
+![Figure 1](fig-2.png){.figure}
 
-**Figure 1 – Horizontal opening and vertical opening angles in IR communication (Fig. 5 of the source standard)**
+/// caption
+Figure 1 – Horizontal opening and vertical opening angles in IR communication 
+(Fig. 5 of the source standard)
+///
 
 ## 9 Frames and Windows
 
@@ -165,9 +172,11 @@ This clause, spanning 4 pages, describes, in text and tables, the basic features
 
 This clause, spanning 6 pages, describes in text, diagrams, and tables, how to integrate the IR interface into the structure of the ITS station. The adaptation structure of the IR interface into the ITS station is shown in Figure 2.
 
-**Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)**
+![Figure 2](fig-3.png){.figure}
 
-![Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)](fig-3.png)
+/// caption
+Figure 2 – Medium adaptation of the IR interface into the ITS station (Fig. 17 of the source standard)
+///
 
 ## 15 Adoption of Other Standards and Internationally Accepted Practices
 
