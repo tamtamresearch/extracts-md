@@ -1,10 +1,34 @@
 """Unit tests for convert_docx.py functions."""
+import glob
+import os
 import re
 
 import pytest
 import docx
 
-from convert_docx import clean, yaml_q, CAPTION_RE, render_paragraph
+import convert_docx
+from convert_docx import (
+    clean,
+    yaml_q,
+    CAPTION_RE,
+    render_paragraph,
+    scan_doc,
+    check,
+    VectorFigureError,
+)
+
+
+def _vector_docx():
+    """Return path to an input .docx containing a vector figure, or None."""
+    for f in sorted(glob.glob(os.path.join("input", "*.docx"))):
+        if os.path.basename(f).startswith("~"):
+            continue
+        try:
+            if scan_doc(f):
+                return f
+        except Exception:
+            continue
+    return None
 
 
 @pytest.mark.unit
@@ -274,3 +298,45 @@ def test_spaces_outside_formatting():
     
     result3 = render_paragraph(para3)
     assert result3 == "word **middle** word"
+
+
+@pytest.mark.unit
+def test_no_libreoffice_helpers_removed():
+    """LibreOffice rasterisation helpers must be gone (dependency removed)."""
+    assert not hasattr(convert_docx, "find_soffice")
+    assert not hasattr(convert_docx, "_trim_whitespace")
+    assert not hasattr(convert_docx, "_SOFFICE")
+
+
+@pytest.mark.unit
+def test_convert_rejects_vector_figure(tmp_path):
+    """Converting a .docx with an EMF/WMF figure must fail fast."""
+    docx_file = _vector_docx()
+    if not docx_file:
+        pytest.skip("No input .docx with a vector (EMF/WMF) figure available")
+
+    with pytest.raises(VectorFigureError, match=r"vector image"):
+        convert_docx.convert(docx_file, str(tmp_path))
+
+
+@pytest.mark.unit
+def test_scan_doc_flags_vector_figure():
+    """scan_doc() reports vector figures as problems."""
+    docx_file = _vector_docx()
+    if not docx_file:
+        pytest.skip("No input .docx with a vector (EMF/WMF) figure available")
+
+    problems = scan_doc(docx_file)
+    assert problems, "scan_doc should report at least one problem"
+    assert any("vector" in p.lower() for p in problems)
+
+
+@pytest.mark.unit
+def test_check_returns_bad_count(tmp_path, capsys):
+    """check() returns the number of problematic docs and prints a report."""
+    # Empty dir -> no problems.
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    assert check(str(empty)) == 0
+    out = capsys.readouterr().out
+    assert "All documents are convertible." in out

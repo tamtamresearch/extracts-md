@@ -10,10 +10,13 @@
 #   mise run build        # build the static site into book/
 #   mise run serve        # local preview with live reload
 #   mise run all          # convert + gen + build
+#   mise run dev          # watch docx -> convert/gen + serve with browser reload
+#   mise run check        # scan docx for content that breaks conversion (e.g. vector figures)
 
 [tools]
 uv = "latest"
 mdbook = "0.4"
+"aqua:watchexec/watchexec" = "latest"
 
 [settings]
 # Let mise pick up the uv-managed Python toolchain.
@@ -46,8 +49,28 @@ description = "Full pipeline: convert -> gen -> build"
 depends = ["convert", "gen"]
 run = "mdbook build"
 
+[tasks.rebuild]
+description = "Reconvert docx and regenerate nav (output/ refresh for live reload)"
+depends = ["convert", "gen"]
+
+[tasks.watch]
+description = "Watch input/*.docx and reconvert + regenerate nav on change"
+run = "watchexec --exts docx --watch input --restart -- mise run rebuild"
+
+[tasks.dev]
+description = "Live dev: watch docx -> convert/gen, and serve with browser reload"
+depends = ["gen"]
+run = [
+  "mise run watch &",
+  "mdbook serve --open",
+]
+
+[tasks.check]
+description = "Scan input/*.docx for content that breaks conversion (e.g. vector figures)"
+run = "uv run python convert_docx.py --check input"
+
 [tasks.preflight]
-description = "Validate environment (LibreOffice, dependencies)"
+description = "Validate environment (dependencies)"
 run = "uv run pytest tests/test_preflight.py -v"
 
 [tasks.test]

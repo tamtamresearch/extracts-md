@@ -4,7 +4,8 @@
 Features:
   * YAML front-matter (standard, name/name_1..n, published/edition/pages, annotation, note)
   * Body from "Introduction" onward, H1 demoted to H2 (Heading n -> level n+1)
-  * Embedded figures extracted to <docname>/fig-N.<ext>; EMF/WMF converted to PNG
+  * Embedded figures extracted to <docname>/fig-N.<ext>; vector EMF/WMF figures
+    are rejected (convert them to PNG/JPEG inside the .docx and rerun)
   * Word tables -> HTML <table> with colspan/rowspan (merged cells preserved)
   * Czech custom styles mapped (Text normy, Seznam v normě, Poznámka, NadpisTabObr, ...)
 """
@@ -13,7 +14,6 @@ import html as _html
 import os
 import re
 import shutil
-import subprocess
 import sys
 
 import docx
@@ -44,21 +44,12 @@ VECTOR = {"emf", "wmf"}
 MONOSPACE_FONTS = {'courier', 'courier new', 'consolas', 'monaco', 'monospace'}
 
 
-def _trim_whitespace(png, pad=12):
-    """Crop white margins from a rendered vector image."""
-    try:
-        from PIL import Image, ImageChops
-    except ImportError:
-        return
-    im = Image.open(png).convert("RGB")
-    bg = Image.new("RGB", im.size, (255, 255, 255))
-    bbox = ImageChops.difference(im, bg).getbbox()
-    if not bbox:
-        return
-    l, t, r, b = bbox
-    l, t = max(0, l - pad), max(0, t - pad)
-    r, b = min(im.width, r + pad), min(im.height, b + pad)
-    im.crop((l, t, r, b)).save(png)
+class VectorFigureError(Exception):
+    """Raised when a .docx contains a vector (EMF/WMF) figure.
+
+    These cannot be embedded as raster images; the figure must be converted
+    to PNG/JPEG inside the .docx before conversion can proceed.
+    """
 
 
 def clean(text: str) -> str:
@@ -89,29 +80,6 @@ def parse_name_table(table):
 
 # ---------- images ----------
 
-def find_soffice():
-    """Locate the LibreOffice binary across platforms.
-
-    macOS Homebrew cask provides `soffice`; Linux packages provide
-    `libreoffice` (and usually `soffice` too). Override with $SOFFICE_BIN.
-    """
-    candidates = [os.environ.get("SOFFICE_BIN"), "soffice", "libreoffice"]
-    for c in candidates:
-        if c and shutil.which(c):
-            return shutil.which(c)
-    for p in ("/Applications/LibreOffice.app/Contents/MacOS/soffice",
-              "/opt/homebrew/bin/soffice", "/usr/local/bin/soffice"):
-        if os.path.exists(p):
-            return p
-    raise RuntimeError(
-        "LibreOffice not found (looked for 'soffice'/'libreoffice'). "
-        "Install it (macOS: `brew install --cask libreoffice`) or set "
-        "$SOFFICE_BIN to the binary path. Needed to rasterise EMF/WMF figures."
-    )
-
-
-_SOFFICE = None
-
 
 class ImgState:
     def __init__(self, doc, assetdir, docname):
@@ -128,6 +96,13 @@ class ImgState:
         ext = CT_EXT.get(part.content_type, "png")
         self.n += 1
         base = f"fig-{self.n}"
+        if ext in VECTOR:
+            raise VectorFigureError(
+                f"{self.docname}: figure {base} is a vector image "
+                f"({ext.upper()}), which cannot be embedded as a raster image. "
+                f"Open the .docx, convert this figure to PNG or JPEG, re-embed "
+                f"it, and rerun the conversion."
+            )
         os.makedirs(self.assetdir, exist_ok=True)
         # Stage in /tmp (mounts disallow file deletion); copy final file to mount.
         tmp = os.path.join("/tmp", "extract_assets")
@@ -135,22 +110,6 @@ class ImgState:
         staged = os.path.join(tmp, base + "." + ext)
         with open(staged, "wb") as fh:
             fh.write(part.blob)
-        if ext in VECTOR:
-            global _SOFFICE
-            if _SOFFICE is None:
-                _SOFFICE = find_soffice()
-            profile = os.path.join(tmp, "lo_profile")
-            subprocess.run(
-                [_SOFFICE, "--headless",
-                 "-env:UserInstallation=file://" + profile,
-                 "--convert-to", "png", "--outdir", tmp, staged],
-                check=False,
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-            )
-            png = os.path.join(tmp, base + ".png")
-            if os.path.exists(png):
-                _trim_whitespace(png)
-                staged, ext = png, "png"
         final = os.path.join(self.assetdir, base + "." + ext)
         shutil.copyfile(staged, final)
         rel = f"{base}.{ext}"          # md lives in same folder as figures
@@ -504,13 +463,79 @@ def convert(path, outdir):
     return docname, imgs.n, sum(1 for k, _ in blocks if k == "tbl")
 
 
-def main():
-    indir, outdir = sys.argv[1], sys.argv[2]
-    os.makedirs(outdir, exist_ok=True)
+def scan_doc(path):
+    """Inspect a .docx for content that breaks conversion.
+
+    Returns a list of human-readable problem strings (empty if the document
+    is convertible). Currently flags vector (EMF/WMF) figures, which the
+    converter rejects.
+    """
+    problems = []
+    doc = docx.Document(path)
+    for rid, part in doc.part.related_parts.items():
+        ext = CT_EXT.get(getattr(part, "content_type", ""), "")
+        if ext in VECTOR:
+            problems.append(
+                f"vector figure ({ext.upper()}) — convert to PNG/JPEG in the .docx"
+            )
+    return problems
+
+
+def _docx_inputs(indir):
     for f in sorted(glob.glob(os.path.join(indir, "*.docx"))):
         if os.path.basename(f).startswith("~"):
             continue
-        name, nimg, ntbl = convert(f, outdir)
+        yield f
+
+
+def check(indir):
+    """Scan all input docx and report problems; return number of bad docs.
+
+    Does not abort on the first problem — reports every offending document so
+    they can all be fixed in one pass (intended for local development).
+    """
+    bad = 0
+    for f in _docx_inputs(indir):
+        name = os.path.basename(f)
+        try:
+            problems = scan_doc(f)
+        except Exception as exc:  # noqa: BLE001 - report, don't crash the scan
+            print(f"[ERROR] {name}: could not read ({exc})")
+            bad += 1
+            continue
+        if problems:
+            bad += 1
+            print(f"[FAIL] {name}")
+            for p in problems:
+                print(f"        - {p}")
+        else:
+            print(f"[ok]   {name}")
+    if bad:
+        print(f"\n{bad} document(s) need attention before conversion.")
+    else:
+        print("\nAll documents are convertible.")
+    return bad
+
+
+def main():
+    args = sys.argv[1:]
+    if args and args[0] == "--check":
+        indir = args[1] if len(args) > 1 else "input"
+        sys.exit(1 if check(indir) else 0)
+
+    indir, outdir = args[0], args[1]
+    os.makedirs(outdir, exist_ok=True)
+    for f in _docx_inputs(indir):
+        try:
+            name, nimg, ntbl = convert(f, outdir)
+        except VectorFigureError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            print(
+                "Tip: run `mise run check` to list every document that needs "
+                "vector figures converted.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         print(f"{name:24} figures={nimg} tables={ntbl}")
 
 

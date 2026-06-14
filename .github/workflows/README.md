@@ -10,10 +10,10 @@ The workflow runs as a single job with sequential steps:
 
 **Steps:**
 1. **Checkout repository** - Get the latest code
-2. **Install LibreOffice** - Required for EMF/WMF image conversion
-3. **Install mise** - Tool version manager (provides uv, mdbook, Python)
-4. **Run preflight checks** - Validates LibreOffice, Python dependencies
-5. **Run test suite** - All 35 tests must pass
+2. **Install mise** - Tool version manager (provides uv, mdbook, Python, watchexec)
+3. **Run preflight checks** - Validates Python dependencies
+4. **Run test suite** - All tests must pass
+5. **Check documents** - Fail early if any `.docx` has unconvertible content (e.g. vector EMF/WMF figures)
 6. **Convert documents** - Word `.docx` → Markdown with figures
 7. **Generate navigation** - Create `SUMMARY.md` and landing page
 8. **Build mdBook** - Generate static site in `book/` directory
@@ -93,17 +93,17 @@ https://<username>.github.io/<repository>/
 2. Verify no branch protection rules on `gh-pages`
 3. Check the Actions logs for specific error messages
 
-### LibreOffice Not Found (in CI)
+### Vector Figure Rejected (in CI)
 
-**Problem:** Tests fail with "LibreOffice not found" error.
+**Problem:** The "Convert documents" (or "Check documents") step fails with a `vector image (EMF/WMF)` error.
+
+**Cause:** A `.docx` in `input/` contains a vector (EMF/WMF) figure. The converter
+no longer depends on LibreOffice and rejects vector figures outright.
 
 **Solution:**
-The workflow uses Ubuntu runners which don't have LibreOffice pre-installed. Tests marked with `@pytest.mark.requires_libreoffice` should be skipped in CI, or LibreOffice should be installed in the workflow.
-
-**Current behavior:** Tests requiring LibreOffice will fail if the fixtures contain EMF/WMF images. Consider:
-1. Marking these tests to skip in CI
-2. Adding LibreOffice installation step to the workflow
-3. Using pre-converted PNG fixtures for CI
+1. Run `mise run check` locally to list every offending document.
+2. Open each one, convert the vector figure to PNG/JPEG, re-embed it, and save.
+3. Push the fixed `.docx`. CI will then convert cleanly.
 
 ## Local Testing
 

@@ -41,9 +41,6 @@ def tmp_output(tmp_path):
 def pytest_configure(config):
     """Register custom markers."""
     config.addinivalue_line(
-        "markers", "requires_libreoffice: mark test as requiring LibreOffice"
-    )
-    config.addinivalue_line(
         "markers", "integration: mark test as implementation-agnostic integration test"
     )
     config.addinivalue_line(

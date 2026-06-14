@@ -13,6 +13,7 @@ mise install              # first time: install uv + mdbook
 mise run setup            # first time: install Python 3.12 + deps
 mise run all              # full pipeline: convert + gen + build
 mise run serve            # preview with live reload
+mise run dev              # watch input/*.docx → convert/gen + serve with browser reload
 ```
 
 ### Individual Tasks
@@ -21,7 +22,13 @@ mise run serve            # preview with live reload
 mise run convert          # input/*.docx → output/<doc>/index.md (+ figures)
 mise run gen              # regenerate SUMMARY.md + landing page from front-matter
 mise run build            # mdbook build (auto-runs `gen` first)
+mise run check            # scan input/*.docx for unconvertible content (e.g. vector figures)
+mise run watch            # re-run convert + gen whenever an input .docx changes
 ```
+
+`mise run dev` is the live-development entry point: it runs `watch` (re-converts
+on `.docx` edits) alongside `mdbook serve --open`, so editing a source document
+triggers conversion and the browser reloads automatically.
 
 ## Key Architecture
 
@@ -81,28 +88,30 @@ At build time, `frontmatter_preprocessor.py` strips YAML and injects H1 title fr
 
 ## Dependencies
 
-### LibreOffice (Required)
-
-Only needed if `.docx` contains EMF/WMF vector figures (converts to PNG).
-
-```sh
-brew install --cask libreoffice   # macOS
-```
-
-Override binary location: `export SOFFICE_BIN=/path/to/soffice`
+No external binaries are required. (LibreOffice was previously needed to
+rasterise EMF/WMF figures; the converter now rejects vector figures instead — see
+the vector-figure note below.)
 
 ### Python Packages
 
 Managed by `uv`; defined in `pyproject.toml`:
 - `python-docx` — parse Word documents
-- `Pillow` — trim whitespace from rasterized figures
+- `Pillow` — image handling
+
+### Vector (EMF/WMF) figures
+
+`convert_docx.py` only embeds raster images. If a `.docx` contains a vector
+EMF/WMF figure, `mise run convert` **stops** with a `VectorFigureError` naming
+the offending document and figure. Fix it by opening the `.docx`, converting the
+figure to PNG/JPEG, re-embedding it, and rerunning. Use `mise run check` to list
+every problematic document in one pass.
 
 ## Quirks & Gotchas
 
 1. **Task dependency**: `mise run build` and `mise run serve` both depend on `gen`, so SUMMARY.md is always regenerated before building.
 2. **Preprocessor execution**: `book.toml` calls `uv run python frontmatter_preprocessor.py` to ensure the venv is active.
 3. **Czech custom styles**: `convert_docx.py` maps Czech Word styles (`Text normy`, `Seznam v normě`, `Poznámka`, `NadpisTabObr`) to Markdown equivalents.
-4. **Missing LibreOffice**: If a `.docx` has EMF/WMF figures and LibreOffice is missing, conversion fails with `FileNotFoundError: 'soffice'`.
+4. **Vector figures abort conversion**: a `.docx` with EMF/WMF figures fails fast (`VectorFigureError`); convert those figures to raster (PNG/JPEG) first. `mise run check` reports them without aborting.
 
 ## File Locations
 
@@ -131,7 +140,7 @@ Pytest-based test suite with 26 tests covering conversion, navigation, and prepr
 ### Test Commands
 
 ```sh
-mise run preflight        # validate environment (LibreOffice, dependencies)
+mise run preflight        # validate environment (dependencies)
 mise run test             # full test suite (preflight → integration → unit)
 mise run test-integration # core tests (implementation-agnostic)
 mise run test-unit        # function-level tests (implementation-specific)
@@ -157,14 +166,7 @@ tests/
 - **Real extract conversion** (`test_real_extract_iso22741_10`): validates front-matter, figures, tables, heading demotion
 - **Navigation generation** (`test_navigation_generation`): validates SUMMARY.md and index.md generation
 - **Preprocessor transform** (`test_preprocessor_transform`): validates YAML stripping and H1 injection
-
-### LibreOffice Tests
-
-Tests requiring LibreOffice are marked with `@pytest.mark.requires_libreoffice`. Skip with:
-
-```sh
-uv run pytest tests/ -m "not requires_libreoffice"
-```
+- **Vector figure rejection** (`test_convert_rejects_vector_figure`): validates that EMF/WMF figures fail fast
 
 ### Manual Verification
 

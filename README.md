@@ -22,8 +22,8 @@ website can be generated.
 - **Inline formatting.** Preserves **bold**, *italic*, and `code` formatting from
   Word documents. Monospace fonts (Courier New, etc.) are converted to inline code.
   Smart space handling ensures clean Markdown output.
-- **Figures.** Extracts embedded images; converts vector EMF/WMF to PNG (via
-  LibreOffice) and trims page whitespace.
+- **Figures.** Extracts embedded raster images. Vector EMF/WMF figures are
+  rejected; convert them to PNG/JPEG inside the `.docx` first.
 - **Tables.** Renders Word tables as HTML `<table>` with `colspan`/`rowspan`, so
   merged cells survive and the text stays selectable, searchable and translatable.
 - **Site.** Generates the mdBook navigation and builds a static, full-text-search
@@ -68,22 +68,19 @@ extracts-md/
     -o ~/.local/bin/mise && chmod +x ~/.local/bin/mise
   # or: brew install mise   |   curl https://mise.run | sh
   ```
-- **LibreOffice** on `PATH` — only used to rasterise vector (EMF/WMF) figures.
-  ```sh
-  brew install --cask libreoffice      # provides the `soffice` command
-  ```
-  Override the binary location with `SOFFICE_BIN=/path/to/soffice` if needed.
 
-`mise` provides `uv` and `mdbook`; `uv` provides Python (`.python-version`) and
-the packages in `pyproject.toml`. Nothing else to install by hand.
+`mise` provides `uv`, `mdbook`, and `watchexec`; `uv` provides Python
+(`.python-version`) and the packages in `pyproject.toml`. No external binaries
+need to be installed by hand.
 
 ## Quick start
 
 ```sh
-mise install      # install pinned tools: uv + mdbook
+mise install      # install pinned tools: uv + mdbook + watchexec
 mise run setup    # uv installs Python + dependencies
 mise run all      # convert  →  generate nav  →  build site into book/
 mise run serve    # local preview with live reload
+mise run dev      # watch input/*.docx → convert/gen + serve with browser reload
 ```
 
 ## GitHub Pages Deployment
@@ -119,7 +116,10 @@ The workflow ensures that only tested, validated content is deployed to the `gh-
 | `mise run build`       | build the static site into `book/`                        |
 | `mise run serve`       | serve locally with live reload                            |
 | `mise run all`         | `convert` + `gen` + `build`                               |
-| `mise run preflight`   | validate environment (LibreOffice, dependencies)          |
+| `mise run check`       | scan `input/*.docx` for unconvertible content (vector figures) |
+| `mise run watch`       | re-run `convert` + `gen` whenever an input `.docx` changes |
+| `mise run dev`         | watch `.docx` + serve with browser reload (live dev)      |
+| `mise run preflight`   | validate environment (dependencies)                       |
 | `mise run test`        | run full test suite (35 tests)                            |
 | `mise run test-integration` | run core end-to-end tests (implementation-agnostic) |
 | `mise run test-unit`   | run function-level tests (implementation-specific)        |
@@ -201,7 +201,7 @@ line (`edition`/`pages` are omitted when absent).
 The project includes a comprehensive pytest-based test suite with 35 tests:
 
 ```sh
-mise run preflight        # validate environment (LibreOffice, dependencies)
+mise run preflight        # validate environment (dependencies)
 mise run test             # full test suite (~2s)
 mise run test-integration # core end-to-end tests (implementation-agnostic)
 mise run test-unit        # function-level tests (implementation-specific)
@@ -220,17 +220,12 @@ The integration tests use a real extract (`ISO_TS_22741-10.docx`) and validate:
 - Heading demotion (H1 → H2)
 - Navigation file generation (`SUMMARY.md`, `index.md`)
 
-Tests requiring LibreOffice are marked and can be skipped with:
-
-```sh
-uv run pytest tests/ -m "not requires_libreoffice"
-```
-
 ## Troubleshooting
 
-- **`FileNotFoundError: 'libreoffice'` / `'soffice'`** — install LibreOffice
-  (`brew install --cask libreoffice`) or set `SOFFICE_BIN`. Only the documents
-  containing EMF/WMF figures need it.
+- **`VectorFigureError: ... is a vector image (EMF/WMF)`** — a `.docx` contains a
+  vector figure, which cannot be embedded. Open the document, convert the figure
+  to PNG/JPEG, re-embed it, and rerun. Run `mise run check` to list every
+  affected document at once.
 - **`uv` resolves a newer Python than pinned** — run `uv python pin 3.12 && uv sync`
   to lock the exact interpreter.
 - **Tests failing** — run `mise run preflight` first to validate your environment.
