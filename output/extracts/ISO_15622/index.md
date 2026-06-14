@@ -44,9 +44,9 @@ ACC is primarily intended to provide longitudinal vehicle control for vehicles t
 
 The following referenced documents are indispensable for the application of this document:
 
-ISO 2575 — *Road vehicles — Symbols for controls, indicators and tell-tales*
+- ISO 2575 — *Road vehicles — Symbols for controls, indicators and tell-tales*
 
-UN/ECE Regulation No. 13-H — *Uniform provisions concerning the approval of passenger cars with regard to braking*
+- UN/ECE Regulation No. 13-H — *Uniform provisions concerning the approval of passenger cars with regard to braking*
 
 ## 3 Terms and definitions
 

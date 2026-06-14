@@ -164,13 +164,13 @@ In this very brief clause, the following is literally stated:
 
 "This document specifies the data dictionary to be used internationally for the deployment of the following messages:
 
-- *map data (MAP);*
+1. *map data (MAP);*
 
-- *signal phase and timing (SPaT);*
+1. *signal phase and timing (SPaT);*
 
-- *signal request message (SRM);*
+1. *signal request message (SRM);*
 
-- *signal status message (SSM).*
+1. *signal status message (SSM).*
 
 The structure of these messages is defined by selection of an annex and the message requirements therein. The annexes with message structure requirements are as follows:
 

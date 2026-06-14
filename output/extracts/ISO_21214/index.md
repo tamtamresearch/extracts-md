@@ -86,36 +86,44 @@ Article **6.1 Transmitter wavelengths and bandwidth and** Article **6.2 – Radi
 
 <table>
   <tr>
-    <th>Parameter</th>
-    <th>Specification<br>Channel 870 Channel 970<br>(main channel) (alternative channel)</th>
+    <th rowspan="2">Parameter</th>
+    <th colspan="2">Specification</th>
+  </tr>
+  <tr>
+    <td>Channel 870<br>(main channel)</td>
+    <td>Channel 970<br>(alternative channel)</td>
   </tr>
   <tr>
     <td>TX1 Nominal transmitter wavelength</td>
-    <td>870 nm 970 nm</td>
+    <td>870 nm</td>
+    <td>970 nm</td>
   </tr>
   <tr>
     <td>TX2 Transmitter pass band</td>
-    <td>820 nm to 910 nm 920 nm to 1 010 nm</td>
+    <td>820 nm to 910 nm</td>
+    <td>920 nm to 1 010 nm</td>
   </tr>
   <tr>
     <td>TX3 Coherence length</td>
-    <td>&lt; 1 mm</td>
+    <td colspan="2">&lt; 1 mm</td>
   </tr>
   <tr>
     <td>TX4 Total radiated power</td>
-    <td>Dependent on transmitter class (see 6.2)</td>
+    <td colspan="2">Dependent on transmitter class (see 6.2)</td>
   </tr>
   <tr>
     <td>TX5 Minimum receiver in-band (RX2) radiated power</td>
-    <td>80 % of TX4</td>
+    <td colspan="2">80 % of TX4</td>
   </tr>
   <tr>
     <td>TX6a Radiated power below pass band</td>
-    <td>not specified &lt; 10 % of TX4</td>
+    <td>not specified</td>
+    <td>&lt; 10 % of TX4</td>
   </tr>
   <tr>
     <td>TX6b Radiated power above pass band</td>
-    <td>&lt; 10 % of TX4 not specified</td>
+    <td>&lt; 10 % of TX4</td>
+    <td>not specified</td>
   </tr>
 </table>
 

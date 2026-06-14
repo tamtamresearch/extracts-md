@@ -87,11 +87,11 @@ This clause, spanning five pages, describes various internal roles within the EF
 
 - Interoperability Manager: Tasked with managing the rules of the overall toll regime. Responsibilities include:
 
-- Defining security and data privacy concepts.
+    - Defining security and data privacy concepts.
 
-- Defining identification schemes and granting ID codes to tolling applications.
+    - Defining identification schemes and granting ID codes to tolling applications.
 
-- Certification processes for equipment and operational permits, as well as dispute resolution and monitoring.
+    - Certification processes for equipment and operational permits, as well as dispute resolution and monitoring.
 
 ![Figure 2](fig-2.png){.figure}
 

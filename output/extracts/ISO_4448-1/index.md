@@ -92,29 +92,29 @@ Subclause **7.2** describes the need to create a safe space in the public space 
 
 Subclause **7.3** deals with challenges such as common obstacles on the infrastructure/pavement, such as garbage cans, parked vehicles, stored building materials or evicted furniture, fallen tree branches or bushes growing into the road, places where the pavement ends or poor quality of the pavement surface. At the same time, it also lists 12 issues that need to be solved by regulation:
 
-- pedestrian and cyclist safety and rights-of-way;
+1. pedestrian and cyclist safety and rights-of-way;
 
-- requirements for infrastructure dimensions (related to accessibility regulations);
+1. requirements for infrastructure dimensions (related to accessibility regulations);
 
-- PMR speeds, dimensions, weights (maximums and minimums);
+1. PMR speeds, dimensions, weights (maximums and minimums);
 
-- equipment such as brakes, lights, speakers, mics, reflectors, signage (decals);
+1. equipment such as brakes, lights, speakers, mics, reflectors, signage (decals);
 
-- device identification and its visibility for enforcement;
+1. device identification and its visibility for enforcement;
 
-- areas and hours of operation, especially avoiding certain zones such as schools;
+1. areas and hours of operation, especially avoiding certain zones such as schools;
 
-- PMR behaviour regarding accessibility (e.g. distance-keeping, blocking ramps or entrance ways);
+1. PMR behaviour regarding accessibility (e.g. distance-keeping, blocking ramps or entrance ways);
 
-- audible signals emanating from a PMR such as their loudness and meaning;
+1. audible signals emanating from a PMR such as their loudness and meaning;
 
-- requirements to alert other users of PMR presence (sounds, lights, flags);
+1. requirements to alert other users of PMR presence (sounds, lights, flags);
 
-- requirements to recognize and respond to sounds such as emergency vehicle sirens;
+1. requirements to recognize and respond to sounds such as emergency vehicle sirens;
 
-- enforcement and penalties;
+1. enforcement and penalties;
 
-- liability and insurance.
+1. liability and insurance.
 
 ## 8 Operating principles for PMRs
 
