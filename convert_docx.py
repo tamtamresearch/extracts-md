@@ -184,6 +184,75 @@ def table_html(table, imgs: ImgState) -> str:
     return "\n".join(out)
 
 
+# ---------- list numbering ----------
+
+# Word numbering formats that should render as an *ordered* (numbered) list.
+# Everything else (bullet, none, ...) renders as an unordered "-" list.
+ORDERED_FMTS = {
+    "decimal", "decimalZero",
+    "lowerLetter", "upperLetter",
+    "lowerRoman", "upperRoman",
+    "ordinal", "cardinalText", "ordinalText",
+}
+
+
+def build_numfmt_map(doc):
+    """Map (numId, ilvl) -> numFmt for a document's numbering definitions.
+
+    Word stores list numbering indirectly: a paragraph's ``w:numPr`` points at a
+    ``w:numId`` which resolves (via ``w:num`` -> ``w:abstractNumId``) to an
+    ``w:abstractNum`` carrying per-level ``w:numFmt`` (decimal, bullet, ...).
+    Returns an empty dict when the document has no numbering part.
+    """
+    try:
+        numbering = doc.part.numbering_part.element
+    except (AttributeError, NotImplementedError, KeyError):
+        return {}
+    num2ab = {}
+    for num in numbering.findall(qn("w:num")):
+        ab = num.find(qn("w:abstractNumId"))
+        if ab is not None:
+            num2ab[num.get(qn("w:numId"))] = ab.get(qn("w:val"))
+    ab_fmts = {}  # abstractNumId -> {ilvl: numFmt}
+    for ab in numbering.findall(qn("w:abstractNum")):
+        aid = ab.get(qn("w:abstractNumId"))
+        levels = {}
+        for lvl in ab.findall(qn("w:lvl")):
+            ilvl = lvl.get(qn("w:ilvl"))
+            fmt = lvl.find(qn("w:numFmt"))
+            if ilvl is not None and fmt is not None:
+                levels[ilvl] = fmt.get(qn("w:val"))
+        ab_fmts[aid] = levels
+    result = {}
+    for num_id, ab_id in num2ab.items():
+        for ilvl, fmt in ab_fmts.get(ab_id, {}).items():
+            result[(num_id, ilvl)] = fmt
+    return result
+
+
+def list_info(p, numfmt_map):
+    """Return (ilvl, ordered) for a list paragraph, or None if not a list.
+
+    ``ilvl`` is the 0-based indent level; ``ordered`` is True for numbered
+    lists (decimal, roman, letter, ...) and False for bullets.
+    """
+    pPr = p._p.find(qn("w:pPr"))
+    if pPr is None:
+        return None
+    numPr = pPr.find(qn("w:numPr"))
+    if numPr is None:
+        return None
+    num_id_el = numPr.find(qn("w:numId"))
+    ilvl_el = numPr.find(qn("w:ilvl"))
+    num_id = num_id_el.get(qn("w:val")) if num_id_el is not None else None
+    # A numId of "0" means numbering is explicitly removed for this paragraph.
+    if num_id is None or num_id == "0":
+        return None
+    ilvl = ilvl_el.get(qn("w:val")) if ilvl_el is not None else "0"
+    fmt = numfmt_map.get((num_id, ilvl))
+    return int(ilvl), fmt in ORDERED_FMTS
+
+
 # ---------- paragraph rendering ----------
 
 def _extract_run_text(run_elem) -> str:
@@ -365,7 +434,7 @@ def render_paragraph_runs(p) -> str:
     return txt
 
 
-def render_paragraph(p) -> str:
+def render_paragraph(p, numfmt_map=None) -> str:
     style = p.style.name or ""
     txt = render_paragraph_runs(p)
     if not txt:
@@ -374,6 +443,12 @@ def render_paragraph(p) -> str:
         m = re.search(r"(\d+)", style)
         level = int(m.group(1)) if m else 1
         return "#" * min(level + 1, 6) + " " + txt
+    info = list_info(p, numfmt_map or {})
+    if info is not None:
+        ilvl, ordered = info
+        indent = "    " * ilvl  # 4 spaces per nesting level (Markdown sublist)
+        marker = "1." if ordered else "-"
+        return f"{indent}{marker} {txt}"
     if style in LIST_STYLES:
         return "- " + txt
     if style in NOTE_STYLES:
@@ -460,6 +535,7 @@ def convert(path, outdir):
     docname = os.path.splitext(os.path.basename(path))[0]
     docdir = os.path.join(outdir, docname)
     imgs = ImgState(doc, docdir, docname)
+    numfmt_map = build_numfmt_map(doc)
 
     paras = [p for p in doc.paragraphs if p.text.strip()]
     annotation = clean(paras[1].text) if len(paras) > 1 else ""
@@ -585,7 +661,7 @@ def convert(path, outdir):
             _emit_image(rids, ctext)
             continue
 
-        md = render_paragraph(obj)
+        md = render_paragraph(obj, numfmt_map)
         if md:
             lines.append(md)
 

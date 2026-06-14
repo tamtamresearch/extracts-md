@@ -19,8 +19,12 @@ from convert_docx import (
     caption_kind,
     caption_label,
     caption_block,
+    build_numfmt_map,
+    list_info,
 )
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
 
 
 def _vector_docx():
@@ -408,3 +412,102 @@ def test_caption_block_figure_appends():
 def test_caption_block_table_prepends():
     out = caption_block("Table 1 — x", above=True)
     assert out == "/// caption | <\nTable 1 — x\n///"
+
+
+# ---------- list numbering ----------
+
+def _set_numpr(para, num_id, ilvl=0):
+    """Attach a w:numPr (numId/ilvl) to a paragraph's pPr."""
+    pPr = para._p.get_or_add_pPr()
+    numPr = OxmlElement("w:numPr")
+    ilvl_el = OxmlElement("w:ilvl")
+    ilvl_el.set(qn("w:val"), str(ilvl))
+    numId_el = OxmlElement("w:numId")
+    numId_el.set(qn("w:val"), str(num_id))
+    numPr.append(ilvl_el)
+    numPr.append(numId_el)
+    pPr.append(numPr)
+    return para
+
+
+@pytest.mark.unit
+def test_list_info_none_for_plain_paragraph():
+    doc = docx.Document()
+    para = doc.add_paragraph()
+    para.add_run("just prose")
+    assert list_info(para, {}) is None
+
+
+@pytest.mark.unit
+def test_list_info_detects_level_and_ordered():
+    doc = docx.Document()
+    para = _set_numpr(doc.add_paragraph(), num_id=13, ilvl=1)
+    para.add_run("item")
+    # decimal -> ordered
+    assert list_info(para, {("13", "1"): "decimal"}) == (1, True)
+    # bullet -> unordered
+    assert list_info(para, {("13", "1"): "bullet"}) == (1, False)
+    # unknown fmt -> unordered
+    assert list_info(para, {}) == (1, False)
+
+
+@pytest.mark.unit
+def test_list_info_ignores_removed_numbering():
+    """numId 0 means numbering is explicitly removed for the paragraph."""
+    doc = docx.Document()
+    para = _set_numpr(doc.add_paragraph(), num_id=0)
+    para.add_run("not a list")
+    assert list_info(para, {("0", "0"): "decimal"}) is None
+
+
+@pytest.mark.unit
+def test_render_paragraph_ordered_list():
+    doc = docx.Document()
+    para = _set_numpr(doc.add_paragraph(), num_id=13, ilvl=0)
+    para.add_run("first ordered item")
+    out = render_paragraph(para, {("13", "0"): "decimal"})
+    assert out == "1. first ordered item"
+
+
+@pytest.mark.unit
+def test_render_paragraph_bullet_list():
+    doc = docx.Document()
+    para = _set_numpr(doc.add_paragraph(), num_id=5, ilvl=0)
+    para.add_run("a bullet")
+    out = render_paragraph(para, {("5", "0"): "bullet"})
+    assert out == "- a bullet"
+
+
+@pytest.mark.unit
+def test_render_paragraph_nested_ordered_indent():
+    doc = docx.Document()
+    para = _set_numpr(doc.add_paragraph(), num_id=13, ilvl=2)
+    para.add_run("nested")
+    out = render_paragraph(para, {("13", "2"): "decimal"})
+    assert out == "        1. nested"  # 4 spaces per level
+
+
+@pytest.mark.unit
+def test_build_numfmt_map_empty_without_numbering():
+    """A doc with no numbering part yields an empty map (no crash)."""
+    doc = docx.Document()
+    # A fresh doc has no numbering_part; build_numfmt_map must not raise.
+    assert isinstance(build_numfmt_map(doc), dict)
+
+
+@pytest.mark.unit
+def test_iso4448_chapter7_ordered_list():
+    """The real ISO_4448-1 chapter 7 list is ordered (decimal), not bullets."""
+    path = os.path.join("input", "ISO_4448-1.docx")
+    if not os.path.exists(path):
+        pytest.skip("ISO_4448-1.docx not available")
+    doc = docx.Document(path)
+    numfmt_map = build_numfmt_map(doc)
+    ordered = [
+        render_paragraph(p, numfmt_map)
+        for p in doc.paragraphs
+        if list_info(p, numfmt_map) and list_info(p, numfmt_map)[1]
+    ]
+    # The chapter-7 list has 12 ordered items, each emitted as "1. ...".
+    assert len(ordered) >= 12
+    assert all(line.startswith("1. ") for line in ordered)
