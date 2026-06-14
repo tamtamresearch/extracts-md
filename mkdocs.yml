@@ -1,5 +1,7 @@
 site_name: ITS Standard Extracts
 site_description: Informative extracts of selected ISO / CEN / EN technical standards prepared for ISO/TC 204.
+# Preview site served from this repo's GitHub Pages (project page subpath).
+site_url: https://tamtamresearch.github.io/extracts-md/
 
 # The converted Markdown in output/ is the mkdocs source tree.
 docs_dir: output

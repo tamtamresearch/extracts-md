@@ -1,11 +1,11 @@
-name: CI
+name: Deploy preview to GitHub Pages
 
-# This repository only PRODUCES the Markdown in output/. The production
-# ISO-TC204 site is built and deployed from a separate repository; the
-# output/extracts/<doc>/ folders are copied there manually.
+# This repository PRODUCES the Markdown in output/ (the deliverable that is
+# copied manually into the production ISO-TC204 site repository).
 #
-# This workflow therefore validates the pipeline (tests + convert + a strict
-# mkdocs build) but does NOT deploy anywhere.
+# As a convenience, it also builds a local mkdocs preview and deploys it to this
+# repo's GitHub Pages (gh-pages branch) so the conversion result can be reviewed
+# online. This is a PREVIEW only; production is built/deployed elsewhere.
 
 on:
   push:
@@ -15,11 +15,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  validate:
-    name: Test & Build
+  build-and-deploy:
+    name: Test, Build & Deploy preview
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -48,8 +52,11 @@ jobs:
       - name: Build mkdocs site (strict)
         run: uv run mkdocs build --strict
 
-      - name: Upload built site artifact
-        uses: actions/upload-artifact@v4
+      - name: Deploy preview to gh-pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: site
-          path: site/
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          force_orphan: true

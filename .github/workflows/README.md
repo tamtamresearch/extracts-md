@@ -1,14 +1,14 @@
 # GitHub Actions Workflows
 
-## deploy.yml — CI (validate, no deploy)
+## deploy.yml — Deploy preview to GitHub Pages
 
-> Despite the filename, this workflow **does not deploy** anything. This
-> repository only produces the Markdown in `output/`. The production ISO-TC204
-> site is built and deployed from a separate repository; the
-> `output/extracts/<doc>/` folders are copied there manually.
+This repository **produces** the Markdown in `output/` (the deliverable copied
+manually into the production ISO-TC204 site repository). As a convenience, this
+workflow also builds the local mkdocs preview and deploys it to **this repo's**
+GitHub Pages (`gh-pages` branch) so the conversion result can be reviewed online.
 
-The workflow validates the conversion pipeline on every push to `master`, on
-pull requests, and on manual dispatch.
+> This is a **preview** only. The production site is built/deployed from a
+> separate repository.
 
 ### Steps
 
@@ -22,18 +22,25 @@ pull requests, and on manual dispatch.
 7. **Generate navigation** — regenerate the mkdocs `nav:` block + landing page.
 8. **Build mkdocs site (strict)** — `uv run mkdocs build --strict` to catch
    broken links / config.
-9. **Upload artifact** — the built `site/` is uploaded for inspection.
+9. **Deploy preview** — push `site/` to the `gh-pages` branch (only on `master`).
 
-**If any step fails:** the workflow stops; nothing is published.
+**If any step fails:** the workflow stops; nothing is deployed.
 
 ### Triggers
 
-- **Push to `master`** and **pull requests** — runs automatically.
+- **Push to `master`** — runs and deploys.
+- **Pull requests** — runs the build/tests only (no deploy).
 - **Manual** — via the Actions UI (`workflow_dispatch`).
 
 ### Permissions
 
-`contents: read` only — the workflow never writes to the repository.
+`contents: write` — required to push the built site to the `gh-pages` branch.
+
+### GitHub Pages settings
+
+In the repo **Settings → Pages**, set the source to **Deploy from a branch**,
+branch **gh-pages** / **/ (root)**. The preview is served at
+`https://tamtamresearch.github.io/extracts-md/`.
 
 ## Troubleshooting
 
