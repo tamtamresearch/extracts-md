@@ -5,14 +5,24 @@ standard-metadata box (name + Published/Edition/Pages + annotation) at the top
 of every extract page. Extract pages are identified by a ``standard`` key in
 their YAML front matter.
 
+It also appends a "See also" block at the very end of an extract page when a
+``see-also.yaml`` file sits next to the page's ``index.md``.
+
 This replaces the old mdbook ``frontmatter_preprocessor.py``.
 """
 
+import os
+
+import yaml
+
 
 def on_pre_page_macros(env):
-    """Inject the metadata box before Jinja2 processes an extract page."""
-    if "standard" in env.page.meta and "render_standard_metadata" not in env.markdown:
-        env.markdown = "{{ render_standard_metadata() }}\n\n" + env.markdown
+    """Inject the metadata box (top) and See-also block (bottom) for extracts."""
+    if "standard" in env.page.meta:
+        if "render_standard_metadata" not in env.markdown:
+            env.markdown = "{{ render_standard_metadata() }}\n\n" + env.markdown
+        if "render_see_also" not in env.markdown:
+            env.markdown = env.markdown + "\n\n{{ render_see_also() }}"
 
 
 def define_env(env):
@@ -48,3 +58,32 @@ def define_env(env):
 
         html += "</small></div>"
         return html
+
+    @env.macro
+    def render_see_also(path=None):
+        """Render a "See also" block from a sibling ``see-also.yaml`` file.
+
+        The YAML file is a mapping of ``label -> url``. It is looked up next to
+        the current page's source file. Returns an empty string when the file
+        is absent or empty, so pages without one render nothing extra.
+        """
+        if path is None:
+            try:
+                src = env.page.file.abs_src_path
+            except AttributeError:
+                return ""
+            path = os.path.join(os.path.dirname(src), "see-also.yaml")
+
+        if not os.path.isfile(path):
+            return ""
+
+        with open(path, encoding="utf-8") as fh:
+            data = yaml.safe_load(fh)
+
+        if not isinstance(data, dict) or not data:
+            return ""
+
+        lines = ["## See also", ""]
+        for label, url in data.items():
+            lines.append(f"- [{label}]({url})")
+        return "\n".join(lines)

@@ -364,3 +364,52 @@ def test_metadata_macro_missing_fields():
     assert "<strong>Published:</strong> 2025" in html
     assert "Edition:" not in html, "Edition shown when not present"
     assert "<strong>Pages:</strong> 100" in html
+
+
+@pytest.mark.integration
+def test_see_also_macro_render(tmp_path):
+    """render_see_also turns a see-also.yaml mapping into a See also block."""
+    import macros
+
+    yaml_file = tmp_path / "see-also.yaml"
+    yaml_file.write_text(
+        "ITS Vocabulary: https://isotc204.org/iso14812/latest/\n"
+        "GitHub: https://github.com/ISO-TC204/iso14812\n"
+        '"iso.org: ISO/TS 14812:2022": https://www.iso.org/standard/79779.html\n'
+        '"iso.org: ISO/TS 14812:2025": https://www.iso.org/standard/85041.html\n',
+        encoding="utf-8",
+    )
+
+    captured = {}
+
+    class _Reg:
+        def macro(self, f):
+            captured[f.__name__] = f
+            return f
+
+    macros.define_env(_Reg())
+    md = captured["render_see_also"](path=str(yaml_file))
+
+    assert md.startswith("## See also")
+    assert "- [ITS Vocabulary](https://isotc204.org/iso14812/latest/)" in md
+    assert (
+        "- [iso.org: ISO/TS 14812:2022](https://www.iso.org/standard/79779.html)" in md
+    )
+    # Order is preserved (insertion order from the YAML file).
+    assert md.index("ITS Vocabulary") < md.index("GitHub") < md.index("79779")
+
+
+@pytest.mark.integration
+def test_see_also_macro_absent(tmp_path):
+    """render_see_also returns empty string when no see-also.yaml is present."""
+    import macros
+
+    captured = {}
+
+    class _Reg:
+        def macro(self, f):
+            captured[f.__name__] = f
+            return f
+
+    macros.define_env(_Reg())
+    assert captured["render_see_also"](path=str(tmp_path / "see-also.yaml")) == ""
