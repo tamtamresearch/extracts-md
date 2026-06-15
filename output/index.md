@@ -58,6 +58,10 @@ Vocabulary
 Intelligent transport systems – Cooperative ITS  
 Using V2I and I2V communications for applications related to signalized intersections
 
+**[ISO/TS 21219-19:2023](extracts/ISO_TS_21219-19/index.md)**
+Intelligent Transport Systems – Traffic and Travel Information (TTI) in the Transport Protocol Expert Group, Second Generation (TPEG2)  
+Part 19: Applications for Weather Information (TPEG2-WEA)
+
 **[ISO/TS 22726-1:2025](extracts/ISO_TS_22726-1/index.md)**
 Intelligent transport systems – Dynamic data and map database specification for connected and automated driving system applications  
 Part 1: Architecture and logical data model for harmonization of static map data
