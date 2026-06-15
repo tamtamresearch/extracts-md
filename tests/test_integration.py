@@ -3,6 +3,7 @@ import os
 import re
 from pathlib import Path
 
+import docx
 import pytest
 
 import convert_docx
@@ -305,6 +306,53 @@ def test_navigation_generation(sample_output_dir, tmp_path):
 
     # --- Test CSS copied into output/stylesheets ---
     assert (output_dir / "stylesheets" / "extra.css").exists()
+
+
+@pytest.mark.integration
+def test_consecutive_monospace_becomes_code_block(tmp_path, tmp_output):
+    """Consecutive all-monospace paragraphs render as one fenced code block."""
+    doc = docx.Document()
+
+    # Minimal metadata: name table + Published/Note prose so convert() parses.
+    table = doc.add_table(rows=1, cols=1)
+    table.rows[0].cells[0].text = "ISO 99999\nIntelligent transport systems – Example"
+    doc.add_paragraph("ISO 99999")
+    doc.add_paragraph("This Extract does not replace the standard.")
+    doc.add_paragraph("Published 2025, edition 1, 100 pages")
+    doc.add_paragraph("Note: This Extract presents selected chapters.")
+
+    # Body starts at an Introduction heading.
+    doc.add_paragraph("Introduction", style="Heading 1")
+    doc.add_paragraph("Example from Clause B.1.3 of the standard")
+
+    code_lines = [
+        '<xs:complexType name="WeatherReport">',
+        "  <xs:sequence>",
+        '    <xs:element name="reportType" type="wea000_ReportType"/>',
+        "  </xs:sequence>",
+        "</xs:complexType>",
+    ]
+    for ln in code_lines:
+        p = doc.add_paragraph()
+        r = p.add_run(ln)
+        r.font.name = "Courier New"
+
+    doc.add_paragraph("Following prose paragraph.")
+
+    docx_path = tmp_path / "ISO_99999.docx"
+    doc.save(str(docx_path))
+
+    docname, _, _ = convert_docx.convert(str(docx_path), str(tmp_output))
+    body = (tmp_output / docname / "index.md").read_text(encoding="utf-8")
+
+    # A single fenced code block containing all lines in order, indentation kept.
+    expected = "```\n" + "\n".join(code_lines) + "\n```"
+    assert expected in body, f"Code block not grouped as expected.\n{body}"
+
+    # The old per-line inline-code form must be gone.
+    assert "`<xs:complexType" not in body, "Code lines still rendered inline"
+    # Indentation preserved.
+    assert "  <xs:sequence>" in body
 
 
 @pytest.mark.integration

@@ -21,6 +21,7 @@ from convert_docx import (
     caption_block,
     build_numfmt_map,
     list_info,
+    code_line,
 )
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
@@ -167,6 +168,49 @@ def test_monospace_formatting():
     result = render_paragraph(para)
     assert "`{joint-iso-itut(2) its(28) gdd(5)}`" in result
     assert result == "registered under `{joint-iso-itut(2) its(28) gdd(5)}` and the way"
+
+
+@pytest.mark.unit
+def test_code_line_detects_all_monospace():
+    """A paragraph entirely in a monospace font is a code line."""
+    doc = docx.Document()
+    para = doc.add_paragraph()
+    run = para.add_run('<xs:complexType name="WeatherReport">')
+    run.font.name = "Courier New"
+    assert code_line(para) == '<xs:complexType name="WeatherReport">'
+
+
+@pytest.mark.unit
+def test_code_line_preserves_indentation():
+    """Leading whitespace in a code line is preserved (not collapsed)."""
+    doc = docx.Document()
+    para = doc.add_paragraph()
+    run = para.add_run("    <xs:sequence>")
+    run.font.name = "Courier New"
+    assert code_line(para) == "    <xs:sequence>"
+
+
+@pytest.mark.unit
+def test_code_line_none_for_prose():
+    """A normal prose paragraph is not a code line."""
+    doc = docx.Document()
+    para = doc.add_paragraph()
+    para.add_run("This is ordinary prose text.")
+    assert code_line(para) is None
+
+
+@pytest.mark.unit
+def test_code_line_none_for_mixed():
+    """Prose with an inline monospace term stays inline (not a code line)."""
+    doc = docx.Document()
+    para = doc.add_paragraph()
+    para.add_run("Clause ")
+    r = para.add_run("{joint-iso-itut(2)}")
+    r.font.name = "Courier New"
+    para.add_run(" describes the OID")
+    assert code_line(para) is None
+    # And it still renders as inline code via render_paragraph.
+    assert "`{joint-iso-itut(2)}`" in render_paragraph(para)
 
 
 @pytest.mark.unit

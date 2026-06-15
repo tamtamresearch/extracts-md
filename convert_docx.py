@@ -456,6 +456,63 @@ def render_paragraph(p, numfmt_map=None) -> str:
     return txt
 
 
+def _normalize_code_ws(text: str) -> str:
+    """Normalize odd Word spaces to ASCII spaces without collapsing/stripping.
+
+    Mirrors the first line of ``clean()`` (nbsp/narrow/figure spaces -> space)
+    but, unlike ``clean()``, preserves leading whitespace and run-length so a
+    code line keeps its visible indentation. Literal tabs become 4 spaces.
+    """
+    text = text.replace("\xa0", " ").replace(" ", " ").replace(" ", " ")
+    return text.replace("\t", "    ")
+
+
+def code_line(p, numfmt_map=None):
+    """Return the raw text of an all-monospace code paragraph, else ``None``.
+
+    A paragraph qualifies as a code line only when it has at least one
+    text-bearing run and *every* text-bearing run uses a monospace font. It is
+    excluded if it is a heading, list, or note paragraph (those keep their
+    normal rendering). Indentation is preserved (``clean()`` is not applied).
+
+    Mixed prose containing an inline monospace term does **not** qualify, so it
+    continues to render as inline ``code`` via ``render_paragraph``.
+    """
+    style = p.style.name or ""
+    if style.startswith("Heading") or style == "Nadpis":
+        return None
+    if list_info(p, numfmt_map or {}) is not None:
+        return None
+    if style in LIST_STYLES or style in NOTE_STYLES:
+        return None
+
+    saw_text = False
+    parts = []
+    for child in p._element:
+        if child.tag == qn("w:hyperlink"):
+            # A hyperlink in the paragraph means it is not a plain code line.
+            for run_elem in child.findall(qn("w:r")):
+                if _extract_run_text(run_elem).strip():
+                    return None
+            continue
+        if child.tag != qn("w:r"):
+            continue
+        text = _extract_run_text(child)
+        parts.append(text)
+        if not text.strip():
+            continue  # whitespace-only run doesn't need to be monospace
+        rPr = child.find(qn("w:rPr"))
+        font_elem = rPr.find(qn("w:rFonts")) if rPr is not None else None
+        font_name = font_elem.get(qn("w:ascii"), "").lower() if font_elem is not None else ""
+        if font_name not in MONOSPACE_FONTS:
+            return None
+        saw_text = True
+
+    if not saw_text:
+        return None
+    return _normalize_code_ws("".join(parts)).rstrip()
+
+
 # ---------- captions ----------
 
 CAPTION_RE_PREFIX = re.compile(r"^(Figure|Table)\b", re.IGNORECASE)
@@ -632,14 +689,29 @@ def convert(path, outdir):
             first = False
 
     lines = []
+    code_buf = []  # consecutive monospace code lines awaiting a fenced block
+
+    def flush_code():
+        """Emit any buffered code lines as a single fenced code block."""
+        if not code_buf:
+            return
+        # Use a longer fence if any line itself contains a run of backticks.
+        fence = "```"
+        while any(fence in ln for ln in code_buf):
+            fence += "`"
+        lines.append(fence + "\n" + "\n".join(code_buf) + "\n" + fence)
+        code_buf.clear()
+
     for i, (kind, obj) in enumerate(blocks):
         if self_cap[i]:
             # Caption text and image live in the same paragraph: render the
             # image with its own caption (table -> above, figure -> below).
+            flush_code()
             _emit_image(para_blip_rids(obj._p), clean(obj.text))
             continue
 
         if is_cap[i]:
+            flush_code()
             if i not in owner:
                 # Caption with no object: keep it as a standalone caption.
                 lines.append(caption_block(clean(obj.text), above=False))
@@ -651,6 +723,7 @@ def convert(path, outdir):
             # The caption block attaches to the preceding block, so it must be
             # emitted *after* the table; ``above=True`` (`| <`) renders the
             # figcaption above the table inside the figure.
+            flush_code()
             lines.append(table_html(obj, imgs))
             if ctext:
                 lines.append(caption_block(ctext, above=True))
@@ -658,13 +731,22 @@ def convert(path, outdir):
 
         rids = para_blip_rids(obj._p)
         if rids:
+            flush_code()
             _emit_image(rids, ctext)
             continue
 
+        # Group consecutive all-monospace paragraphs into one fenced block.
+        cl = code_line(obj, numfmt_map)
+        if cl is not None:
+            code_buf.append(cl)
+            continue
+
+        flush_code()
         md = render_paragraph(obj, numfmt_map)
         if md:
             lines.append(md)
 
+    flush_code()
     body = "\n\n".join(lines)
     os.makedirs(docdir, exist_ok=True)
     out_md = os.path.join(docdir, "index.md")
