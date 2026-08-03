@@ -10,13 +10,13 @@ Part 13: Status, fault and quality requirements
 Intelligent Transport Systems – eSafety  
 ECall end to end conformance testing for eCall HLAP in hybrid circuit switched/packet switched network environments
 
-**[EN ISO 12855:2022](extracts/EN_ISO_12855/index.md)**
-Electronic Fee Collection (EFC)  
+**[EN ISO 12855:2025](extracts/EN_ISO_12855/index.md)**
+Electronic Fee Collection  
 Information exchange between service provision and toll charging
 
-**[EN ISO 14906:2018](extracts/EN_ISO_14906/index.md)**
-Electronic Fee Collection (EFC)  
-Application interface definition for dedicated short-range communication (DSRC)
+**[EN ISO 14906:2022](extracts/EN_ISO_14906/index.md)**
+Electronic Fee Collection  
+Application interface definition for dedicated short-range communication
 
 **[EN ISO 17573-1:2019](extracts/EN_ISO_17573-1/index.md)**
 Electronic Fee Collection (EFC) – System architecture for vehicle-related tolling  
